@@ -7,15 +7,10 @@ An online U-Fund system built in Java 17=> and ___ _replace with other platform 
 
 - Jay Lee
 - Joseph DeSimone
-<<<<<<< HEAD
 - Sergio Mercado Nunez
-- MEMBER4
-=======
-- Sergio Mercado nunez
-- Khoi Pham
 - Bryant Cheng
->>>>>>> c92931a322b356967273d3c582a9747281b64102
-
+- Khoi Phom
+ 
 
 ## Prerequisites
 
