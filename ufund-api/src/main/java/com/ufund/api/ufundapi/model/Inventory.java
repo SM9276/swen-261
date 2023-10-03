@@ -19,8 +19,8 @@ public class Inventory {
 
     /**
      * Create a inventory with the given id and name
-     * @param id The id of the hero
-     * @param name The name of the hero
+     * @param id The id of the need
+     * @param name The name of the need
      * 
      * {@literal @}JsonProperty is used in serialization and deserialization
      * of the JSON object to the Java object in mapping the fields.  If a field
@@ -33,20 +33,20 @@ public class Inventory {
     }
 
     /**
-     * Retrieves the id of the hero
-     * @return The id of the hero
+     * Retrieves the id of the need
+     * @return The id of the need
      */
     public int getId() {return id;}
 
     /**
-     * Sets the name of the hero - necessary for JSON object to Java object deserialization
-     * @param name The name of the hero
+     * Sets the name of the need - necessary for JSON object to Java object deserialization
+     * @param name The name of the need
      */
     public void setName(String name) {this.name = name;}
 
     /**
-     * Retrieves the name of the hero
-     * @return The name of the hero
+     * Retrieves the name of the need
+     * @return The name of the need
      */
     public String getName() {return name;}
 

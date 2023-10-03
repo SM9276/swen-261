@@ -4,7 +4,7 @@ import java.io.IOException;
 import com.ufund.api.ufundapi.model.Inventory;
 
 /**
- * Defines the interface for Hero object persistence
+ * Defines the interface for Need object persistence
  * 
  * @author SWEN Faculty
  */

@@ -21,7 +21,7 @@ export class NeedService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  /** GET heroes from the server */
+  /** GET needs from the server */
   getNeeds(): Observable<Need[]> {
     return this.http.get<Need[]>(this.needsUrl)
       .pipe(
@@ -30,7 +30,7 @@ export class NeedService {
       );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
+  /** GET need by id. Return `undefined` when id not found */
   getNeedNo404<Data>(id: number): Observable<Need> {
     const url = `${this.needsUrl}/?id=${id}`;
     return this.http.get<Need[]>(url)
@@ -44,7 +44,7 @@ export class NeedService {
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET need by id. Will 404 if id not found */
   getNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.get<Need>(url).pipe(
@@ -53,10 +53,10 @@ export class NeedService {
     );
   }
 
-  /* GET heroes whose name contains search term */
+  /* GET needs whose name contains search term */
   searchNeeds(term: string): Observable<Need[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty need array.
       return of([]);
     }
     return this.http.get<Need[]>(`${this.needsUrl}/?name=${term}`).pipe(
@@ -69,7 +69,7 @@ export class NeedService {
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new need to the server */
   addNeed(need: Need): Observable<Need> {
     return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(
       tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.id}`)),
@@ -77,7 +77,7 @@ export class NeedService {
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the need from the server */
   deleteNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
 
@@ -87,7 +87,7 @@ export class NeedService {
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the need on the server */
   updateNeed(need: Need): Observable<any> {
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
       tap(_ => this.log(`updated need id=${need.id}`)),
@@ -116,7 +116,7 @@ export class NeedService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a NeedService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`NeedService: ${message}`);
   }

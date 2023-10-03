@@ -5,7 +5,7 @@ Welcome to the PROJECT Project!
 ## Team
 
 * MEMBER1
-* MEMBER2
+* MEMBER2-
 
 ## [Design Documentation](DesignDoc)
 
