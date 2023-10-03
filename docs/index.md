@@ -4,8 +4,11 @@ Welcome to the PROJECT Project!
 
 ## Team
 
-* MEMBER1
-* MEMBER2-
+* Bryant Cheng
+* Jay Lee
+* Khoi Pham
+* Sergio Mercado Nunez
+* Joseph DeSimone
 
 ## [Design Documentation](DesignDoc)
 
