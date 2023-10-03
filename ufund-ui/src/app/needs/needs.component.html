@@ -1,1 +1,21 @@
-<p>needs works!</p>
+<h2>Needs</h2>
+
+<div>
+  <label for="new-need">Need type: </label>
+  <input id="new-need" #needType />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(needType.value); needType.value=''">
+    Add need
+  </button>
+</div>
+
+<ul class="needs">
+  <li *ngFor="let need of needs">
+    <a routerLink="/detail/{{need.cost}}">
+      <span class="badge">{{need.cost}}</span> {{need.type}}
+    </a>
+    <button type="button" class="delete" title="delete need"
+      (click)="delete(need)">x</button>
+  </li>
+</ul>

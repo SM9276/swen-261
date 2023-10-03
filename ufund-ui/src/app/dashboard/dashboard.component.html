@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<h2>Top Needs</h2>
+<div class="needs-menu">
+  <a *ngFor="let need of needs"
+      routerLink="/detail/{{need.cost}}">
+      {{need.type}}
+  </a>
+</div>
+
+<app-need-search></app-need-search>

@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { NeedsComponent } from './needs/needs.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NeedDetailComponent } from './need-detail/need-detail.component';
 
-
+const routes: Routes = [
+  { path: 'needs', component: NeedsComponent },
+  { path : 'dashboard', component: DashboardComponent},
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'detail/:cost', component: NeedDetailComponent },
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

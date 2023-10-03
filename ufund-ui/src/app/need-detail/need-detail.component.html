@@ -1,0 +1,12 @@
+<div *ngIf="need">
+
+    <h2>{{need.type | uppercase}} Details</h2>
+    <div><span>id: </span>{{need.cost}}</div>
+    <div>
+      <label for="need-type">Need type: </label>
+      <input id="need-type" [(ngModel)]="need.type" placeholder="type">
+    </div>
+  
+</div>
+<button type="button" (click)="save()">save</button>
+<button type="button" (click)="goBack()">go back</button>
