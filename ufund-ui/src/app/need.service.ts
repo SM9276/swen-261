@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class NeedService {
 
-  private needsUrl = 'team-project-2231-swen-261-05-3c-juiceboxsquad/ufund-api/src/main/java/com/ufund/api/ufundapi';  // URL to web api
+  private needsUrl = 'http://localhost:8080/inventory';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
