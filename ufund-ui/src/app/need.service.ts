@@ -38,9 +38,9 @@ export class NeedService {
         map(needs => needs[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} need id=${id}`);
+          this.log(`${outcome} need cost=${id}`);
         }),
-        catchError(this.handleError<Need>(`getNeed id=${id}`))
+        catchError(this.handleError<Need>(`getNeed cost=${id}`))
       );
   }
 
@@ -48,8 +48,8 @@ export class NeedService {
   getNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.get<Need>(url).pipe(
-      tap(_ => this.log(`fetched need id=${id}`)),
-      catchError(this.handleError<Need>(`getNeed id=${id}`))
+      tap(_ => this.log(`fetched need cost=${id}`)),
+      catchError(this.handleError<Need>(`getNeed cost=${id}`))
     );
   }
 
@@ -72,7 +72,7 @@ export class NeedService {
   /** POST: add a new need to the server */
   addNeed(need: Need): Observable<Need> {
     return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(
-      tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.id}`)),
+      tap((newNeed: Need) => this.log(`added need w/ cost=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeed'))
     );
   }
@@ -82,15 +82,16 @@ export class NeedService {
     const url = `${this.needsUrl}/${id}`;
 
     return this.http.delete<Need>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted need id=${id}`)),
+      tap(_ => this.log(`deleted need cost=${id}`)),
       catchError(this.handleError<Need>('deleteNeed'))
     );
   }
 
   /** PUT: update the need on the server */
   updateNeed(need: Need): Observable<any> {
+    const url = `${this.needsUrl}/${need.id}`;
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
-      tap(_ => this.log(`updated need id=${need.id}`)),
+      tap(_ => this.log(`updated need cost=${need.id}`)),
       catchError(this.handleError<any>('updateNeed'))
     );
   }
