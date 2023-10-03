@@ -1,10 +1,10 @@
 <div *ngIf="need">
 
-    <h2>{{need.type | uppercase}} Details</h2>
-    <div><span>id: </span>{{need.cost}}</div>
+    <h2>{{need.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{need.id}}</div>
     <div>
-      <label for="need-type">Need type: </label>
-      <input id="need-type" [(ngModel)]="need.type" placeholder="type">
+      <label for="need-name">Need name: </label>
+      <input id="need-name" [(ngModel)]="need.name" placeholder="name">
     </div>
   
 </div>

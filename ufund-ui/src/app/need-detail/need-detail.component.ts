@@ -22,8 +22,8 @@ export class NeedDetailComponent {
   }
   
   getNeed(): void {
-    const cost = Number(this.route.snapshot.paramMap.get('id'));
-    this.needService.getNeed(cost)
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.needService.getNeed(id)
       .subscribe(need => this.need = need);
   }
   goBack(): void {

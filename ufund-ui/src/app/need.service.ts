@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class NeedService {
 
-  private needsUrl = 'api/ufundapi';  // URL to web api
+  private needsUrl = 'team-project-2231-swen-261-05-3c-juiceboxsquad/ufund-api/src/main/java/com/ufund/api/ufundapi';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -72,17 +72,17 @@ export class NeedService {
   /** POST: add a new hero to the server */
   addNeed(need: Need): Observable<Need> {
     return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(
-      tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.cost}`)),
+      tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeed'))
     );
   }
 
   /** DELETE: delete the hero from the server */
-  deleteNeed(cost: number): Observable<Need> {
-    const url = `${this.needsUrl}/${cost}`;
+  deleteNeed(id: number): Observable<Need> {
+    const url = `${this.needsUrl}/${id}`;
 
     return this.http.delete<Need>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted need id=${cost}`)),
+      tap(_ => this.log(`deleted need id=${id}`)),
       catchError(this.handleError<Need>('deleteNeed'))
     );
   }
@@ -90,7 +90,7 @@ export class NeedService {
   /** PUT: update the hero on the server */
   updateNeed(need: Need): Observable<any> {
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
-      tap(_ => this.log(`updated need id=${need.cost}`)),
+      tap(_ => this.log(`updated need id=${need.id}`)),
       catchError(this.handleError<any>('updateNeed'))
     );
   }

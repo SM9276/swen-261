@@ -22,10 +22,10 @@ export class NeedsComponent implements OnInit {
     .subscribe(needs => this.needs = needs);
   }
 
-  add(type: string): void {
-    type = type.trim();
-    if (!type) { return; }
-    this.needService.addNeed({ type } as Need)
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.needService.addNeed({ name } as Need)
       .subscribe(need => {
         this.needs.push(need);
       });
@@ -33,7 +33,7 @@ export class NeedsComponent implements OnInit {
 
   delete(need: Need): void {
     this.needs = this.needs.filter(h => h !== need);
-    this.needService.deleteNeed(need.cost).subscribe();
+    this.needService.deleteNeed(need.id).subscribe();
   }
 
 }
