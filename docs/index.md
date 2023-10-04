@@ -1,6 +1,6 @@
 # PROJECT Home
 
-Welcome to the PROJECT Project!
+Welcome to the Ufund Project!
 
 ## Team
 
@@ -12,7 +12,7 @@ Welcome to the PROJECT Project!
 
 ## [Design Documentation](DesignDoc)
 
-Click above for details of the PROJECT design documentation.
+Following the example introduced by the Tour of Heroes tutorial. We created services for interacting with needs and confirming whether an action has been completed with a messenger service. We did this to decrease coupling between classes and maintain consistency in the database
 
 ## [Setup Guide](SetupGuide)
 
