@@ -11,6 +11,7 @@ import { NeedSearchComponent } from './need-search/need-search.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     NeedsComponent,
     NeedDetailComponent,
     MessagesComponent,
-    NeedSearchComponent
+    NeedSearchComponent,
+    LoginComponent
   ],
   bootstrap: [ AppComponent ]
 })
