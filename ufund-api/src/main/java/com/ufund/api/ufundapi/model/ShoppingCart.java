@@ -6,6 +6,11 @@ public class ShoppingCart {
     private List <Product> products;
     private double total;
     private int itemCount;
+    public ShoppingCart(){
+        this.products = new LinkedList<Product>();
+        this.total = 0;
+        this.itemCount = 0;
+    }
 
     public void addToCart(Product item) {
         if (products.contains(item)) {
@@ -56,13 +61,6 @@ public class ShoppingCart {
         }
 
         
-    }
-
-
-    public ShoppingCart(){
-        this.products = new LinkedList<Product>();
-        this.total = 0;
-        this.itemCount = 0;
     }
     public List<Product> getProducts(){
         return this.products;
