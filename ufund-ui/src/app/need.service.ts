@@ -71,7 +71,16 @@ export class NeedService {
 
   /** POST: add a new need to the server */
   addNeed(need: Need): Observable<Need> {
-    return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(
+    console.log(need)
+
+    const { name, price, quantity, id } = need;
+    const requestPayload = {
+      name: name.trim(),
+      price,
+      quantity,
+      id
+    };
+    return this.http.post<Need>(this.needsUrl, requestPayload, this.httpOptions).pipe(
       tap((newNeed: Need) => this.log(`added need w/ cost=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeed'))
     );
