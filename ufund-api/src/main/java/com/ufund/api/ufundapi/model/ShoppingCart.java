@@ -12,7 +12,7 @@ public class ShoppingCart {
             int index = products.indexOf(item);
             products.get(index).setQuantity(products.get(index).getQuantity() + item.getQuantity());
         } else {
-            products.add(new Product(item.getName(), item.getPrice(), item.getQuantity()));
+            products.add(new Product(item.getName(), item.getPrice(), item.getQuantity(),item.getId()));
         }
         total += item.getPrice() * item.getQuantity();
         itemCount += item.getQuantity();
@@ -23,7 +23,7 @@ public class ShoppingCart {
             int index = products.indexOf(item);
             products.get(index).setQuantity(products.get(index).getQuantity() + quantity);
         } else {
-            products.add(new Product(item.getName(), item.getPrice(), quantity));
+            products.add(new Product(item.getName(), item.getPrice(), quantity,item.getId()));
         }
         total += item.getPrice() * quantity;
         itemCount += quantity;
