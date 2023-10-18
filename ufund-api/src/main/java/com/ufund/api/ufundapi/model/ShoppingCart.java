@@ -58,12 +58,14 @@ public class ShoppingCart {
             if (products.get(products.indexOf(item)).getQuantity() <= 0 ) {
                 products.remove(item);
             }
-        }
-
-        
+        }   
     }
-    public List<Product> getProducts(){
-        return this.products;
+    public List<Product> getProducts() {
+        if (products.isEmpty()) {
+            this.itemCount = 0;
+            this.total = 0;
+        }
+        return products;
     }
     public int getItemCount(){
         return this.itemCount;
