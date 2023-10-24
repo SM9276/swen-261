@@ -1,3 +1,8 @@
+
+<nav>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/needs">Needs</a>
+</nav>
 <h2>Top Needs</h2>
 <div class="needs-menu">
   <a *ngFor="let need of needs"
@@ -5,4 +10,6 @@
       {{need.name}}
   </a>
 </div>
+<button mat-raised-button color="primary" (click)="logout()">Logout</button>
+<!-- put this button on every page. -->
 <app-need-search></app-need-search>

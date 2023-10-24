@@ -42,7 +42,7 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public InventoryFileDAO(@Value("${ufund.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public InventoryFileDAO(@Value("${needs.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the inventories from the file

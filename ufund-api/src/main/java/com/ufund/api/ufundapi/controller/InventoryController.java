@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import com.ufund.api.ufundapi.model.Inventory;
 
 @RestController
 @RequestMapping("inventory")
+@CrossOrigin(origins = "http://localhost:4200")
 public class InventoryController {
     private static final Logger LOG = Logger.getLogger(InventoryController.class.getName());
     private InventoryDAO inventoryDao;
@@ -56,7 +58,7 @@ public class InventoryController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Inventory> getInventory(@PathVariable int id) {
-        LOG.info("GET /ufund/" + id);
+        LOG.info("GET /needs/" + id);
         try {
             Inventory inventory = inventoryDao.getInventory(id);
             if (inventory != null)
@@ -79,7 +81,7 @@ public class InventoryController {
      */
     @GetMapping("")
     public ResponseEntity<Inventory[]> getInventory() {
-        LOG.info("GET /ufund");
+        LOG.info("GET /needs");
 
         try {
             Inventory[] inventory = inventoryDao.getInventories();
@@ -109,7 +111,7 @@ public class InventoryController {
      */
     @GetMapping("/")
     public ResponseEntity<Inventory[]> searchInventory(@RequestParam String name) {
-        LOG.info("GET /ufund/?name="+name);
+        LOG.info("GET /needs/?name="+name);
 
         try {
             Inventory[] inventory = inventoryDao.findInventories(name);
@@ -135,7 +137,7 @@ public class InventoryController {
      */
     @PostMapping("")
     public ResponseEntity<Inventory> createInventory(@RequestBody Inventory inventory) {
-        LOG.info("POST /ufund " + inventory);
+        LOG.info("POST /needs " + inventory);
 
         try {
             if (inventory != null){
@@ -162,7 +164,7 @@ public class InventoryController {
      */
     @PutMapping("")
     public ResponseEntity<Inventory> updateInventory(@RequestBody Inventory inventory) {
-        LOG.info("PUT /ufund " + inventory);
+        LOG.info("PUT /needs " + inventory);
 
         try {
             Inventory current_inventory = inventoryDao.updateInventory(inventory);
@@ -189,7 +191,7 @@ public class InventoryController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Inventory> deleteInventory(@PathVariable int id) {
-        LOG.info("DELETE /ufund/" + id);
+        LOG.info("DELETE /needs/" + id);
         try {
             //Inventory inventory = inventoryDao.getInventory(id);
             if (inventoryDao.deleteInventory(id))
