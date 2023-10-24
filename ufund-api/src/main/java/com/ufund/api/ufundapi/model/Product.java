@@ -54,6 +54,7 @@ public class Product {
      */
     public double getPrice(){return price;}
     public int getId(){return id;}
+
     /**
      * Sets the price of the product
      * @param price The price of the product, must be >= 0
