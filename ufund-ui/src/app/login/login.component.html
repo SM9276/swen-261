@@ -1,16 +1,33 @@
-<form action="action_page.php" method="post">
-  
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-    <div>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-    </div>
-      <button type="submit">Login</button>
-      <div>
-        <button type="submit">Create Account</button>
-      </div>
-    </div>
-  
-  </form>
+<div
+  class="authentication-card-container"
+  fxLayout="column"
+  fxLayoutAlign="center"
+>
+  <mat-card class="authentication-card">
+    <mat-card-header> <mat-card-title>Login</mat-card-title></mat-card-header>
+    <mat-card-content>
+      <form
+        [formGroup]="loginForm"
+        fxLayout="column"
+        fxLayoutAlign="center stretch"
+      >
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Login
+      </button>
+      <button mat-button routerLink="/register" routerLinkActive="active">
+        Don't have an account? Register here.
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

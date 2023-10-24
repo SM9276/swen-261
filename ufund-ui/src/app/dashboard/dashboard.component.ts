@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { Observable } from 'rxjs';
+import { AuthenticationService } from '../authentication.service';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +14,16 @@ import { NeedService } from '../need.service';
 export class DashboardComponent implements OnInit {
   needs: Need[] = [];
 
-  constructor(private needService: NeedService) { }
+  constructor(
+    private needService: NeedService,
+    private appComponent: AppComponent,
+    ) { }
 
   ngOnInit(): void {
     this.getNeeds();
+  }
+  logout(): void{
+    this.appComponent.logout();
   }
 
   getNeeds(): void {
