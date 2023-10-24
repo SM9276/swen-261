@@ -17,40 +17,48 @@ public class ProductTest {
     String name;
     double price;
     int quantity;
+    int id;
     Product product2;
     String name2;
     double price2;
     int quantity2;
+    int id2;
     Product product3;
     String name3;
     double price3;
     int quantity3;
+    int id3;
     Product product4;
     String name4;
     double price4;
     int quantity4;
+    int id4;
 
     @BeforeEach
     public void setUpProductTest(){
         name = "Munchies";
         price = 10.0;
         quantity = 8;
-        product = new Product(name, price, quantity);
+        id = 0;
+        product = new Product(name, price, quantity, id);
 
         name2 = "Munchies";
         price2 = 10.0;
         quantity2 = 10;
-        product2 = new Product(name2, price2, quantity);
+        id2 = 1;
+        product2 = new Product(name2, price2, quantity, id);
         
         name3 = "Alma de Mexico";
         price3 = 5.0;
         quantity3 = 8;
-        product3 = new Product(name3, price3, quantity3);
+        id3 = 2;
+        product3 = new Product(name3, price3, quantity3, id);
 
         name4 = "Munchies";
         price4 = 5.0;
         quantity4 = 8;
-        product4 = new Product(name4, price4, quantity4);
+        id4 = 3;
+        product4 = new Product(name4, price4, quantity4, id);
     }
 
     @Test
@@ -110,7 +118,7 @@ public class ProductTest {
         double price = 10.0;
         String name = "Munchies";
         String expectedString = String.format(Product.STRING_FORMAT, name, price, quantity);
-        Product tester = new Product(name, price, quantity);
+        Product tester = new Product(name, price, quantity, id);
         String actualString = tester.toString();
         assertEquals(expectedString, actualString);
     }
@@ -124,7 +132,7 @@ public class ProductTest {
         String name = "Rock";
         double price = 20.7;
         int quantity = 8;
-        Product product = new Product(name, price, quantity);
+        Product product = new Product(name, price, quantity, id2);
         assertEquals(name, product.getName());
         assertEquals(price, product.getPrice());
         assertEquals(quantity, product.getQuantity());
@@ -134,7 +142,7 @@ public class ProductTest {
         String name = "Rock";
         double price = -1;
         int quantity = -1;
-        Product product = new Product(name, price, quantity);
+        Product product = new Product(name, price, quantity, id3);
         assertEquals(name, product.getName());
         assertEquals(0, product.getPrice());
         assertEquals(0, product.getQuantity());

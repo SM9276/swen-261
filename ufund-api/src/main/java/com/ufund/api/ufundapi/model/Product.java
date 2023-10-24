@@ -22,9 +22,9 @@ public class Product {
      * @param quantity The quantity of the product. Cannot be < 0
      * 
      */
-    public Product(@JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("quantity") int quantity) {
+    public Product(@JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("quantity") int quantity, @JsonProperty("id") int id) {
         this.name = name;
-        
+        this.id = id;
         if (price < 0) {
             this.price = 0;
         } 
@@ -53,7 +53,8 @@ public class Product {
      * @return the price of the product
      */
     public double getPrice(){return price;}
-    pubilc int getID(return id;)
+    public int getId(){return id;}
+
     /**
      * Sets the price of the product
      * @param price The price of the product, must be >= 0

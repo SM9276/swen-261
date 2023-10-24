@@ -29,10 +29,10 @@ public class ShoppingCartTests {
     public void setupShoppingCart() {
         productList = new LinkedList<Product>();
 
-        mockProduct1 = new Product("1", 1, 1);
-        new Product("1", 1, 2);
-        mockProduct2 = new Product("2", 2, 2);
-        mockProduct3 = new Product("3", 3, 3);
+        mockProduct1 = new Product("1", 1, 1, 1);
+        new Product("1", 1, 2, 1);
+        mockProduct2 = new Product("2", 2, 2, 2);
+        mockProduct3 = new Product("3", 3, 3, 2);
 
         productList.add(mockProduct1);
         productList.add(mockProduct2);

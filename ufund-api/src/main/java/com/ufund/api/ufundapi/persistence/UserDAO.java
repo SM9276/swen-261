@@ -40,7 +40,7 @@ public interface UserDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    User getUser(int id) throws IOException;
+    User getUser(String name) throws IOException;
 
     /**
      * Creates and saves a {@linkplain User user}
