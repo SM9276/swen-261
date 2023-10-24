@@ -58,11 +58,7 @@ public class InventoryController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-<<<<<<< HEAD
-    public ResponseEntity<Inventory> getInventory(@PathVariable int id) {
-=======
     public ResponseEntity<Product> getProduct(@PathVariable int id) {
->>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
         LOG.info("GET /needs/" + id);
         try {
             Product product = inventoryDao.getProduct(id);
@@ -85,11 +81,7 @@ public class InventoryController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-<<<<<<< HEAD
-    public ResponseEntity<Inventory[]> getInventory() {
-=======
     public ResponseEntity<Product[]> getProduct() {
->>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
         LOG.info("GET /needs");
 
         try {
@@ -119,11 +111,7 @@ public class InventoryController {
      * GET http://localhost:8080/ufund/?name=ma
      */
     @GetMapping("/")
-<<<<<<< HEAD
-    public ResponseEntity<Inventory[]> searchInventory(@RequestParam String name) {
-=======
     public ResponseEntity<Product[]> searchProduct(@RequestParam String name) {
->>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
         LOG.info("GET /needs/?name="+name);
 
         try {
@@ -149,13 +137,8 @@ public class InventoryController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-<<<<<<< HEAD
-    public ResponseEntity<Inventory> createInventory(@RequestBody Inventory inventory) {
-        LOG.info("POST /needs " + inventory);
-=======
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /needs " + product);
->>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
 
         try {
             if (product != null){
@@ -181,13 +164,8 @@ public class InventoryController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-<<<<<<< HEAD
-    public ResponseEntity<Inventory> updateInventory(@RequestBody Inventory inventory) {
-        LOG.info("PUT /needs " + inventory);
-=======
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
         LOG.info("PUT /needs " + product);
->>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
 
         try {
             Product current_product = inventoryDao.updateProduct(product);
@@ -213,11 +191,7 @@ public class InventoryController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-<<<<<<< HEAD
-    public ResponseEntity<Inventory> deleteInventory(@PathVariable int id) {
-=======
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
->>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
         LOG.info("DELETE /needs/" + id);
         try {
             //Inventory inventory = inventoryDao.getInventory(id);
