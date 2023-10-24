@@ -1,7 +1,8 @@
 package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
-import com.ufund.api.ufundapi.model.Inventory;
+//import com.ufund.api.ufundapi.model.Inventory;
+import com.ufund.api.ufundapi.model.Product;
 
 /**
  * Defines the interface for Need object persistence
@@ -16,7 +17,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Inventory[] getInventories() throws IOException;
+    Product[] getProducts() throws IOException;
 
     /**
      * Finds all {@linkplain Inventory inventories} whose name contains the given text
@@ -27,7 +28,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Inventory[] findInventories(String containsText) throws IOException;
+    Product[] findProducts(String containsText) throws IOException;
 
     /**
      * Retrieves a {@linkplain Inventory inventory} with the given id
@@ -40,7 +41,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Inventory getInventory(int id) throws IOException;
+    Product getProduct(int id) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Inventory inventory}
@@ -53,7 +54,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Inventory createInventory(Inventory inventory) throws IOException;
+    Product createProduct(Product product) throws IOException;
 
     /**
      * Updates and saves a {@linkplain Inventory inventory}
@@ -65,7 +66,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Inventory updateInventory(Inventory inventory) throws IOException;
+    Product updateProduct(Product product) throws IOException;
 
     /**
      * Deletes a {@linkplain Inventory inventory} with the given id
@@ -78,6 +79,6 @@ public interface InventoryDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteInventory(int id) throws IOException;
+    boolean deleteProduct(int id) throws IOException;
 }
 

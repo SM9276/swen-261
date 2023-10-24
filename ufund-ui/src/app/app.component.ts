@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+<<<<<<< HEAD
   title = 'ufund-ui';
   login: string = "";
   canDisplay: string = "";
@@ -33,4 +34,7 @@ export class AppComponent {
     this.router.navigate(['login']);
   }
   
+=======
+  title = 'ufund';
+>>>>>>> 60e77287a7b6cd69617e8695537d10fafc2a8bb8
 }

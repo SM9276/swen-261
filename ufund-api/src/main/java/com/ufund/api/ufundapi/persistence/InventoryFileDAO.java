@@ -12,7 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.Inventory;
+//import com.ufund.api.ufundapi.model.Inventory;
+import com.ufund.api.ufundapi.model.Product;
 
 /**
  * Implements the functionality for JSON file-based peristance for Inventories
@@ -25,7 +26,7 @@ import com.ufund.api.ufundapi.model.Inventory;
 @Component
 public class InventoryFileDAO implements InventoryDAO {
     private static final Logger LOG = Logger.getLogger(InventoryFileDAO.class.getName());
-    Map<Integer,Inventory> inventories;   // Provides a local cache of the inventory objects
+    Map<Integer,Product> products;   // Provides a local cache of the inventory objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Inventory
@@ -64,8 +65,8 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @return  The array of {@link Inventory inventories}, may be empty
      */
-    private Inventory[] getInventoriesArray() {
-        return getInventoriesArray(null);
+    private Product[] getProductsArray() {
+        return getProductsArray(null);
     }
 
     /**
@@ -77,18 +78,18 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @return  The array of {@link Inventory inventories}, may be empty
      */
-    private Inventory[] getInventoriesArray(String containsText) { // if containsText == null, no filter
-        ArrayList<Inventory> inventoryArrayList = new ArrayList<>();
+    private Product[] getProductsArray(String containsText) { // if containsText == null, no filter
+        ArrayList<Product> productArrayList = new ArrayList<>();
 
-        for (Inventory inventory : inventories.values()) {
-            if (containsText == null || inventory.getName().contains(containsText)) {
-                inventoryArrayList.add(inventory);
+        for (Product product : products.values()) {
+            if (containsText == null || product.getName().contains(containsText)) {
+                productArrayList.add(product);
             }
         }
 
-        Inventory[] inventoryArray = new Inventory[inventoryArrayList.size()];
-        inventoryArrayList.toArray(inventoryArray);
-        return inventoryArray;
+        Product[] productArray = new Product[productArrayList.size()];
+        productArrayList.toArray(productArray);
+        return productArray;
     }
 
     /**
@@ -99,12 +100,12 @@ public class InventoryFileDAO implements InventoryDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Inventory[] inventoryArray = getInventoriesArray();
+        Product[] productArray = getProductsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),inventoryArray);
+        objectMapper.writeValue(new File(filename),productArray);
         return true;
     }
 
@@ -118,19 +119,19 @@ public class InventoryFileDAO implements InventoryDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        inventories = new TreeMap<>();
+        products = new TreeMap<>();
         nextId = 0;
 
         // Deserializes the JSON objects from the file into an array of inventories
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Inventory[] inventoryArray = objectMapper.readValue(new File(filename),Inventory[].class);
+        Product[] productArray = objectMapper.readValue(new File(filename),Product[].class);
 
         // Add each inventory to the tree map and keep track of the greatest id
-        for (Inventory inventory : inventoryArray) {
-            inventories.put(inventory.getId(),inventory);
-            if (inventory.getId() > nextId)
-                nextId = inventory.getId();
+        for (Product product : productArray) {
+            products.put(product.getId(),product);
+            if (product.getId() > nextId)
+                nextId = product.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
@@ -141,9 +142,9 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Inventory[] getInventories() {
-        synchronized(inventories) {
-            return getInventoriesArray();
+    public Product[] getProducts() {
+        synchronized(products) {
+            return getProductsArray();
         }
     }
 
@@ -151,9 +152,9 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Inventory[] findInventories(String containsText) {
-        synchronized(inventories) {
-            return getInventoriesArray(containsText);
+    public Product[] findProducts(String containsText) {
+        synchronized(products) {
+            return getProductsArray(containsText);
         }
     }
 
@@ -161,10 +162,10 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Inventory getInventory(int id) {
-        synchronized(inventories) {
-            if (inventories.containsKey(id))
-                return inventories.get(id);
+    public Product getProduct(int id) {
+        synchronized(products) {
+            if (products.containsKey(id))
+                return products.get(id);
             else
                 return null;
         }
@@ -174,14 +175,14 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Inventory createInventory(Inventory inventory) throws IOException {
-        synchronized(inventories) {
+    public Product createProduct(Product product) throws IOException {
+        synchronized(products) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            Inventory newInventory = new Inventory(nextId(),inventory.getName());
-            inventories.put(newInventory.getId(),newInventory);
+            Product newProduct = new Product(product.getName(),product.getPrice(),product.getQuantity(),product.getId());
+            products.put(newProduct.getId(),newProduct);
             save(); // may throw an IOException
-            return newInventory;
+            return newProduct;
         }
     }
 
@@ -189,14 +190,14 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Inventory updateInventory(Inventory inventory) throws IOException {
-        synchronized(inventories) {
-            if (inventories.containsKey(inventory.getId()) == false)
+    public Product updateProduct(Product product) throws IOException {
+        synchronized(products) {
+            if (products.containsKey(product.getId()) == false)
                 return null;  // inventory does not exist
 
-            inventories.put(inventory.getId(),inventory);
+            products.put(product.getId(),product);
             save(); // may throw an IOException
-            return inventory;
+            return product;
         }
     }
 
@@ -204,10 +205,10 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean deleteInventory(int id) throws IOException {
-        synchronized(inventories) {
-            if (inventories.containsKey(id)) {
-                inventories.remove(id);
+    public boolean deleteProduct(int id) throws IOException {
+        synchronized(products) {
+            if (products.containsKey(id)) {
+                products.remove(id);
                 return save();
             }
             else
