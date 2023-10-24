@@ -10,6 +10,7 @@ public class Product {
 
     // Package private for tests
     static final String STRING_FORMAT = "Product [name=%s, price=%f, quantity=%d]";
+    @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("price") private double price;
     @JsonProperty("quantity") private int quantity;
@@ -52,7 +53,7 @@ public class Product {
      * @return the price of the product
      */
     public double getPrice(){return price;}
-
+    pubilc int getID(return id;)
     /**
      * Sets the price of the product
      * @param price The price of the product, must be >= 0
@@ -80,7 +81,6 @@ public class Product {
         } 
         else {this.quantity=quantity;}
     }
-
     /**
      * {@inheritDoc}
      */
