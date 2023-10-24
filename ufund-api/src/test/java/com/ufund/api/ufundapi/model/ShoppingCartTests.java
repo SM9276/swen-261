@@ -24,7 +24,7 @@ public class ShoppingCartTests {
     private ShoppingCart shoppingCart2;
     private ShoppingCart shoppingCartEmpty;
 
-  
+
     @BeforeEach
     public void setupShoppingCart() {
         productList = new LinkedList<Product>();
