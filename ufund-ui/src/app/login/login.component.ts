@@ -41,13 +41,9 @@ export class LoginComponent {
   }
 
   attemptLogin(username: string, password: string) {
-    console.log(username);
-    console.log(password);
     const value = this.authenticationService.login({username,password} as User)
-    console.log(value);
       value.subscribe((name) => {this.user.push(name);
-        console.log(name);
-        if (this.user != null && this.authenticationService.searchUsers(this.user[0].username)) {
+        if (this.user != null && this.user[0].username != undefined) {
           this.router.navigate(['dashboard']);
           this.appComponent.canDisplay = "yes";
           this.appComponent.setCookie(username);
