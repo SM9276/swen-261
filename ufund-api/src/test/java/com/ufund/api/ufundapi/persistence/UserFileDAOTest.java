@@ -30,9 +30,9 @@ public class UserFileDAOTest {
     public void setupUserFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testUsers = new User[3];
-        testUsers[0] = new User("Joseph", "password1");
-        testUsers[1] = new User("Zephyr", "password2");
-        testUsers[2] = new User("Deric", "password3");
+        testUsers[0] = new User("Boseph", "password1");
+        testUsers[1] = new User("Dephyr", "password2");
+        testUsers[2] = new User("Zeric", "password3");
 
         when(mockObjectMapper
             .readValue(new File("ambiguous.txt"), User[].class))
@@ -64,16 +64,16 @@ public class UserFileDAOTest {
     @Test
     public void testGetUser() {
         // Invoke
-        User user = userFileDAO.getUser("Joseph");
+        User user = userFileDAO.getUser("Boseph");
 
         // Analzye
         assertEquals(user,testUsers[0]);
     }
 
     @Test
-    public void testDeleteHero() {
+    public void testDeleteUser() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser("Joseph"),
+        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser("Boseph"),
                             "Unexpected exception thrown");
 
         // Analzye
@@ -101,7 +101,7 @@ public class UserFileDAOTest {
     }
 
     @Test
-    public void testUpdateHero() {
+    public void testUpdateUser() {
         // Setup
         User user = new User("Galactic Jud", "JedMode");
 
@@ -131,7 +131,7 @@ public class UserFileDAOTest {
     @Test
     public void testGetUserNotFound() {
         // Invoke
-        User user = userFileDAO.getUser("Zephyr");
+        User user = userFileDAO.getUser("Deph");
 
         // Analyze
         assertEquals(user,null);
@@ -140,7 +140,7 @@ public class UserFileDAOTest {
     @Test
     public void testDeleteUserNotFound() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser("Deric"),
+        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser("Deerman"),
                                                 "Unexpected exception thrown");
 
         // Analyze
@@ -149,7 +149,7 @@ public class UserFileDAOTest {
     }
 
     @Test
-    public void testUpdateHeroNotFound() {
+    public void testUpdateUserNotFound() {
         // Setup
         User user = new User("Goku", "Gohan's Birthday");
 
