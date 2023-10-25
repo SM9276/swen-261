@@ -30,9 +30,9 @@ public class UserFileDAOTest {
     public void setupUserFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testUsers = new User[3];
-        testUsers[0] = new User(77, "Joseph", "password1");
-        testUsers[1] = new User(78, "Zephyr", "password2");
-        testUsers[2] = new User(79, "Deric", "password3");
+        testUsers[0] = new User("Joseph", "password1");
+        testUsers[1] = new User("Zephyr", "password2");
+        testUsers[2] = new User("Deric", "password3");
 
         when(mockObjectMapper
             .readValue(new File("ambiguous.txt"), User[].class))
@@ -57,14 +57,14 @@ public class UserFileDAOTest {
 
         // Analyze
         assertEquals(users.length,2);
-        assertEquals(users[0],testUsers[1]);
-        assertEquals(users[1],testUsers[2]);
+        assertEquals(users[0],testUsers[0]);
+        assertEquals(users[1],testUsers[1]);
     }
 
     @Test
     public void testGetUser() {
         // Invoke
-        User user = userFileDAO.getUser(77);
+        User user = userFileDAO.getUser("Joseph");
 
         // Analzye
         assertEquals(user,testUsers[0]);
@@ -73,7 +73,7 @@ public class UserFileDAOTest {
     @Test
     public void testDeleteHero() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser(77),
+        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser("Joseph"),
                             "Unexpected exception thrown");
 
         // Analzye
@@ -88,7 +88,7 @@ public class UserFileDAOTest {
     @Test
     public void testCreateUser() {
         // Setup
-        User user = new User(4, "Jared", "OPM");
+        User user = new User("Jared", "OPM");
 
         // Invoke
         User result = assertDoesNotThrow(() -> userFileDAO.createUser(user),
@@ -96,15 +96,14 @@ public class UserFileDAOTest {
 
         // Analyze
         assertNotNull(result);
-        User actual = userFileDAO.getUser(user.getId());
-        assertEquals(actual.getId(),user.getId());
+        User actual = userFileDAO.getUser(user.getUsername());
         assertEquals(actual.getUsername(),user.getUsername());
     }
 
     @Test
     public void testUpdateHero() {
         // Setup
-        User user = new User(6,"Galactic Jud", "JedMode");
+        User user = new User("Galactic Jud", "JedMode");
 
         // Invoke
         User result = assertDoesNotThrow(() -> userFileDAO.updateUser(user),
@@ -112,7 +111,7 @@ public class UserFileDAOTest {
 
         // Analyze
         assertNotNull(result);
-        User actual = userFileDAO.getUser(user.getId());
+        User actual = userFileDAO.getUser(user.getUsername());
         assertEquals(actual,user);
     }
 
@@ -122,7 +121,7 @@ public class UserFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(User[].class));
 
-        User user = new User(102,"Mr. Smiley", "ORV");
+        User user = new User("Mr. Smiley", "ORV");
 
         assertThrows(IOException.class,
                         () -> userFileDAO.createUser(user),
@@ -132,7 +131,7 @@ public class UserFileDAOTest {
     @Test
     public void testGetUserNotFound() {
         // Invoke
-        User user = userFileDAO.getUser(78);
+        User user = userFileDAO.getUser("Zephyr");
 
         // Analyze
         assertEquals(user,null);
@@ -141,7 +140,7 @@ public class UserFileDAOTest {
     @Test
     public void testDeleteUserNotFound() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser(78),
+        boolean result = assertDoesNotThrow(() -> userFileDAO.deleteUser("Deric"),
                                                 "Unexpected exception thrown");
 
         // Analyze
@@ -152,7 +151,7 @@ public class UserFileDAOTest {
     @Test
     public void testUpdateHeroNotFound() {
         // Setup
-        User user = new User(78,"Goku", "Gohan's Birthday");
+        User user = new User("Goku", "Gohan's Birthday");
 
         // Invoke
         User result = assertDoesNotThrow(() -> userFileDAO.updateUser(user),
