@@ -26,7 +26,7 @@ public class UserFileDAOTest {
     User[] testUsers;
     ObjectMapper mockObjectMapper;
     
-    @Test
+    @BeforeEach
     public void setupUserFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testUsers = new User[3];
@@ -38,6 +38,16 @@ public class UserFileDAOTest {
             .readValue(new File("ambiguous.txt"), User[].class))
                 .thenReturn(testUsers);
         userFileDAO = new UserFileDAO("ambiguous.txt", mockObjectMapper);
+    }
+
+    @Test
+    public void testGetUsers() {
+        User[] users = userFileDAO.getUsers();
+
+        assertEquals(users.length, testUsers.length);
+        for (int i = 0; i < testUsers.length; ++i) {
+            assertEquals(users[i], testUsers[i]);
+        }
     }
 
 }
