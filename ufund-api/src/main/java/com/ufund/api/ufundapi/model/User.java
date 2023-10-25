@@ -12,9 +12,8 @@ public class User {
     private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "User [id=%d, username=%s, password=%s]";
+    static final String STRING_FORMAT = "User [ username=%s, password=%s]";
 
-    @JsonProperty("id") private int id;
     @JsonProperty("username") private String username;
     @JsonProperty("password") private String password;
 
@@ -28,8 +27,7 @@ public class User {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public User(@JsonProperty("id") int id, @JsonProperty("username") String username, @JsonProperty("password") String password) {
-        this.id = id;
+    public User(@JsonProperty("username") String username, @JsonProperty("password") String password) {
         this.username = username;
         this.password = password;
     }
@@ -38,7 +36,6 @@ public class User {
      * Retrieves the id of the need
      * @return The id of the need
      */
-    public int getId() {return id;}
 
     /**
      * Sets the name of the need - necessary for JSON object to Java object deserialization
@@ -69,6 +66,6 @@ public class User {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,username,password);
+        return String.format(STRING_FORMAT,username,password);
     }
 }

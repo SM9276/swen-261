@@ -21,9 +21,12 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private messageService: MessageService) {}
 
   login(user: User): Observable<User> {
-    const url = `${this.userUrl}/login?id=` + user.username;
+
+    const url = `${this.userUrl}/login/${user.username}`;
+
+    console.log(this.http.get<User>(url))
     return this.http.get<User>(url).pipe(
-      catchError(this.handleError<User>(`getUser id=${user.username}`))
+      catchError(this.handleError<User>(`getUser ${user.username}`))
     );
   }
 
@@ -48,6 +51,7 @@ export class AuthenticationService {
   }
   searchUsers(term: String): Observable<User[]> {
     console.log(term);
+    console.log(this.http.get<User[]>(`${this.userUrl}/?user=${term}`));
     return this.http.get<User[]>(`${this.userUrl}/?user=${term}`).pipe(tap(x => x.length),
       catchError(this.handleError<User[]>('searchUsers'))
     );

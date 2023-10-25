@@ -28,6 +28,7 @@ export class NeedsComponent implements OnInit {
     const id:number = parseFloat(needId);
 
     if (!name) { return; }
+    console.log(this.needService.addNeed({name,price,quantity,id} as Need));
     this.needService.addNeed({name,price,quantity,id} as Need)
       .subscribe(need => {
         this.needs.push(need);
