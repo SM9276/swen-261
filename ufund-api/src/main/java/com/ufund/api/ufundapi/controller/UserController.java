@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufund.api.ufundapi.persistence.UserDAO;
+import com.ufund.api.ufundapi.model.Product;
 import com.ufund.api.ufundapi.model.User;
  /**
  * Handles the REST API requests for the User resource
@@ -56,11 +57,29 @@ public class UserController  {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/login/{id}")
-    public ResponseEntity<User> getUser(@PathVariable int id) {
-        LOG.info("GET /login/?name=" + id);
+
+    @GetMapping("/")
+    public ResponseEntity<User[]> searchUser(@RequestParam String name) {
+        LOG.info("GET /users/?user="+name);
+
         try {
-            User user = userDAO.getUser(id);
+            User[] user = userDAO.findUsers(name);
+            if (user != null)
+                return new ResponseEntity<User[]>(user,HttpStatus.OK);
+            else
+                return new ResponseEntity<User[]>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/login/{name}")
+    public ResponseEntity<User> getUser(@PathVariable String name) {
+        LOG.info("GET /users/" + name);
+        try {
+            User user = userDAO.getUser(name);
             if (user != null)
                 return new ResponseEntity<User>(user,HttpStatus.OK);
             else
@@ -82,11 +101,11 @@ public class UserController  {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User id) {
-        LOG.info("POST /register?id = " + id);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        LOG.info("POST /register?id = " + user);
 
         try {
-            User status = userDAO.createUser(id);
+            User status = userDAO.createUser(user);
             if (status != null) {
                 return new ResponseEntity<User>(status, HttpStatus.CREATED);
             } else { 
@@ -108,13 +127,13 @@ public class UserController  {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable int id) {
-        LOG.info("DELETE " + id);
+    @DeleteMapping("{username}")
+    public ResponseEntity<User> deleteUser(@PathVariable String name) {
+        LOG.info("DELETE " + name);
 
         try {
             //Username status = usernameDAO.deleteUsername(id);
-            if (userDAO.deleteUser(id)) {
+            if (userDAO.deleteUser(name)) {
                 return new ResponseEntity<User>(HttpStatus.OK);
             } else { 
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

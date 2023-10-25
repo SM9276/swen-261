@@ -25,7 +25,7 @@ import com.ufund.api.ufundapi.model.User;
 @Component
 public class UserFileDAO implements UserDAO {
     private static final Logger LOG = Logger.getLogger(UserFileDAO.class.getName());
-    Map<Integer,User> users;   // Provides a local cache of the inventory objects
+    Map<String,User> users;   // Provides a local cache of the inventory objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Inventory
@@ -53,12 +53,6 @@ public class UserFileDAO implements UserDAO {
      * 
      * @return The next id
      */
-    private synchronized static int nextId() {
-        int id = nextId;
-        ++nextId;
-        return id;
-    }
-
     /**
      * Generates an array of {@linkplain User users} from the tree map
      * 
@@ -128,9 +122,8 @@ public class UserFileDAO implements UserDAO {
 
         // Add each inventory to the tree map and keep track of the greatest id
         for (User user : userArray) {
-            users.put(user.getId(),user);
-            if (user.getId() > nextId)
-                nextId = user.getId();
+            users.put(user.getUsername(),user);
+
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
@@ -161,10 +154,10 @@ public class UserFileDAO implements UserDAO {
     ** {@inheritDoc}
      */
     @Override
-    public User getUser(int id) {
+    public User getUser(String name) {
         synchronized(users) {
-            if (users.containsKey(id))
-                return users.get(id);
+            if (users.containsKey(name))
+                return users.get(name);
             else
                 return null;
         }
@@ -178,8 +171,8 @@ public class UserFileDAO implements UserDAO {
         synchronized(users) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            User newUser = new User(nextId(), user.getUsername(), user.getPassword());
-            users.put(newUser.getId(),newUser);
+            User newUser = new User(user.getUsername(), user.getPassword());
+            users.put(newUser.getUsername(),newUser);
             save(); // may throw an IOException
             return newUser;
         }
@@ -191,10 +184,10 @@ public class UserFileDAO implements UserDAO {
     @Override
     public User updateUser(User user) throws IOException {
         synchronized(users) {
-            if (users.containsKey(user.getId()) == false)
+            if (users.containsKey(user.getUsername()) == false)
                 return null;  // inventory does not exist
 
-            users.put(user.getId(),user);
+            users.put(user.getUsername(),user);
             save(); // may throw an IOException
             return user;
         }
@@ -204,10 +197,10 @@ public class UserFileDAO implements UserDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean deleteUser(int id) throws IOException {
+    public boolean deleteUser(String name) throws IOException {
         synchronized(users) {
-            if (users.containsKey(id)) {
-                users.remove(id);
+            if (users.containsKey(name)) {
+                users.remove(name);
                 return save();
             }
             else

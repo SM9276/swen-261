@@ -1,2 +1,2 @@
 
-[{"id":0,"username":"JayLee","password":"Admin"},{"id":1,"username":"Mart","password":"Mart"},{"id":2,"username":"Inez","password":"Inez"}]
+[{"username":"Admin","password":"Admin"},{"username":"Mart","password":"Mart"},{"username":"Inez","password":"Inez"}]
