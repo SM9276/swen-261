@@ -32,5 +32,9 @@ export class AppComponent {
     this.cookie.delete("UserId");
     this.router.navigate(['login']);
   }
+
+  public getUsername() {
+    return this.login;
+  }
   
 }

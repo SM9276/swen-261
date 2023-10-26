@@ -1,10 +1,10 @@
 <h2>Needs</h2>
 <a routerLink="/dashboard">Dashboard</a>
 <a routerLink="/needs">Needs</a>
-<div>
+<div *ngIf="this.getUsername() === 'Admin'">
   <label for="new-need">Need name: </label>
   <input id="new-need" #needName />
-   <!-- (click) passes input value to add() and then clears the input -->
+  <!-- (click) passes input value to add() and then clears the input -->
 
   <label for="new-need2">Need price: </label>
   <input id="new-need2" #needPrice />
@@ -30,7 +30,9 @@
     <a routerLink="/detail/{{need.id}}">
       <span class="badge">{{need.id}}</span> {{need.name}}
     </a>
-    <button type="button" class="delete" title="delete need"
-      (click)="delete(need)">x</button>
+    <div *ngIf="this.getUsername() === 'Admin'">
+      <button type="button" class="delete" title="delete need"
+        (click)="delete(need)">x</button>
+    </div>
   </li>
 </ul>
