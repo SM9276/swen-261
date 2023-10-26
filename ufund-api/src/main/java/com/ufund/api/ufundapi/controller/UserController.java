@@ -75,6 +75,23 @@ public class UserController  {
         }
     }
 
+    @GetMapping("/")
+    public ResponseEntity<User[]> searchUserShoppingCart(@RequestParam String name) {
+        LOG.info("GET /shopping-cart/?user="+name);
+
+        try {
+            User[] user = userDAO.findUsers(name);
+            if (user != null)
+                return new ResponseEntity<User[]>(user,HttpStatus.OK);
+            else
+                return new ResponseEntity<User[]>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/login/{name}")
     public ResponseEntity<User> getUser(@PathVariable String name) {
         LOG.info("GET /users/" + name);
