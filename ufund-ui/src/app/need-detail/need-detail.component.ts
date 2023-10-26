@@ -11,7 +11,6 @@ import { AppComponent } from '../app.component';
 
 import { NeedService } from '../need.service';
 import { User } from '../user';
-import { AppComponent } from '../app.component';
 import { shoppingCart } from '../shoppingCart';
 @Component({
   selector: 'app-need-detail',
@@ -55,7 +54,7 @@ export class NeedDetailComponent {
       const needs: Need[]= this.needs;
       this.userService.addToShoppingCart({username, needs} as shoppingCart).subscribe(() => this.goBack());
     }
-
+  }
 
   getUsername(): String {
     return this.appComponent.getUsername();
