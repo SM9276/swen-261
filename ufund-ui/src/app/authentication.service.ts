@@ -48,4 +48,11 @@ export class AuthenticationService {
       return of(error as T);
     };
   }
+  searchUsers(term: String): Observable<User[]> {
+    console.log(term);
+    return this.http.get<User[]>(`${this.userUrl}/?user=${term}`).pipe(tap(x => x.length),
+      catchError(this.handleError<User[]>('searchUsers'))
+    );
+  }
+  
 }
