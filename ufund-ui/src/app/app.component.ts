@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ufund-ui';
+  title = 'Orphan Helpers';
   login: string = "";
   canDisplay: string = "";
   constructor(private cookie: CookieService, private authenticationService: AuthenticationService, private router: Router){
