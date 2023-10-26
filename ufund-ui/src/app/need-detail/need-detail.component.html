@@ -17,7 +17,13 @@
       <input id="need-id" [(ngModel)]="need.id" placeholder="id">
     </div>
 </div>
+
+<button type="button" (click)="save()">save</button>
+<button type="button" (click)="addToCart()">add to cart</button>
+<button type="button" (click)="goBack()">go back</button>
+
 <div *ngIf="this.getUsername() === 'Admin'">
   <button type="button" (click)="save()">save</button>
 </div>
-  <button type="button" (click)="goBack()">go back</button>
+
+
