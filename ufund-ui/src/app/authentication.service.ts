@@ -32,7 +32,6 @@ export class AuthenticationService {
 
   register(user: User): Observable<User> {
     const {username, password} = user;
-    console.log(user);
     return this.http.post<User>(`${this.userUrl}/register`, user, this.httpOptions).pipe(
       catchError(this.handleError<User>('updateUser'))
     );
@@ -48,12 +47,5 @@ export class AuthenticationService {
       // Let the app keep running by returning an empty result.
       return of(error as T);
     };
-  }
-  searchUsers(term: String): Observable<User[]> {
-    console.log(term);
-    console.log(this.http.get<User[]>(`${this.userUrl}/?user=${term}`));
-    return this.http.get<User[]>(`${this.userUrl}/?user=${term}`).pipe(tap(x => x.length),
-      catchError(this.handleError<User[]>('searchUsers'))
-    );
   }
 }

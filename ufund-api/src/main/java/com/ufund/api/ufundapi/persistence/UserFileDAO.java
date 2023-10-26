@@ -169,8 +169,7 @@ public class UserFileDAO implements UserDAO {
     @Override
     public User createUser(User user) throws IOException {
         synchronized(users) {
-            // We create a new inventory object because the id field is immutable
-            // and we need to assign the next unique id
+
             User newUser = new User(user.getUsername(), user.getPassword());
             users.put(newUser.getUsername(),newUser);
             save(); // may throw an IOException
@@ -186,7 +185,6 @@ public class UserFileDAO implements UserDAO {
         synchronized(users) {
             if (users.containsKey(user.getUsername()) == false)
                 return null;  // inventory does not exist
-
             users.put(user.getUsername(),user);
             save(); // may throw an IOException
             return user;
