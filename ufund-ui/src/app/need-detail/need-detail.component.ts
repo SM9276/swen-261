@@ -3,6 +3,7 @@ import { Need } from '../need';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AppComponent } from '../app.component';
 
 import { NeedService } from '../need.service';
 @Component({
@@ -14,7 +15,8 @@ export class NeedDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private needService: NeedService,
-    private location: Location
+    private location: Location,
+    private appComponent: AppComponent
   ) {}
   @Input() need?: Need;
   ngOnInit(): void {
@@ -34,5 +36,9 @@ export class NeedDetailComponent {
       this.needService.updateNeed(this.need)
         .subscribe(() => this.goBack());
     }
+  }
+
+  getUsername(): String {
+    return this.appComponent.getUsername();
   }
 }
