@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { AppComponent } from '../app.component';
+import { User } from '../user';
 
 @Component({
   selector: 'app-needs',
@@ -10,7 +12,7 @@ import { NeedService } from '../need.service';
 export class NeedsComponent implements OnInit {
   needs: Need[] = [];
 
-  constructor(private needService: NeedService) { }
+  constructor(private needService: NeedService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.getNeeds();
@@ -41,4 +43,7 @@ export class NeedsComponent implements OnInit {
     this.needService.deleteNeed(need.id).subscribe();
   }
 
+  getUsername(): String {
+    return this.appComponent.getUsername();
+  }
 }

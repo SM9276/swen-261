@@ -43,10 +43,17 @@ export class LoginComponent {
   attemptLogin(username: string, password: string) {
     const value = this.authenticationService.login({username,password} as User)
       value.subscribe((name) => {this.user.push(name);
+        console.log(name);
         if (this.user != null && this.user[0].username != undefined) {
-          this.router.navigate(['dashboard']);
-          this.appComponent.canDisplay = "yes";
-          this.appComponent.setCookie(username);
+          if(this.user[0].password == password){
+            this.router.navigate(['dashboard']);
+            this.appComponent.canDisplay = "yes";
+            this.appComponent.setCookie(username);
+          }
+          else {
+            window.alert("Password Incorrect");
+            this.loginForm.reset();
+          }
         }
       else {
         window.alert("Please Enter a Valid Username or Register");
