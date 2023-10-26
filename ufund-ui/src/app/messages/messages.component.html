@@ -1,4 +1,4 @@
-<div *ngIf="messageService.messages.length">
+<div *ngIf="messageService.messages.length && this.getUsername() === 'Admin'">
 
     <h2>Messages</h2>
     <button type="button" class="clear"
