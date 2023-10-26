@@ -36,7 +36,7 @@ export class RegisterComponent {
       this.authenticationService.register({username, password}as User).subscribe(
         (user) => {
           this.users.push(user);
-          if (user   != null) {
+          if (user   != null && this.authenticationService.searchUsers(user.username)) {
             this.router.navigate(['login']);
           } else {
             window.alert('This username is already taken.');
