@@ -109,7 +109,7 @@ This section describes the application domain.
 
 
 
-![Domain Model]("Domain Model.png")
+![Domain Model](Domain Model.png)
 
 
 
