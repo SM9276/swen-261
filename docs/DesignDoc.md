@@ -109,7 +109,7 @@ This section describes the application domain.
 
 
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model]("Domain Model.png")
 
 
 
@@ -159,7 +159,7 @@ The following Tiers/Layers model shows a high-level view of the webapp's archite
 
 
 
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
+![The Tiers & Layers of the Architecture](architecture-tiers-and-layers-diagram.png)
 
 
 
