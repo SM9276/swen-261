@@ -45,6 +45,8 @@ export class LoginComponent {
       value.subscribe((name) => {this.user.push(name);
         console.log(name);
         if (this.user != null && this.user[0].username != undefined) {
+          console.log(this.user)
+
           if(this.user[0].password == password){
             this.router.navigate(['dashboard']);
             this.appComponent.canDisplay = "yes";
