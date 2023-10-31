@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ShoppingCartsComponent } from './shopping-carts/shopping-carts.component';
+import { fundingBasketsComponent } from './funding-baskets/funding-baskets.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'detail/:id', component: NeedDetailComponent },
   { path: 'register', component: RegisterComponent,},
-  {path: 'shopping-carts', component: ShoppingCartsComponent}
+  {path: 'funding-basket', component: fundingBasketsComponent}
 ];
 
 @NgModule({

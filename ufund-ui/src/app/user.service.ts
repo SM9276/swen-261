@@ -7,13 +7,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 // import { shoppingCart } from './shoppingCart';
 import { MessageService } from './message.service';
 import { Need } from './need';
-import { shoppingCart } from './shoppingCart';
+import { fundingBasket } from './fundingBasket';
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private shoppingCartUrl = 'http://localhost:8080/shopping-cart';  // URL to web api
+  private fundingBasketUrl = 'http://localhost:8080/funding-basket';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,25 +23,25 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-    addToShoppingCart(shoppingCart: shoppingCart): Observable<shoppingCart> {
-      console.log(shoppingCart) 
+    addToFundingBasket(fundingBasket: fundingBasket): Observable<fundingBasket> {
+      console.log(fundingBasket) 
       
-      const {username, needs} = shoppingCart;
+      const {username, needs} = fundingBasket;
       const requestPayload = {
         username,
         needs
       };
-      return this.http.post<shoppingCart>(this.shoppingCartUrl, requestPayload, this.httpOptions).pipe(
-        tap((newShoppingCart: shoppingCart) => this.log(`added need w/ name=${newShoppingCart.needs} to funds basket`)),
-        catchError(this.handleError<shoppingCart>('addShoppingCart'))
+      return this.http.post<fundingBasket>(this.fundingBasketUrl, requestPayload, this.httpOptions).pipe(
+        tap((newFundingBasket: fundingBasket) => this.log(`added need w/ name=${newFundingBasket.needs} to funds basket`)),
+        catchError(this.handleError<fundingBasket>('addFundingBasket'))
       );
     }
       /** GET need by id. Will 404 if id not found */
-  getShoppingCart(name: String): Observable<shoppingCart[]> {
-    const url = `${this.shoppingCartUrl}/${name}`;
-    return this.http.get<shoppingCart[]>(url).pipe(
+  getFundingBasket(name: String): Observable<fundingBasket[]> {
+    const url = `${this.fundingBasketUrl}/${name}`;
+    return this.http.get<fundingBasket[]>(url).pipe(
       tap(_ => this.log(`fetched need name=${name}`)),
-      catchError(this.handleError<shoppingCart[]>(`getShoppingCart name=${name}`))
+      catchError(this.handleError<fundingBasket[]>(`getFundingBasket name=${name}`))
     );
   }
 

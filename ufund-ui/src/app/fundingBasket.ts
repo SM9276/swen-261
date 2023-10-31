@@ -1,5 +1,5 @@
 import { Need } from "./need";
-export interface shoppingCart{
+export interface fundingBasket{
     username: String;
     needs: Need[];
 }

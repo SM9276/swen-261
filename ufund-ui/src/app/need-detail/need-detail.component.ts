@@ -11,7 +11,7 @@ import { AppComponent } from '../app.component';
 
 import { NeedService } from '../need.service';
 import { User } from '../user';
-import { shoppingCart } from '../shoppingCart';
+import { fundingBasket } from '../fundingBasket';
 @Component({
   selector: 'app-need-detail',
   templateUrl: './need-detail.component.html',
@@ -48,11 +48,11 @@ export class NeedDetailComponent {
     }
   }
 
-  addToCart(): void{
+  addToBasket(): void{
     if (this.needs) {
       const username: String = (this.appComponent.login).trim();
       const needs: Need[]= this.needs;
-      this.userService.addToShoppingCart({username, needs} as shoppingCart).subscribe(() => this.goBack());
+      this.userService.addToFundingBasket({username, needs} as fundingBasket).subscribe(() => this.goBack());
     }
   }
 
