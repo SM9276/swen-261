@@ -18,9 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ufund.api.ufundapi.persistence.InventoryDAO;
-import com.ufund.api.ufundapi.persistence.ShoppingCartDAO;
+import com.ufund.api.ufundapi.persistence.FundingBasketDAO;
 import com.ufund.api.ufundapi.model.Product;
-import com.ufund.api.ufundapi.model.ShoppingCart;
+import com.ufund.api.ufundapi.model.FundingBasket;
 import com.ufund.api.ufundapi.model.User;
 
 /**
@@ -33,40 +33,40 @@ import com.ufund.api.ufundapi.model.User;
  */
 
 @RestController
-@RequestMapping("/shopping-cart")
+@RequestMapping("/funding-basket")
 @CrossOrigin(origins = "http://localhost:4200")
 
-public class ShoppingCartController {
-    private static final Logger LOG = Logger.getLogger(ShoppingCartController.class.getName());
-    private ShoppingCartDAO shoppingCartDao;
+public class FundingBasketController {
+    private static final Logger LOG = Logger.getLogger(FundingBasketController.class.getName());
+    private FundingBasketDAO fundingBasketDao;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param shoppingCartDao The {@link InventoryDAO Inventory Data Access Object} to perform CRUD operations
+     * @param fundingBasketDao The {@link InventoryDAO Inventory Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public ShoppingCartController(ShoppingCartDAO shoppingCartDao) {
-        this.shoppingCartDao = shoppingCartDao;
+    public FundingBasketController(FundingBasketDAO fundingBasketDao) {
+        this.fundingBasketDao = fundingBasketDao;
     }
 
     /**
-     * Responds to the GET request for a {@linkplain ShoppingCart shoppingCart} for the given id
+     * Responds to the GET request for a {@linkplain FundingBasket fundingBasket} for the given id
      * 
-     * @param id The id used to locate the {@link ShoppingCart shoppingCart}
+     * @param id The id used to locate the {@link FundingBasket fundingBasket}
      * 
-     * @return ResponseEntity with {@link ShoppingCart shoppingCart} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link FundingBasket fundingBasket} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{name}")
-    public ResponseEntity<ShoppingCart> getShoppingCart(@PathVariable String name) {
-        LOG.info("GET /shopping-cart/" + name);
+    public ResponseEntity<FundingBasket> getFundingBasket(@PathVariable String name) {
+        LOG.info("GET /funding-basket/" + name);
         try {
-            ShoppingCart shoppingCart = shoppingCartDao.getShoppingCart(name);
-            if (shoppingCart != null)
-                return new ResponseEntity<ShoppingCart>(shoppingCart,HttpStatus.OK);
+            FundingBasket fundingBasket = fundingBasketDao.getFundingBasket(name);
+            if (fundingBasket != null)
+                return new ResponseEntity<FundingBasket>(fundingBasket,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -77,12 +77,12 @@ public class ShoppingCartController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain ShoppingCart shoppingCart} whose name contains
+     * Responds to the GET request for all {@linkplain FundingBasket fundingBasket} whose name contains
      * the text in name
      * 
-     * @param name The name parameter which contains the text used to find the {@link ShoppingCart shoppingCart}
+     * @param name The name parameter which contains the text used to find the {@link FundingBasket fundingBasket}
      * 
-     * @return ResponseEntity with array of {@link ShoppingCart shoppingCart} objects (may be empty) and
+     * @return ResponseEntity with array of {@link FundingBasket fundingBasket} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
@@ -90,15 +90,15 @@ public class ShoppingCartController {
      * GET http://localhost:8080/ufund/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<ShoppingCart[]> searchUserShoppingCart(@RequestParam String name) {
-        LOG.info("GET /shopping-cart/?user="+name);
+    public ResponseEntity<FundingBasket[]> searchUserFundingBasket(@RequestParam String name) {
+        LOG.info("GET /funding-basket/?user="+name);
 
         try {
-            ShoppingCart[] shoppingCart = shoppingCartDao.findShoppingCart(name);
-            if (shoppingCart != null)
-                return new ResponseEntity<ShoppingCart[]>(shoppingCart,HttpStatus.OK);
+            FundingBasket[] fundingBasket = fundingBasketDao.findFundingBasket(name);
+            if (fundingBasket != null)
+                return new ResponseEntity<FundingBasket[]>(fundingBasket,HttpStatus.OK);
             else
-                return new ResponseEntity<ShoppingCart[]>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<FundingBasket[]>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -106,16 +106,16 @@ public class ShoppingCartController {
         }
     }
     @PostMapping("")
-    public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
-        LOG.info("POST /shopping-carts " + shoppingCart);
+    public ResponseEntity<FundingBasket> createFundingBasket(@RequestBody FundingBasket fundingBasket) {
+        LOG.info("POST /funding-basket " + fundingBasket);
 
         try {
-            if (shoppingCart != null){
-                shoppingCartDao.createShoppingCart(shoppingCart);
-                return new ResponseEntity<ShoppingCart>(shoppingCart,HttpStatus.CREATED);
+            if (fundingBasket != null){
+                fundingBasketDao.createFundingBasket(fundingBasket);
+                return new ResponseEntity<FundingBasket>(fundingBasket,HttpStatus.CREATED);
             }
             else
-                return new ResponseEntity<ShoppingCart>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<FundingBasket>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

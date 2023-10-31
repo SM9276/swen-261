@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 
 @Tag("Model-tier")
-public class ShoppingCartTests {
+public class FundingBasketTests {
     private Product[] mockProduct1;
     private Product[] mockProduct2;
     private Product[] mockProduct3;
@@ -27,14 +27,14 @@ public class ShoppingCartTests {
     private String empty_username;
     private List<Product> productList;
 
-    private ShoppingCart shoppingCart1;
-    private ShoppingCart shoppingCart2;
-    private ShoppingCart shoppingCartEmpty;
+    private FundingBasket fundingBasket1;
+    private FundingBasket fundingBasket2;
+    private FundingBasket fundingBasketEmpty;
     // productList[0] = new ArrayList<Product>();
 
 
     @BeforeEach
-    public void setupShoppingCart() {
+    public void setupFundingBasket() {
 
         mockProduct_1 = new Product("1", 1, 1, 1);
         mockProduct_2 = new Product("2", 2, 2, 2);
@@ -46,8 +46,8 @@ public class ShoppingCartTests {
         username = "Joe";
 
         empty_username = " ";
-        shoppingCart1 = new ShoppingCart(username, mockProduct1);
-        shoppingCartEmpty = new ShoppingCart(null,null);
+        fundingBasket1 = new FundingBasket(username, mockProduct1);
+        fundingBasketEmpty = new FundingBasket(null,null);
 
     }
 
@@ -60,12 +60,12 @@ public class ShoppingCartTests {
         mockProduct1[1] = mockProduct_2;
         mockProduct1[2] = mockProduct_3;
         mockProduct3[0] = mockProduct_1;
-        shoppingCart1 = new ShoppingCart(username, mockProduct1);
-        shoppingCart2 = new ShoppingCart(username, mockProduct2);
-        shoppingCartEmpty = new ShoppingCart(username, new Product[0]);
+        fundingBasket1 = new FundingBasket(username, mockProduct1);
+        fundingBasket2 = new FundingBasket(username, mockProduct2);
+        fundingBasketEmpty = new FundingBasket(username, new Product[0]);
 
-        assertNotNull(shoppingCart1);
-        assertNotNull(shoppingCart2);
-        assertNotNull(shoppingCartEmpty);
+        assertNotNull(fundingBasket1);
+        assertNotNull(fundingBasket2);
+        assertNotNull(fundingBasketEmpty);
     }
 }

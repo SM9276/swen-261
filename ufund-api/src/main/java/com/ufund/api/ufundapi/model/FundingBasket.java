@@ -8,11 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * @author SWEN Faculty
  */
-public class ShoppingCart {
-    private static final Logger LOG = Logger.getLogger(ShoppingCart.class.getName());
+public class FundingBasket {
+    private static final Logger LOG = Logger.getLogger(FundingBasket.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "shopping Cart[username=%s, products=%s]";
+    static final String STRING_FORMAT = "funding Basket[username=%s, products=%s]";
 
     @JsonProperty("username") private String username;
     @JsonProperty("products") private Product[] products;
@@ -27,7 +27,7 @@ public class ShoppingCart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public ShoppingCart(@JsonProperty("username") String username, @JsonProperty("products") Product[] products) {
+    public FundingBasket(@JsonProperty("username") String username, @JsonProperty("products") Product[] products) {
         this.username = username;
         this.products = products;
     }
@@ -36,13 +36,14 @@ public class ShoppingCart {
      * Retrieves the name of the need
      * @return The name of the need
      */
-    public String getShoppingCart() {return username;}
+    public String getFundingBasket() {return username;}
 
     public Product[] getProducts() {return products;}
     
     public void setProducts(Product[] products) {
         this.products = products;
     }
+    
     /**
      * {@inheritDoc}
      */

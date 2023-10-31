@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.ufund.api.ufundapi.model.Product;
-import com.ufund.api.ufundapi.model.ShoppingCart;
+import com.ufund.api.ufundapi.model.FundingBasket;
 import com.ufund.api.ufundapi.model.User;
 @Component
-public class ShoppingCartFileDAO implements ShoppingCartDAO{
-    Map<String,ShoppingCart> shoppingCarts;   // Provides a local cache of the inventory objects
+public class FundingBasketFileDAO implements FundingBasketDAO{
+    Map<String,FundingBasket> fundingBaskets;   // Provides a local cache of the inventory objects
     // so that we don't need to read from the file
     // each time
 
@@ -36,8 +36,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO{
      * 
      * @return  The array of {@link User users}, may be empty
      */
-    private ShoppingCart[] getShoppingCartsArray() {
-        return getShoppingCartsArray(null);
+    private FundingBasket[] getFundingBasketsArray() {
+        return getFundingBasketsArray(null);
     }
     /**
      * Generates an array of {@linkplain User users} from the tree map for any
@@ -48,52 +48,52 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO{
      * 
      * @return  The array of {@link User users}, may be empty
      */
-    private ShoppingCart[] getShoppingCartsArray(String containsText) { // if containsText == null, no filter
-        ArrayList<ShoppingCart> shoppingCartArrayList = new ArrayList<>();
+    private FundingBasket[] getFundingBasketsArray(String containsText) { // if containsText == null, no filter
+        ArrayList<FundingBasket> fundingBasketArrayList = new ArrayList<>();
 
-        for (ShoppingCart shoppingCart : shoppingCarts.values()) {
-            if (containsText == null || shoppingCart.getShoppingCart().contains(containsText)) {
-                shoppingCartArrayList.add(shoppingCart);
+        for (FundingBasket fundingBasket : fundingBaskets.values()) {
+            if (containsText == null || fundingBasket.getFundingBasket().contains(containsText)) {
+                fundingBasketArrayList.add(fundingBasket);
             }
         }
 
-        ShoppingCart[] shoppingCartArray = new ShoppingCart[shoppingCartArrayList.size()];
-        shoppingCartArrayList.toArray(shoppingCartArray);
-        return shoppingCartArray;
+        FundingBasket[] fundingBasketArray = new FundingBasket[fundingBasketArrayList.size()];
+        fundingBasketArrayList.toArray(fundingBasketArray);
+        return fundingBasketArray;
     }
 
-    public ShoppingCartFileDAO(@Value("${shopping-cart.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public FundingBasketFileDAO(@Value("${funding-basket.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the inventories from the file
     }
     @Override
-    public ShoppingCart getShoppingCart(String name) throws IOException {
-       synchronized(shoppingCarts) {
-            if (shoppingCarts.containsKey(name))
-                return shoppingCarts.get(name);
+    public FundingBasket getFundingBasket(String name) throws IOException {
+       synchronized(fundingBaskets) {
+            if (fundingBaskets.containsKey(name))
+                return fundingBaskets.get(name);
             else
                 return null;
         }
     }
 
     @Override
-    public ShoppingCart[] findShoppingCart(String containsText) throws IOException {
-        synchronized(shoppingCarts) {
-            return getShoppingCartsArray(containsText);
+    public FundingBasket[] findFundingBasket(String containsText) throws IOException {
+        synchronized(fundingBaskets) {
+            return getFundingBasketsArray(containsText);
         }
     }
     private boolean load() throws IOException {
-        shoppingCarts = new TreeMap<>();
+        fundingBaskets = new TreeMap<>();
 
         // Deserializes the JSON objects from the file into an array of inventories
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        ShoppingCart[] shoppingCartArray = objectMapper.readValue(new File(filename),ShoppingCart[].class);
+        FundingBasket[] fundingBasketArray = objectMapper.readValue(new File(filename),FundingBasket[].class);
 
         // Add each inventory to the tree map and keep track of the greatest id
-        for (ShoppingCart shoppingCart : shoppingCartArray) {
-            shoppingCarts.put(shoppingCart.getShoppingCart(), shoppingCart);
+        for (FundingBasket fundingBasket : fundingBasketArray) {
+            fundingBaskets.put(fundingBasket.getFundingBasket(), fundingBasket);
 
         }
         return true;
@@ -106,12 +106,12 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO{
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        ShoppingCart[] shoppingCartsArray = getShoppingCartsArray();
+        FundingBasket[] fundingBasketsArray = getFundingBasketsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),shoppingCartsArray);
+        objectMapper.writeValue(new File(filename),fundingBasketsArray);
         return true;
     }
 
@@ -119,14 +119,14 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO{
     ** {@inheritDoc}
      */
     @Override
-    public ShoppingCart createShoppingCart(ShoppingCart shoppingCart) throws IOException {
-        synchronized(shoppingCarts) {
+    public FundingBasket createFundingBasket(FundingBasket fundingBasket) throws IOException {
+        synchronized(fundingBaskets) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            ShoppingCart newShoppingCart = new ShoppingCart(shoppingCart.getShoppingCart(), shoppingCart.getProducts());
-            shoppingCarts.put(newShoppingCart.getShoppingCart(),newShoppingCart);
+            FundingBasket newFundingBasket = new FundingBasket(fundingBasket.getFundingBasket(), fundingBasket.getProducts());
+            fundingBaskets.put(newFundingBasket.getFundingBasket(),newFundingBasket);
             save(); // may throw an IOException
-            return newShoppingCart;
+            return newFundingBasket;
         }
     }
     

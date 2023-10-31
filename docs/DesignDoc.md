@@ -82,7 +82,7 @@ This section describes the features of the application.
 
 
 ### Definition of MVP
-> The Minimum Viable Product in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to shopping cart, checkout shopping cart, search specific needs by id and name. 
+> The Minimum Viable Product in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to funding basket, checkout funding basket, search specific needs by id and name. 
 ### MVP Features
 > _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
@@ -120,15 +120,15 @@ This section describes the application domain.
 A helper can choose from Orphan needs(Cupboard) 
 Orphan Needs are stored in the Inventory
 Checkout Updates Inventory
-Admin can Add/remove/edit shopping cart
+Admin can Add/remove/edit funding basket
 A helper is a User 
-A helper can view/edit their shopping cart. A Helper can pay to checkout their shopping cart
+A helper can view/edit their funding basket. A Helper can pay to checkout their funding basket
 User can log in using a Username
 User can View Website
 Website displays Orphan Needs(Cupboard)
-Shopping Cart(Funding Basket) proceeds to checkout
+Funding Basket(Funding Basket) proceeds to checkout
 Username saves in a UserFile
-The UserFile restores the ShoppingCart
+The UserFile restores the FundingBasket
 Products(Needs) has Food and Supplies
 Donations have Food, Money Donations, Supplies
 Both Products(needs) and Donations are stored in Statics Page.
@@ -256,10 +256,10 @@ This section describes the web interface flow; this is how the user views and in
 > Tier above._
 
 
-The three main classes we built to model our website are the User, the Product, and the Shopping Cart.
+The three main classes we built to model our website are the User, the Product, and the Funding Basket.
 The User class was built to maintain all of the information pertaining to each user, such as their username and password. This allows them to log into their account as needed in order to fulfill their personal tasks and maintain persistence when logging in and out.
 The Product class was built to maintain information pertaining to each need inside the cupboard. This allows the controller to access information about each product’s id, cost, quantity, and name. This allows transparency for when the Admin or a Helper attempts to create, search for, edit, or delete a need if they’re permitted to.
-The Shopping Cart class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
+The Funding Basket class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
 
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**

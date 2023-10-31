@@ -5,34 +5,34 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 
 import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.User;
 // import com.ufund.api.ufundapi.model.Product;
-import com.ufund.api.ufundapi.model.ShoppingCart;
-// import com.ufund.api.ufundapi.model.ShoppingCart;
+import com.ufund.api.ufundapi.model.FundingBasket;
 
-public interface ShoppingCartDAO {
+public interface FundingBasketDAO {
     /**
      * Retrieves a {@linkplain User user} with the given id
      * 
-     * @param string The username of the {@link ShoppingCart shoppingCart} to get
+     * @param string The username of the {@link FundingBasket fundingBasket} to get
      * 
-     * @return a {@link ShoppingCart shoppingCart} object with the matching id
+     * @return a {@link FundingBasket fundingBasket} object with the matching id
      * <br>
-     * null if no {@link ShoppingCart shoppingCart} with a matching id is found
+     * null if no {@link FundingBasket fundingBasket} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
-    ShoppingCart getShoppingCart(String name) throws IOException;
+    FundingBasket getFundingBasket(String name) throws IOException;
 
     /**
-     * Finds all {@linkplain ShoppingCart shoppingCart} whose name contains the given text
+     * Finds all {@linkplain FundingBasket fundingBasket} whose name contains the given text
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link ShoppingCart shoppingCart} whose nemes contains the given text, may be empty
+     * @return An array of {@link FundingBasket fundingBasket} whose nemes contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    ShoppingCart[] findShoppingCart(String containsText) throws IOException;
+    FundingBasket[] findFundingBasket(String containsText) throws IOException;
         /**
      * Creates and saves a {@linkplain Inventory inventory}
      * 
@@ -44,5 +44,5 @@ public interface ShoppingCartDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    ShoppingCart createShoppingCart(ShoppingCart shoppingCart) throws IOException;
+    FundingBasket createFundingBasket(FundingBasket fundingBasket) throws IOException;
 }
