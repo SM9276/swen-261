@@ -23,6 +23,10 @@ export class NeedsComponent implements OnInit {
     .subscribe(needs => this.needs = needs);
   }
 
+  logout(): void{
+    this.appComponent.logout();
+  }
+  
   add(name: string,needPrice: string, needQuantity: string, needId: string): void {
     name = name.trim();
     const price:number = parseFloat(needPrice);

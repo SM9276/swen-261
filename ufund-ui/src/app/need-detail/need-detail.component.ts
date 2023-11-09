@@ -41,6 +41,9 @@ export class NeedDetailComponent {
   goBack(): void {
     this.location.back();
   }
+  logout(): void{
+    this.appComponent.logout();
+  }
   save(): void {
     if (this.need) {
       this.needService.updateNeed(this.need)

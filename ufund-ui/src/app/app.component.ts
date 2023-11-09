@@ -13,7 +13,6 @@ export class AppComponent {
   login: string = "";
   canDisplay: string = "";
   constructor(private cookie: CookieService, private authenticationService: AuthenticationService, private router: Router){
-
   }
 
   ngOnInit(): void{
