@@ -17,8 +17,9 @@
       <input id="need-id" [(ngModel)]="need.id" placeholder="id">
     </div>
 </div>
-
+<div *ngIf="this.getUsername() !== 'Admin'">
 <button type="button" (click)="addToBasket()">add to basket</button>
+</div>
 <button type="button" (click)="goBack()">go back</button>
 
 <div *ngIf="this.getUsername() === 'Admin'">

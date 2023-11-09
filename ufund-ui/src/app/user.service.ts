@@ -23,13 +23,13 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-    updateNeed(need: Need): Observable<any> {
-      const url = `${this.needsUrl}/${need.id}`;
-      return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
-        tap(_ => this.log(`updated need cost=${need.id}`)),
-        catchError(this.handleError<any>('updateNeed'))
-      );
-    }  
+    // updateNeed(need: Need): Observable<any> {
+    //   const url = `${this.needsUrl}/${need.id}`;
+    //   return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
+    //     tap(_ => this.log(`updated need cost=${need.id}`)),
+    //     catchError(this.handleError<any>('updateNeed'))
+    //   );
+    // }  
       /** GET need by id. Will 404 if id not found */
   getFundingBasket(name: String): Observable<FundingBasket> {
     const url = `${this.fundingBasketUrl}/${name}`;
