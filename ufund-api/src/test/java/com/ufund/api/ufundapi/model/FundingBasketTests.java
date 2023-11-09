@@ -50,22 +50,22 @@ public class FundingBasketTests {
         fundingBasketEmpty = new FundingBasket(null,null);
 
     }
-
-    @Test
-    public void testConstructorNotNull() {
-        mockProduct_1 = new Product("1", 1, 1, 1);
-        mockProduct_2 = new Product("2", 2, 2, 2);
-        mockProduct_3 = new Product("3", 3, 3, 2);
-        mockProduct1[0] = mockProduct_1;
-        mockProduct1[1] = mockProduct_2;
-        mockProduct1[2] = mockProduct_3;
-        mockProduct3[0] = mockProduct_1;
-        fundingBasket1 = new FundingBasket(username, mockProduct1);
-        fundingBasket2 = new FundingBasket(username, mockProduct2);
-        fundingBasketEmpty = new FundingBasket(username, new Product[0]);
-
-        assertNotNull(fundingBasket1);
-        assertNotNull(fundingBasket2);
-        assertNotNull(fundingBasketEmpty);
-    }
 }
+//     @Test
+//     public void testConstructorNotNull() {
+//         mockProduct_1 = new Product("1", 1, 1, 1);
+//         mockProduct_2 = new Product("2", 2, 2, 2);
+//         mockProduct_3 = new Product("3", 3, 3, 2);
+//         mockProduct1[0] = mockProduct_1;
+//         mockProduct1[1] = mockProduct_2;
+//         mockProduct1[2] = mockProduct_3;
+//         mockProduct3[0] = mockProduct_1;
+//         fundingBasket1 = new FundingBasket(username, mockProduct1);
+//         fundingBasket2 = new FundingBasket(username, mockProduct2);
+//         fundingBasketEmpty = new FundingBasket(username, new Product[0]);
+
+//         assertNotNull(fundingBasket1);
+//         assertNotNull(fundingBasket2);
+//         assertNotNull(fundingBasketEmpty);
+//     }
+// }

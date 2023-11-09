@@ -105,17 +105,17 @@ public class FundingBasketController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("")
+    @PostMapping("/funding-basket")
     public ResponseEntity<FundingBasket> createFundingBasket(@RequestBody FundingBasket fundingBasket) {
-        LOG.info("POST /funding-basket " + fundingBasket);
+        LOG.info("POST /basket?id = " + fundingBasket);
 
         try {
-            if (fundingBasket != null){
-                fundingBasketDao.createFundingBasket(fundingBasket);
-                return new ResponseEntity<FundingBasket>(fundingBasket,HttpStatus.CREATED);
+            FundingBasket status = fundingBasketDao.createFundingBasket(fundingBasket);
+            if (status != null) {
+                return new ResponseEntity<FundingBasket>(status, HttpStatus.CREATED);
+            } else { 
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-            else
-                return new ResponseEntity<FundingBasket>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

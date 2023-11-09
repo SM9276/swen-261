@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 // import { shoppingCart } from './shoppingCart';
 import { MessageService } from './message.service';
 import { Need } from './need';
-import { fundingBasket } from './fundingBasket';
+import { FundingBasket } from './FundingBasket';
 
 
 @Injectable({ providedIn: 'root' })
@@ -23,25 +23,27 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-    addToFundingBasket(fundingBasket: fundingBasket): Observable<fundingBasket> {
-      console.log(fundingBasket) 
-      
-      const {username, needs} = fundingBasket;
-      const requestPayload = {
-        username,
-        needs
-      };
-      return this.http.post<fundingBasket>(this.fundingBasketUrl, requestPayload, this.httpOptions).pipe(
-        tap((newFundingBasket: fundingBasket) => this.log(`added need w/ name=${newFundingBasket.needs} to funds basket`)),
-        catchError(this.handleError<fundingBasket>('addFundingBasket'))
+    updateNeed(need: Need): Observable<any> {
+      const url = `${this.needsUrl}/${need.id}`;
+      return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
+        tap(_ => this.log(`updated need cost=${need.id}`)),
+        catchError(this.handleError<any>('updateNeed'))
       );
-    }
+    }  
       /** GET need by id. Will 404 if id not found */
-  getFundingBasket(name: String): Observable<fundingBasket[]> {
+  getFundingBasket(name: String): Observable<FundingBasket> {
     const url = `${this.fundingBasketUrl}/${name}`;
-    return this.http.get<fundingBasket[]>(url).pipe(
+    return this.http.get<FundingBasket>(url).pipe(
       tap(_ => this.log(`fetched need name=${name}`)),
-      catchError(this.handleError<fundingBasket[]>(`getFundingBasket name=${name}`))
+      catchError(this.handleError<FundingBasket>(`getFundingBasket name=${name}`))
+    );
+  }
+
+
+  makeFundingBasket(fundingBasket: FundingBasket): Observable<FundingBasket> {
+    const {username, needs} = fundingBasket;
+    return this.http.post<FundingBasket>(`${this.fundingBasketUrl}/funding-basket`, fundingBasket, this.httpOptions).pipe(
+      catchError(this.handleError<FundingBasket>('makeFundingBasket'))
     );
   }
 

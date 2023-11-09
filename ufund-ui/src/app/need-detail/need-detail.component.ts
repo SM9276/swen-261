@@ -11,7 +11,8 @@ import { AppComponent } from '../app.component';
 
 import { NeedService } from '../need.service';
 import { User } from '../user';
-import { fundingBasket } from '../fundingBasket';
+import { FundingBasket } from '../FundingBasket';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-need-detail',
   templateUrl: './need-detail.component.html',
@@ -25,10 +26,9 @@ export class NeedDetailComponent {
 
     private userService: UserService,
 
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
   ) {}
   @Input() need?: Need;
-  @Input() needs: Need[] = [];
   ngOnInit(): void {
     this.getNeed();
   }
@@ -49,10 +49,12 @@ export class NeedDetailComponent {
   }
 
   addToBasket(): void{
-    if (this.needs) {
+    if (this.need) {
       const username: String = (this.appComponent.login).trim();
-      const needs: Need[]= this.needs;
-      this.userService.addToFundingBasket({username, needs} as fundingBasket).subscribe(() => this.goBack());
+      const basket = this.userService.getFundingBasket(username);
+      // basket
+
+      // this.userService.addToFundingBasket(basket).subscribe(() => this.goBack());
     }
   }
 

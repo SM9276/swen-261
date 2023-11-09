@@ -5,6 +5,9 @@ import { AppComponent } from '../app.component';
 import { User } from '../user';
 import { AuthenticationService } from '../authentication.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Need } from '../need';
+import { UserService } from '../user.service';
+import { FundingBasket } from '../FundingBasket';
 
 @Component({
   selector: 'register',
@@ -14,8 +17,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent {
   registerForm: FormGroup;
   users: User[] = [];
+  list: Need[] = [];
+  fundingBaskets: FundingBasket[] = [];
 
-  constructor(private http: HttpClient, private router :Router, private authenticationService: AuthenticationService,
+  constructor(private http: HttpClient, private router :Router, private authenticationService: AuthenticationService, private userService: UserService,
     private formBuilder: FormBuilder){
       this.registerForm = this.formBuilder.group({
         username: ['', Validators.required],
@@ -37,6 +42,13 @@ export class RegisterComponent {
         (user) => {
           this.users.push(user);
           if (user   != null && this.authenticationService.searchUsers(user.username)) {
+            const needs = this.list;
+            this.userService.makeFundingBasket({username, needs}as FundingBasket).subscribe(
+              (fundingBasket) => {
+                this.fundingBaskets.push(fundingBasket);
+                console.log(fundingBasket);
+              }
+            )
             this.router.navigate(['login']);
           } else {
             window.alert('This username is already taken.');

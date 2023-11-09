@@ -5,18 +5,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ufund.api.ufundapi.model.Product;
 import com.ufund.api.ufundapi.model.FundingBasket;
 import com.ufund.api.ufundapi.model.User;
 @Component
 public class FundingBasketFileDAO implements FundingBasketDAO{
+    private static final Logger LOG = Logger.getLogger(InventoryFileDAO.class.getName());
     Map<String,FundingBasket> fundingBaskets;   // Provides a local cache of the inventory objects
     // so that we don't need to read from the file
     // each time
@@ -36,6 +42,11 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
      * 
      * @return  The array of {@link User users}, may be empty
      */
+    public FundingBasketFileDAO(@Value("${funding-basket.file}") String filename,ObjectMapper objectMapper) throws IOException {
+        this.filename = filename;
+        this.objectMapper = objectMapper;
+        load();  // load the inventories from the file
+    }
     private FundingBasket[] getFundingBasketsArray() {
         return getFundingBasketsArray(null);
     }
@@ -62,11 +73,7 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
         return fundingBasketArray;
     }
 
-    public FundingBasketFileDAO(@Value("${funding-basket.file}") String filename,ObjectMapper objectMapper) throws IOException {
-        this.filename = filename;
-        this.objectMapper = objectMapper;
-        load();  // load the inventories from the file
-    }
+
     @Override
     public FundingBasket getFundingBasket(String name) throws IOException {
        synchronized(fundingBaskets) {
@@ -129,7 +136,7 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
             return newFundingBasket;
         }
     }
-    
+
 
 
 }
