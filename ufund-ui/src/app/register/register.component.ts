@@ -18,6 +18,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   users: User[] = [];
   list: Need[] = [];
+
   fundingBaskets: FundingBasket[] = [];
 
   constructor(private http: HttpClient, private router :Router, private authenticationService: AuthenticationService, private userService: UserService,
@@ -41,12 +42,15 @@ export class RegisterComponent {
       this.authenticationService.register({username, password}as User).subscribe(
         (user) => {
           this.users.push(user);
-          if (user   != null && this.authenticationService.searchUsers(user.username)) {
+          if (user!= null && this.authenticationService.searchUsers(user.username)) {
             const needs = this.list;
+            console.log(needs);
             this.userService.makeFundingBasket({username, needs}as FundingBasket).subscribe(
               (fundingBasket) => {
-                this.fundingBaskets.push(fundingBasket);
+                this.fundingBaskets.push(fundingBasket); 
+                console.log(this.fundingBaskets);
                 console.log(fundingBasket);
+                console.log(fundingBasket.needs);
               }
             )
             this.router.navigate(['login']);
@@ -55,6 +59,7 @@ export class RegisterComponent {
           }
         }
       );
+
   }
 }
 }

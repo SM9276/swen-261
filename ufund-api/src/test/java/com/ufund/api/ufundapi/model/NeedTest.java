@@ -11,141 +11,141 @@ import java.util.LinkedList;
 
 
 @Tag("Model-tier")
-public class ProductTest {
+public class NeedTest {
 
-    Product product;
+    Need Need;
     String name;
     double price;
     int quantity;
     int id;
-    Product product2;
+    Need Need2;
     String name2;
     double price2;
     int quantity2;
     int id2;
-    Product product3;
+    Need Need3;
     String name3;
     double price3;
     int quantity3;
     int id3;
-    Product product4;
+    Need Need4;
     String name4;
     double price4;
     int quantity4;
     int id4;
 
     @BeforeEach
-    public void setUpProductTest(){
+    public void setUpNeedTest(){
         name = "Munchies";
         price = 10.0;
         quantity = 8;
         id = 0;
-        product = new Product(name, price, quantity, id);
+        Need = new Need(name, price, quantity, id);
 
         name2 = "Munchies";
         price2 = 10.0;
         quantity2 = 10;
         id2 = 1;
-        product2 = new Product(name2, price2, quantity, id);
+        Need2 = new Need(name2, price2, quantity, id);
         
         name3 = "Alma de Mexico";
         price3 = 5.0;
         quantity3 = 8;
         id3 = 2;
-        product3 = new Product(name3, price3, quantity3, id);
+        Need3 = new Need(name3, price3, quantity3, id);
 
         name4 = "Munchies";
         price4 = 5.0;
         quantity4 = 8;
         id4 = 3;
-        product4 = new Product(name4, price4, quantity4, id);
+        Need4 = new Need(name4, price4, quantity4, id);
     }
 
     @Test
     public void testGetName(){
-        assertEquals(name, product.getName());
+        assertEquals(name, Need.getName());
     }
 
     @Test
     public void testSetName(){
-        product.setName("Minecraft");
-        assertEquals("Minecraft", product.getName());
+        Need.setName("Minecraft");
+        assertEquals("Minecraft", Need.getName());
     }
 
     @Test
     public void testGetQuantity(){
-        assertEquals(8, product.getQuantity());
+        assertEquals(8, Need.getQuantity());
     }
 
     @Test 
     public void testEquals() {
-        LinkedList<Product> list = new LinkedList<>();
-        list.add(product);
-        assertTrue(product.equals(product2));
-        assertFalse(product.equals(product3));
-        assertFalse(product.equals(product4));
-        assertTrue(list.contains(product2));
+        LinkedList<Need> list = new LinkedList<>();
+        list.add(Need);
+        assertTrue(Need.equals(Need2));
+        assertFalse(Need.equals(Need3));
+        assertFalse(Need.equals(Need4));
+        assertTrue(list.contains(Need2));
 
         Object testObj = new Object();
-        assertFalse(product.equals(testObj));
+        assertFalse(Need.equals(testObj));
     }
     @Test
     public void testSetQuantity(){
-        product.setQuantity(18);
-        assertEquals(18, product.getQuantity());
+        Need.setQuantity(18);
+        assertEquals(18, Need.getQuantity());
 
-        product.setQuantity(-1);
-        assertEquals(0, product.getQuantity());
+        Need.setQuantity(-1);
+        assertEquals(0, Need.getQuantity());
     }
     @Test
     public void testGetPrice(){
-        assertEquals(price, product.getPrice());
+        assertEquals(price, Need.getPrice());
     }
     @Test
     public void testSetPrice(){
-        product.setPrice(15.00);
-        assertEquals(15.00, product.getPrice());
+        Need.setPrice(15.00);
+        assertEquals(15.00, Need.getPrice());
 
-        product.setPrice(-1);
-        assertEquals(0, product.getPrice());
+        Need.setPrice(-1);
+        assertEquals(0, Need.getPrice());
 
-        product.setPrice(0);
-        assertEquals(0, product.getPrice());
+        Need.setPrice(0);
+        assertEquals(0, Need.getPrice());
     }
     @Test
     public void testToString(){
         int quantity = 4;
         double price = 10.0;
         String name = "Munchies";
-        String expectedString = String.format(Product.STRING_FORMAT, name, price, quantity);
-        Product tester = new Product(name, price, quantity, id);
+        String expectedString = String.format(Need.STRING_FORMAT, name, price, quantity);
+        Need tester = new Need(name, price, quantity, id);
         String actualString = tester.toString();
         assertEquals(expectedString, actualString);
     }
 
     @Test
     public void testHash() {
-        assertNotNull(product.hashCode());
+        assertNotNull(Need.hashCode());
     }
     @Test
     public void testConstructor(){
         String name = "Rock";
         double price = 20.7;
         int quantity = 8;
-        Product product = new Product(name, price, quantity, id2);
-        assertEquals(name, product.getName());
-        assertEquals(price, product.getPrice());
-        assertEquals(quantity, product.getQuantity());
+        Need Need = new Need(name, price, quantity, id2);
+        assertEquals(name, Need.getName());
+        assertEquals(price, Need.getPrice());
+        assertEquals(quantity, Need.getQuantity());
     }
     @Test
     public void testConstructorNegative(){
         String name = "Rock";
         double price = -1;
         int quantity = -1;
-        Product product = new Product(name, price, quantity, id3);
-        assertEquals(name, product.getName());
-        assertEquals(0, product.getPrice());
-        assertEquals(0, product.getQuantity());
+        Need Need = new Need(name, price, quantity, id3);
+        assertEquals(name, Need.getName());
+        assertEquals(0, Need.getPrice());
+        assertEquals(0, Need.getQuantity());
     }
 
 }

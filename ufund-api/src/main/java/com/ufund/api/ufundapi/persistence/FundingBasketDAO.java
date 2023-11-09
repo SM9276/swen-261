@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.User;
-// import com.ufund.api.ufundapi.model.Product;
+// import com.ufund.api.ufundapi.model.need;
 import com.ufund.api.ufundapi.model.FundingBasket;
 
 public interface FundingBasketDAO {
@@ -32,7 +32,7 @@ public interface FundingBasketDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    FundingBasket[] findFundingBasket(String containsText) throws IOException;
+    FundingBasket updateFundingBasket(FundingBasket fundingBasket) throws IOException;
         /**
      * Creates and saves a {@linkplain Inventory inventory}
      * 

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 //import com.ufund.api.ufundapi.model.Inventory;
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 
 /**
  * Implements the functionality for JSON file-based peristance for Inventories
@@ -26,7 +26,7 @@ import com.ufund.api.ufundapi.model.Product;
 @Component
 public class InventoryFileDAO implements InventoryDAO {
     private static final Logger LOG = Logger.getLogger(InventoryFileDAO.class.getName());
-    Map<Integer,Product> products;   // Provides a local cache of the inventory objects
+    Map<Integer,Need> needs;   // Provides a local cache of the inventory objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Inventory
@@ -65,8 +65,8 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @return  The array of {@link Inventory inventories}, may be empty
      */
-    private Product[] getProductsArray() {
-        return getProductsArray(null);
+    private Need[] getNeedsArray() {
+        return getNeedsArray(null);
     }
 
     /**
@@ -78,18 +78,18 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @return  The array of {@link Inventory inventories}, may be empty
      */
-    private Product[] getProductsArray(String containsText) { // if containsText == null, no filter
-        ArrayList<Product> productArrayList = new ArrayList<>();
+    private Need[] getNeedsArray(String containsText) { // if containsText == null, no filter
+        ArrayList<Need> needArrayList = new ArrayList<>();
 
-        for (Product product : products.values()) {
-            if (containsText == null || product.getName().contains(containsText)) {
-                productArrayList.add(product);
+        for (Need need : needs.values()) {
+            if (containsText == null || need.getName().contains(containsText)) {
+                needArrayList.add(need);
             }
         }
 
-        Product[] productArray = new Product[productArrayList.size()];
-        productArrayList.toArray(productArray);
-        return productArray;
+        Need[] needArray = new Need[needArrayList.size()];
+        needArrayList.toArray(needArray);
+        return needArray;
     }
 
     /**
@@ -100,12 +100,12 @@ public class InventoryFileDAO implements InventoryDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Product[] productArray = getProductsArray();
+        Need[] needArray = getNeedsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),productArray);
+        objectMapper.writeValue(new File(filename),needArray);
         return true;
     }
 
@@ -119,19 +119,19 @@ public class InventoryFileDAO implements InventoryDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        products = new TreeMap<>();
+        needs = new TreeMap<>();
         nextId = 0;
 
         // Deserializes the JSON objects from the file into an array of inventories
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Product[] productArray = objectMapper.readValue(new File(filename),Product[].class);
+        Need[] needArray = objectMapper.readValue(new File(filename),Need[].class);
 
         // Add each inventory to the tree map and keep track of the greatest id
-        for (Product product : productArray) {
-            products.put(product.getId(),product);
-            if (product.getId() > nextId)
-                nextId = product.getId();
+        for (Need need : needArray) {
+            needs.put(need.getId(),need);
+            if (need.getId() > nextId)
+                nextId = need.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
@@ -142,9 +142,9 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product[] getProducts() {
-        synchronized(products) {
-            return getProductsArray();
+    public Need[] getNeeds() {
+        synchronized(needs) {
+            return getNeedsArray();
         }
     }
 
@@ -152,9 +152,9 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product[] findProducts(String containsText) {
-        synchronized(products) {
-            return getProductsArray(containsText);
+    public Need[] findNeeds(String containsText) {
+        synchronized(needs) {
+            return getNeedsArray(containsText);
         }
     }
 
@@ -162,10 +162,10 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product getProduct(int id) {
-        synchronized(products) {
-            if (products.containsKey(id))
-                return products.get(id);
+    public Need getNeed(int id) {
+        synchronized(needs) {
+            if (needs.containsKey(id))
+                return needs.get(id);
             else
                 return null;
         }
@@ -175,14 +175,14 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product createProduct(Product product) throws IOException {
-        synchronized(products) {
+    public Need createNeed(Need need) throws IOException {
+        synchronized(needs) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            Product newProduct = new Product(product.getName(),product.getPrice(),product.getQuantity(),product.getId());
-            products.put(newProduct.getId(),newProduct);
+            Need newNeed = new Need(need.getName(),need.getPrice(),need.getQuantity(),need.getId());
+            needs.put(newNeed.getId(),newNeed);
             save(); // may throw an IOException
-            return newProduct;
+            return newNeed;
         }
     }
 
@@ -190,14 +190,14 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product updateProduct(Product product) throws IOException {
-        synchronized(products) {
-            if (products.containsKey(product.getId()) == false)
+    public Need updateNeed(Need need) throws IOException {
+        synchronized(needs) {
+            if (needs.containsKey(need.getId()) == false)
                 return null;  // inventory does not exist
 
-            products.put(product.getId(),product);
+            needs.put(need.getId(),need);
             save(); // may throw an IOException
-            return product;
+            return need;
         }
     }
 
@@ -205,10 +205,10 @@ public class InventoryFileDAO implements InventoryDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean deleteProduct(int id) throws IOException {
-        synchronized(products) {
-            if (products.containsKey(id)) {
-                products.remove(id);
+    public boolean deleteNeed(int id) throws IOException {
+        synchronized(needs) {
+            if (needs.containsKey(id)) {
+                needs.remove(id);
                 return save();
             }
             else

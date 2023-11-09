@@ -82,7 +82,7 @@ This section describes the features of the application.
 
 
 ### Definition of MVP
-> The Minimum Viable Product in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to funding basket, checkout funding basket, search specific needs by id and name. 
+> The Minimum Viable Need in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to funding basket, checkout funding basket, search specific needs by id and name. 
 ### MVP Features
 > _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
@@ -129,9 +129,9 @@ Website displays Orphan Needs(Cupboard)
 Funding Basket(Funding Basket) proceeds to checkout
 Username saves in a UserFile
 The UserFile restores the FundingBasket
-Products(Needs) has Food and Supplies
+Needs(Needs) has Food and Supplies
 Donations have Food, Money Donations, Supplies
-Both Products(needs) and Donations are stored in Statics Page.
+Both Needs(needs) and Donations are stored in Statics Page.
 
 
 
@@ -256,9 +256,9 @@ This section describes the web interface flow; this is how the user views and in
 > Tier above._
 
 
-The three main classes we built to model our website are the User, the Product, and the Funding Basket.
+The three main classes we built to model our website are the User, the Need, and the Funding Basket.
 The User class was built to maintain all of the information pertaining to each user, such as their username and password. This allows them to log into their account as needed in order to fulfill their personal tasks and maintain persistence when logging in and out.
-The Product class was built to maintain information pertaining to each need inside the cupboard. This allows the controller to access information about each product’s id, cost, quantity, and name. This allows transparency for when the Admin or a Helper attempts to create, search for, edit, or delete a need if they’re permitted to.
+The Need class was built to maintain information pertaining to each need inside the cupboard. This allows the controller to access information about each Need’s id, cost, quantity, and name. This allows transparency for when the Admin or a Helper attempts to create, search for, edit, or delete a need if they’re permitted to.
 The Funding Basket class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
 
 
