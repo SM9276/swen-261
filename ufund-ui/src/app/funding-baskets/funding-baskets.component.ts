@@ -19,6 +19,10 @@ export class fundingBasketsComponent {
     this.getFundingBasket();
   }
 
+  logout(): void{
+    this.appComponent.logout();
+  }
+  
   getFundingBasket(): void {
     this.userService.getFundingBasket(this.appComponent.login)
     .subscribe(fundingBaskets => this.fundingBasket = fundingBaskets);
