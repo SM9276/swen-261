@@ -1,21 +1,115 @@
 /* AppComponent's private CSS styles */
-h1 {
+  h1 {
     margin-bottom: 0;
   }
-  nav a {
-    padding: 1rem;
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #e8e8e8;
-    color: #3d3d3d;
-    border-radius: 4px;
+  .router-outlet {
+    margin-bottom: 0; /* Remove bottom margin */
+    padding-bottom: 0; /* Remove bottom padding */
+    border-bottom: none;
   }
-  
-  nav a:hover {
-    color: white;
-    background-color: #42545C;
+  .navbar-nav {
+    height: 50px;
+    width: 100%;
+    justify-content: space-around;
   }
-  nav a:active {
-    background-color: black;
+  .navbar-toggler {
+    height:65px;
   }
+
+  .navbar img {
+    width: 65px;
+  }
+  .nav-item active, a {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    
+  }
+  .Nav-subscribe-toggle, a{
+      margin-left: auto;
+      min-width: 0;
+      font-weight: 700;
+  }
+  .Nav .Nav-inner>* {
+      flex-shrink: 0;
+  }
+  .Nav-subscribe-toggle {
+      position: right;
+      vertical-align: middle;
+      transition: color .25s;
+  }
+
+/*Contact*/
+.contact
+{
+	width: 100%;
+  padding: 80px;
+	margin: auto;
+  text-align: justify;
+}
+.contact i 
+{
+	padding: 10px;
+}
+.contact .btn
+{
+	margin-top: 10px;
+	width: 100%;
+	background-color: rgb(35, 35, 48);
+	color: white;
+}
+.contact .input-group
+{
+	margin-top: 10px;
+}
+
+/*footer*/
+.footer
+{
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+  padding: 80px;
+  /* background-color: lightslategray; */
+}
+
+.socialMedia {
+  justify-content: space-evenly;
+}
+.footer .btn
+{
+  background-color: rgb(35, 35, 48);
+  color: white;
+	width: 100%;
+}
+.facebook
+{
+	color: rgb(59, 89, 152);
+}
+.twitter
+{
+	color: rgb(29, 161, 242);
+}
+.instagram 
+{
+  color: #f03690;
+}
+.linkedin
+{
+	color: rgb(0, 115, 176);
+}
+.price title {
+ margin-left: 2.5 cm
+}
+
+.row {
+  display: flex;
+}
+.column {
+  flex: 25%;
+  padding: 5px;
+}
+.column-6 {
+  flex: 50%;
+  padding: 5px;
+}
