@@ -10,7 +10,7 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./funding-baskets.component.css']
 })
 export class fundingBasketsComponent {
-  fundingBasket?: FundingBasket;
+  fundingBaskets: FundingBasket[] = [];
   needs: Need[] = [];
 
   constructor(private userService: UserService, private appComponent: AppComponent) { }
@@ -24,8 +24,14 @@ export class fundingBasketsComponent {
   }
   
   getFundingBasket(): void {
-    this.userService.getFundingBasket(this.appComponent.login)
-    .subscribe(fundingBaskets => this.fundingBasket = fundingBaskets);
+    const username: String = (this.appComponent.login).trim();
+    console.log(username);
+    const basket = this.userService.getFundingBasket(username);
+    console.log(basket);
+    basket.subscribe((fundingBasket) => {this.fundingBaskets.push(fundingBasket);
+      console.log(fundingBasket);
+      this.needs = this.fundingBaskets[0].needs;
+  });
+  
   }
-
 }

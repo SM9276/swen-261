@@ -1,3 +1,1 @@
-
-[{"username":"Jay1","needs":[{"name":"Binoculars","price":10.0,"quantity":10,"id":1}],"fundingBasket":"Jay1"}]
-
+[{"username":"Jay1","needs":[{"name":"Binoculars","price":10.0,"quantity":10,"id":1},{"name":"Binoculars","price":10.0,"quantity":10,"id":1},{"name":"Binoculars","price":10.0,"quantity":10,"id":1},{"name":"Binoculars","price":10.0,"quantity":10,"id":1}],"fundingBasket":"Jay1"}]
