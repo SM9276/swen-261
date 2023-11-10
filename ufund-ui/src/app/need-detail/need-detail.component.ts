@@ -55,16 +55,21 @@ export class NeedDetailComponent {
   addToBasket(): void{
     if (this.need) {
       const username: String = (this.appComponent.login).trim();
-      console.log(username);
       const basket = this.userService.getFundingBasket(username);
-      console.log(basket);
       const id = Number(this.route.snapshot.paramMap.get('id'));
-      console.log(id);
       basket.subscribe((fundingBasket) => {this.fundingBaskets.push(fundingBasket);
-      console.log(fundingBasket);
       this.needService.getNeed(id).subscribe(need => this.need = need);
       console.log(this.need);
-      this.fundingBaskets[0].needs.push(this.need);
+      console.log(this.need.quantity);
+      this.fundingBaskets[0].needs.forEach((need) => {
+        if(this.need.id == need.id){
+          need.quantity += 1;
+          console.log(need);
+        }
+        else {
+          this.fundingBaskets[0].needs.push(this.need);
+        }
+      });
       this.userService.updateFundingBasket(this.fundingBaskets[0]).subscribe(() => this.goBack());
     });
     }
