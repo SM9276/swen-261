@@ -4,7 +4,9 @@ import { NeedService } from '../need.service';
 import { UserService } from '../user.service';
 import { FundingBasket } from '../FundingBasket';
 import { AppComponent } from '../app.component';
+
 import { Router, NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-funding-baskets',
@@ -15,6 +17,7 @@ export class fundingBasketsComponent {
   fundingBaskets: FundingBasket[] = [];
   needs: Need[] = [];
   empty: Need[] = [];
+  example: Need[] = [];
 
   constructor(private router :Router, private userService: UserService, private appComponent: AppComponent) { }
 
@@ -71,5 +74,22 @@ export class fundingBasketsComponent {
       this.router.navigate(['dashboard']);
       window.alert('Thank you for your donation!');
   });
+  }
+  removeNeedFromBasket(need: Need): void {
+    const list = this.example;
+    this.needs = this.needs.filter(h => h !== need);
+    const username: String = (this.appComponent.login).trim();
+    console.log(username);
+    const basket = this.userService.getFundingBasket(username);
+    console.log(basket);
+    basket.subscribe((fundingBasket) => {this.fundingBaskets.push(fundingBasket);
+      this.fundingBaskets[1].needs.forEach((item) => {
+        if(item.id != need.id){
+          list.push(item);
+        }
+      });
+      this.fundingBaskets[1].needs = list;
+      this.userService.updateFundingBasket(this.fundingBaskets[1]).subscribe();
+    });
   }
 }
