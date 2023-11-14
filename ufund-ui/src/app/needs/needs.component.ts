@@ -23,18 +23,28 @@ export class NeedsComponent implements OnInit {
     .subscribe(needs => this.needs = needs);
   }
 
+  logout(): void{
+    this.appComponent.logout();
+  }
+  
   add(name: string,needPrice: string, needQuantity: string, needId: string): void {
     name = name.trim();
     const price:number = parseFloat(needPrice);
     const quantity:number = parseFloat(needQuantity);
     const id:number = parseFloat(needId);
-
-    if (!name) { return; }
-    console.log(this.needService.addNeed({name,price,quantity,id} as Need));
-    this.needService.addNeed({name,price,quantity,id} as Need)
-      .subscribe(need => {
-        this.needs.push(need);
-      });
+    console.log(price)
+    console.log(quantity)
+    if (price<0 || quantity<0 ){
+      window.alert('Invalid Price or Quantity');
+    }
+    else{
+      if (!name && !needPrice && !needQuantity && needId) { return; }
+      console.log(this.needService.addNeed({name,price,quantity,id} as Need));
+      this.needService.addNeed({name,price,quantity,id} as Need)
+        .subscribe(need => {
+          this.needs.push(need);
+        });
+    }
   }
 
   delete(need: Need): void {

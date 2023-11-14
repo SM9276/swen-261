@@ -8,14 +8,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * @author SWEN Faculty
  */
-public class ShoppingCart {
-    private static final Logger LOG = Logger.getLogger(ShoppingCart.class.getName());
+public class FundingBasket {
+    private static final Logger LOG = Logger.getLogger(FundingBasket.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "shopping Cart[username=%s, products=%s]";
+    static final String STRING_FORMAT = "funding Basket[username=%s, needs=%s]";
 
     @JsonProperty("username") private String username;
-    @JsonProperty("products") private Product[] products;
+    @JsonProperty("needs") private Need[] needs;
 
     /**
      * Create a inventory with the given id and name
@@ -27,27 +27,28 @@ public class ShoppingCart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public ShoppingCart(@JsonProperty("username") String username, @JsonProperty("products") Product[] products) {
+    public FundingBasket(@JsonProperty("username") String username, @JsonProperty("needs") Need[] needs) {
         this.username = username;
-        this.products = products;
+        this.needs = needs;
     }
 
     /**
      * Retrieves the name of the need
      * @return The name of the need
      */
-    public String getShoppingCart() {return username;}
+    public String getFundingBasket() {return username;}
 
-    public Product[] getProducts() {return products;}
+    public Need[] getNeeds() {return needs;}
     
-    public void setProducts(Product[] products) {
-        this.products = products;
+    public void setNeeds(Need[] needs) {
+        this.needs = needs;
     }
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,username,products);
+        return String.format(STRING_FORMAT,username,needs);
     }
 }

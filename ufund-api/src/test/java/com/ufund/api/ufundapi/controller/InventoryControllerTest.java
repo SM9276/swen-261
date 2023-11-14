@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.InventoryDAO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,168 +26,168 @@ public class InventoryControllerTest {
     InventoryDAO inventoryDAO;
     @InjectMocks
     InventoryController mockInventoryController;   
-    ResponseEntity<Product> testEntityProduct;
-    ResponseEntity<Product[]> testEntityProducts;
+    ResponseEntity<Need> testEntityNeed;
+    ResponseEntity<Need[]> testEntityNeeds;
 
     /**
-    * Testing getProduct given the product exists 
+    * Testing getNeed given the need exists 
     */
 
     @Test
-    public void testGetProducts() throws IOException{
-        Product[] testProducts = {new Product("Water",2,5,1)}; 
-        when(inventoryDAO.getProducts()).thenReturn(testProducts);
-        testEntityProducts = mockInventoryController.getProduct();
-        assertEquals(testEntityProducts.getStatusCodeValue(), 200);
+    public void testGetNeeds() throws IOException{
+        Need[] testNeeds = {new Need("Water",2,5,1)}; 
+        when(inventoryDAO.getNeeds()).thenReturn(testNeeds);
+        testEntityNeeds = mockInventoryController.getNeed();
+        assertEquals(testEntityNeeds.getStatusCodeValue(), 200);
     }
 
     @Test
-    public void testGetProductsThrowsIO() throws IOException{
-        when(inventoryDAO.getProducts()).thenThrow(IOException.class);
-        testEntityProducts = mockInventoryController.getProduct();
-        assertEquals(testEntityProducts.getStatusCodeValue(), 500);
+    public void testGetNeedsThrowsIO() throws IOException{
+        when(inventoryDAO.getNeeds()).thenThrow(IOException.class);
+        testEntityNeeds = mockInventoryController.getNeed();
+        assertEquals(testEntityNeeds.getStatusCodeValue(), 500);
     }
 
     @Test
-    public void testGetProduct() throws IOException{
-        Product testProduct = new Product("Water",2,5,1); 
-        when(inventoryDAO.getProduct(testProduct.getId())).thenReturn(testProduct);
-        testEntityProduct = mockInventoryController.getProduct(testProduct.getId());
-        assertEquals(testEntityProduct.getStatusCodeValue(), 200);
-    }
-
-    /**
-    * Testing getProducts catch block for IOException 
-    */
-    @Test
-    public void testGetProductThrowsIO() throws IOException{
-        when(inventoryDAO.getProduct(anyInt())).thenThrow(IOException.class);
-        testEntityProduct = mockInventoryController.getProduct(anyInt());
-        assertEquals(testEntityProduct.getStatusCodeValue(), 500);
+    public void testGetNeed() throws IOException{
+        Need testNeed = new Need("Water",2,5,1); 
+        when(inventoryDAO.getNeed(testNeed.getId())).thenReturn(testNeed);
+        testEntityNeed = mockInventoryController.getNeed(testNeed.getId());
+        assertEquals(testEntityNeed.getStatusCodeValue(), 200);
     }
 
     /**
-    * Testing getProduct given the product does not exist 
+    * Testing getNeeds catch block for IOException 
     */
     @Test
-    public void testGetProduct404() throws IOException{
-        when(inventoryDAO.getProduct(anyInt())).thenReturn(null);
-        ResponseEntity<Product> testEntityProduct = mockInventoryController.getProduct(anyInt());
-        assertEquals(testEntityProduct.getStatusCodeValue(), 404);
-    }
-    /**
-    * Testing searchProducts  
-    */
-    @Test
-    public void testSearchProducts() throws IOException{
-        Product[] testProducts = new Product[3];
-        testProducts[0] = new Product("Food",5.50,6,2);
-        when(inventoryDAO.findProducts("ood")).thenReturn(testProducts);
-        testEntityProducts = mockInventoryController.searchProduct("ood");
-        assertEquals(testEntityProducts.getStatusCodeValue(), 200);
+    public void testGetNeedThrowsIO() throws IOException{
+        when(inventoryDAO.getNeed(anyInt())).thenThrow(IOException.class);
+        testEntityNeed = mockInventoryController.getNeed(anyInt());
+        assertEquals(testEntityNeed.getStatusCodeValue(), 500);
     }
 
     /**
-    * Testing searchProducts catch block for IOException 
+    * Testing getNeed given the need does not exist 
     */
     @Test
-    public void testSearchProductsThrowsIO() throws IOException{
-        when(inventoryDAO.findProducts(anyString())).thenThrow(IOException.class);
-        testEntityProducts = mockInventoryController.searchProduct(anyString());
-        assertEquals(testEntityProducts.getStatusCodeValue(), 500);
+    public void testGetNeed404() throws IOException{
+        when(inventoryDAO.getNeed(anyInt())).thenReturn(null);
+        ResponseEntity<Need> testEntityNeed = mockInventoryController.getNeed(anyInt());
+        assertEquals(testEntityNeed.getStatusCodeValue(), 404);
+    }
+    /**
+    * Testing searchNeeds  
+    */
+    @Test
+    public void testSearchNeeds() throws IOException{
+        Need[] testNeeds = new Need[3];
+        testNeeds[0] = new Need("Food",5.50,6,2);
+        when(inventoryDAO.findNeeds("ood")).thenReturn(testNeeds);
+        testEntityNeeds = mockInventoryController.searchNeed("ood");
+        assertEquals(testEntityNeeds.getStatusCodeValue(), 200);
+    }
+
+    /**
+    * Testing searchNeeds catch block for IOException 
+    */
+    @Test
+    public void testSearchNeedsThrowsIO() throws IOException{
+        when(inventoryDAO.findNeeds(anyString())).thenThrow(IOException.class);
+        testEntityNeeds = mockInventoryController.searchNeed(anyString());
+        assertEquals(testEntityNeeds.getStatusCodeValue(), 500);
     }
     
     /**
-    * Testing createProduct givin the Product does not already exist
+    * Testing createNeed givin the Need does not already exist
     */
     @Test
-    public void testCreateProduct() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.createProduct(testProduct)).thenReturn(testProduct);
-        ResponseEntity<Product> testEntity = mockInventoryController.createProduct(testProduct);
+    public void testCreateNeed() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.createNeed(testNeed)).thenReturn(testNeed);
+        ResponseEntity<Need> testEntity = mockInventoryController.createNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 201);    }
     /**
-    * Testing createProduct givin the Product does not already exist
+    * Testing createNeed givin the Need does not already exist
     */
     @Test
-    public void testCreateProductConflict() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.createProduct(testProduct)).thenReturn(null);
-        ResponseEntity<Product> testEntity = mockInventoryController.createProduct(testProduct);
+    public void testCreateNeedConflict() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.createNeed(testNeed)).thenReturn(null);
+        ResponseEntity<Need> testEntity = mockInventoryController.createNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 201);    
     }
     /**
-    * Testing createProduct catch block for an IOException 
+    * Testing createNeed catch block for an IOException 
     */
     @Test
-    public void testCreateProductThrowsIO() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.createProduct(any(Product.class))).thenThrow(IOException.class);
-        ResponseEntity<Product> testEntity = mockInventoryController.createProduct(testProduct);
+    public void testCreateNeedThrowsIO() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.createNeed(any(Need.class))).thenThrow(IOException.class);
+        ResponseEntity<Need> testEntity = mockInventoryController.createNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 500);    
     }
     
     /**
-    * Testing updateProduct given the product exists 
+    * Testing updateNeed given the Need exists 
     */
     @Test
-    public void testUpdateProduct() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.updateProduct(testProduct)).thenReturn(testProduct);
-        ResponseEntity<Product> testEntity = mockInventoryController.updateProduct(testProduct);
+    public void testUpdateNeed() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.updateNeed(testNeed)).thenReturn(testNeed);
+        ResponseEntity<Need> testEntity = mockInventoryController.updateNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 200);    
     }
 
     /**
-    * Testing createProduct givin the Product does not already exist
+    * Testing createNeed givin the Need does not already exist
     */
     @Test
-    public void testUpdateProductConflict() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.updateProduct(testProduct)).thenReturn(null);
-        ResponseEntity<Product> testEntity = mockInventoryController.updateProduct(testProduct);
+    public void testUpdateNeedConflict() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.updateNeed(testNeed)).thenReturn(null);
+        ResponseEntity<Need> testEntity = mockInventoryController.updateNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 404);    
     }
     /**
-    * Testing updateProduct catch block for an IOException 
+    * Testing updateNeed catch block for an IOException 
     */
     @Test
-    public void testUpdateProductThrowsIO() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.updateProduct(any(Product.class))).thenThrow(IOException.class);
-        ResponseEntity<Product> testEntity = mockInventoryController.updateProduct(testProduct);
+    public void testUpdateNeedThrowsIO() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.updateNeed(any(Need.class))).thenThrow(IOException.class);
+        ResponseEntity<Need> testEntity = mockInventoryController.updateNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 500);    
     }
     
     /**
-    * Testing Delete given the Product exists
+    * Testing Delete given the Need exists
     */
     @Test
-    public void testDeleteProduct() throws IOException{
-        Product testProduct = new Product("Food",5.50,6,2);
-        when(inventoryDAO.deleteProduct(testProduct.getId())).thenReturn(true);
-        ResponseEntity<Product> testEntity = mockInventoryController.deleteProduct(testProduct.getId());
+    public void testDeleteNeed() throws IOException{
+        Need testNeed = new Need("Food",5.50,6,2);
+        when(inventoryDAO.deleteNeed(testNeed.getId())).thenReturn(true);
+        ResponseEntity<Need> testEntity = mockInventoryController.deleteNeed(testNeed.getId());
         assertEquals(testEntity.getStatusCodeValue(), 200);    
     }
 
     /**
-    * Testing deleteProduct catch block for an IOException 
+    * Testing deleteNeed catch block for an IOException 
     */
     @Test
-    public void testDeleteProductThrowsIO() throws IOException{
-        Product testProduct = new Product("Socks",12,2,3);
-        when(inventoryDAO.deleteProduct(3)).thenThrow(IOException.class);
-        ResponseEntity<Product> testEntity = mockInventoryController.deleteProduct(testProduct.getId());
+    public void testDeleteNeedThrowsIO() throws IOException{
+        Need testNeed = new Need("Socks",12,2,3);
+        when(inventoryDAO.deleteNeed(3)).thenThrow(IOException.class);
+        ResponseEntity<Need> testEntity = mockInventoryController.deleteNeed(testNeed.getId());
         assertEquals(testEntity.getStatusCodeValue(), 500);    
     }
 
     /**
-    * Testing deleteProduct givin the Product does not already exist
+    * Testing deleteNeed givin the Need does not already exist
     */
     @Test
-    public void testDeleteProductConflict() throws IOException{
-        when(inventoryDAO.deleteProduct(anyInt())).thenReturn(false);
-        ResponseEntity<Product> testEntity = mockInventoryController.deleteProduct(anyInt());
+    public void testDeleteNeedConflict() throws IOException{
+        when(inventoryDAO.deleteNeed(anyInt())).thenReturn(false);
+        ResponseEntity<Need> testEntity = mockInventoryController.deleteNeed(anyInt());
         assertEquals(testEntity.getStatusCodeValue(), 404);    
     }
 }

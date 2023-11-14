@@ -2,7 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 //import com.ufund.api.ufundapi.model.Inventory;
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 
 /**
  * Defines the interface for Need object persistence
@@ -17,7 +17,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product[] getProducts() throws IOException;
+    Need[] getNeeds() throws IOException;
 
     /**
      * Finds all {@linkplain Inventory inventories} whose name contains the given text
@@ -28,7 +28,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product[] findProducts(String containsText) throws IOException;
+    Need[] findNeeds(String containsText) throws IOException;
 
     /**
      * Retrieves a {@linkplain Inventory inventory} with the given id
@@ -41,7 +41,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product getProduct(int id) throws IOException;
+    Need getNeed(int id) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Inventory inventory}
@@ -54,7 +54,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product createProduct(Product product) throws IOException;
+    Need createNeed(Need need) throws IOException;
 
     /**
      * Updates and saves a {@linkplain Inventory inventory}
@@ -66,7 +66,7 @@ public interface InventoryDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Product updateProduct(Product product) throws IOException;
+    Need updateNeed(Need need) throws IOException;
 
     /**
      * Deletes a {@linkplain Inventory inventory} with the given id
@@ -79,6 +79,6 @@ public interface InventoryDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteProduct(int id) throws IOException;
+    boolean deleteNeed(int id) throws IOException;
 }
 
