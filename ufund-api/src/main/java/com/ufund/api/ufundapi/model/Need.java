@@ -9,11 +9,12 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [id=%d, name=%s, price=%f, quantity=%d]";
+    static final String STRING_FORMAT = "Need [id=%d, name=%s, price=%f, quantity=%d, amount=%d]";
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("price") private double price;
     @JsonProperty("quantity") private int quantity;
+    @JsonProperty("amount") private int amount;
     
     /**
      * Create a need with the given name, price and quantity
@@ -22,7 +23,7 @@ public class Need {
      * @param quantity The quantity of the need. Cannot be < 0
      * 
      */
-    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("quantity") int quantity) {
+    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("quantity") int quantity, @JsonProperty("amount") int amount) {
         this.name = name;
         this.id = id;
         if (price < 0) {
@@ -34,6 +35,7 @@ public class Need {
             this.quantity = 0;
         } 
         else {this.quantity=quantity;}
+        this.amount = amount;
     }
 
     /**
@@ -82,12 +84,15 @@ public class Need {
         } 
         else {this.quantity=quantity;}
     }
+    public int getAmount(){
+        return amount;
+    }
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id, name, price, quantity);
+        return String.format(STRING_FORMAT,id, name, price, quantity, amount);
     }
 
     @Override

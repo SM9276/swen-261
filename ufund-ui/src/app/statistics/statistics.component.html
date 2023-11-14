@@ -1,0 +1,12 @@
+<br>
+<h2>Statistics</h2>
+
+
+<ul class="needs">
+  <li *ngFor="let need of needs">
+    <a routerLink="/detail/{{need.id}}">
+      <span class="badge">{{need.id}}</span> {{need.name}} {{need.amount}} {{need.amount * need.price}}
+    </a>
+  </li>
+</ul>
+

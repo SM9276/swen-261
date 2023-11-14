@@ -18,8 +18,9 @@ export class fundingBasketsComponent {
   needs: Need[] = [];
   empty: Need[] = [];
   example: Need[] = [];
+  need!: Need;
 
-  constructor(private router :Router, private userService: UserService, private appComponent: AppComponent) { }
+  constructor(private router :Router, private userService: UserService, private appComponent: AppComponent, private needService: NeedService) { }
 
   ngOnInit(): void {
     this.getFundingBasket();
@@ -49,12 +50,22 @@ export class fundingBasketsComponent {
       console.log(fundingBasket);
       console.log(this.fundingBaskets[1]);
       if(this.fundingBaskets[1].bought.length == 0){
-        this.fundingBaskets[1].bought = this.fundingBaskets[0].needs;
-        console.log(this.fundingBaskets[1]);
+        this.fundingBaskets[1].needs.forEach((need) => {
+          this.fundingBaskets[1].bought.push(need);
+          this.needService.getNeed(need.id).subscribe((need_1) => {this.need = need_1
+            this.need.amount = this.need.amount + need.quantity;
+            this.needService.updateNeed(this.need).subscribe();
+          });
+        });
       }
       else{
         this.fundingBaskets[1].needs.forEach((need) => {
           console.log(need);
+          this.needService.getNeed(need.id).subscribe((need_1) => {this.need = need_1
+            this.need.amount = this.need.amount + need.quantity;
+            this.needService.updateNeed(this.need).subscribe();
+            console.log(this.need);
+          });
           this.fundingBaskets[1].bought.forEach((item) => {
             console.log(item);
             if(item.id == need.id){
