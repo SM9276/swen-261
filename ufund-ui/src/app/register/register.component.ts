@@ -39,6 +39,7 @@ export class RegisterComponent {
       const password = this.registerForm.get('password')?.value;
       console.log(username);
       console.log(password);
+      console.log(this.authenticationService.searchUsers(username))
       if(!this.authenticationService.searchUsers(username)){
         this.authenticationService.register({username, password} as User).subscribe(
           (user) => {
