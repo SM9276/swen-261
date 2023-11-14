@@ -31,8 +31,15 @@
          <a class="nav-link " routerLink="/needs">Donate</a>
       </li>
       <li class="nav-item active ">
-        <button *ngIf="this.getUsername()" id="logout" mat-raised-button class="nav-link " (click)="logout()">Logout</button>
+        <button *ngIf="this.getUsername(); else notLoggedIn" id="logout" mat-raised-button class="nav-link " (click)="logout()">Logout</button>
       </li>
+
+      <ng-template #notLoggedIn>
+        <!-- Content to display if not logged in -->
+        <button  id="logout" routerLink="/login" mat-raised-button class="nav-link ">Login</button>
+        
+      </ng-template>
+
        <form class="form-inline my-2 my-lg-0 ">
        <button class="Nav-subscribe-toggle" routerLink = "/statistics">Statistics</button>
        </form>
