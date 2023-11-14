@@ -38,9 +38,9 @@ export class NeedService {
         map(needs => needs[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} need cost=${id}`);
+          this.log(`${outcome} need id=${id}`);
         }),
-        catchError(this.handleError<Need>(`getNeed cost=${id}`))
+        catchError(this.handleError<Need>(`getNeed id=${id}`))
       );
   }
 
@@ -48,8 +48,8 @@ export class NeedService {
   getNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.get<Need>(url).pipe(
-      tap(_ => this.log(`fetched need cost=${id}`)),
-      catchError(this.handleError<Need>(`getNeed cost=${id}`))
+      tap(_ => this.log(`fetched need id=${id}`)),
+      catchError(this.handleError<Need>(`getNeed id=${id}`))
     );
   }
 
@@ -73,15 +73,9 @@ export class NeedService {
   addNeed(need: Need): Observable<Need> {
     console.log(need)
 
-    const { name, price, quantity, id } = need;
-    const requestPayload = {
-      name: name.trim(),
-      price,
-      quantity,
-      id
-    };
-    return this.http.post<Need>(this.needsUrl, requestPayload, this.httpOptions).pipe(
-      tap((newNeed: Need) => this.log(`added need w/ cost=${newNeed.id}`)),
+
+    return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(
+      tap((newNeed: Need) => this.log(`added need id=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeed'))
     );
   }
@@ -91,7 +85,7 @@ export class NeedService {
     const url = `${this.needsUrl}/${id}`;
 
     return this.http.delete<Need>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted need cost=${id}`)),
+      tap(_ => this.log(`deleted need id=${id}`)),
       catchError(this.handleError<Need>('deleteNeed'))
     );
   }
@@ -100,7 +94,7 @@ export class NeedService {
   updateNeed(need: Need): Observable<any> {
     const url = `${this.needsUrl}/${need.id}`;
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
-      tap(_ => this.log(`updated need cost=${need.id}`)),
+      tap(_ => this.log(`updated need id=${need.id}`)),
       catchError(this.handleError<any>('updateNeed'))
     );
   }

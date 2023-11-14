@@ -9,7 +9,7 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [name=%s, price=%f, quantity=%d]";
+    static final String STRING_FORMAT = "Need [id=%d, name=%s, price=%f, quantity=%d]";
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("price") private double price;
@@ -22,7 +22,7 @@ public class Need {
      * @param quantity The quantity of the need. Cannot be < 0
      * 
      */
-    public Need(@JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("quantity") int quantity, @JsonProperty("id") int id) {
+    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("quantity") int quantity) {
         this.name = name;
         this.id = id;
         if (price < 0) {
@@ -87,7 +87,7 @@ public class Need {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, name, price, quantity);
+        return String.format(STRING_FORMAT,id, name, price, quantity);
     }
 
     @Override
