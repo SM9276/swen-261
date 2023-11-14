@@ -23,9 +23,11 @@
 
 <ul class="needs">
   <li *ngFor="let need of needs">
+    <div *ngIf="need.quantity !== 0 || getUsername() === 'Admin'">
     <a routerLink="/detail/{{need.id}}">
       <span class="badge">{{need.id}}</span> {{need.name}}
     </a>
+    </div>
     <div *ngIf="this.getUsername() === 'Admin'">
       <button type="button" class="delete" title="delete need"
         (click)="delete(need)">x</button>
