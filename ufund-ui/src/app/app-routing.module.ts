@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'needs', component: NeedsComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'detail/:id', component: NeedDetailComponent },
   { path: 'register', component: RegisterComponent,},
   {path: 'funding-basket', component: fundingBasketsComponent},
