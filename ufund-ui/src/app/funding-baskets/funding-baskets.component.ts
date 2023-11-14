@@ -5,6 +5,9 @@ import { UserService } from '../user.service';
 import { FundingBasket } from '../FundingBasket';
 import { AppComponent } from '../app.component';
 
+import { Router, NavigationExtras } from '@angular/router';
+
+
 @Component({
   selector: 'app-funding-baskets',
   templateUrl: './funding-baskets.component.html',
@@ -16,7 +19,7 @@ export class fundingBasketsComponent {
   empty: Need[] = [];
   example: Need[] = [];
 
-  constructor(private userService: UserService, private appComponent: AppComponent) { }
+  constructor(private router :Router, private userService: UserService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.getFundingBasket();
@@ -56,6 +59,7 @@ export class fundingBasketsComponent {
             console.log(item);
             if(item.id == need.id){
               item.quantity += need.quantity;
+              
             }
             else{
               this.fundingBaskets[1].bought.push(need);
@@ -67,6 +71,8 @@ export class fundingBasketsComponent {
       console.log(this.fundingBaskets[1]);
       console.log(this.fundingBaskets[1].username);
       this.userService.updateFundingBasket(this.fundingBaskets[1]).subscribe();
+      this.router.navigate(['dashboard']);
+      window.alert('Thank you for your donation!');
   });
   }
   removeNeedFromBasket(need: Need): void {

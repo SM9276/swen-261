@@ -31,7 +31,6 @@ export class LoginComponent {
     }
   }
 
-  
   onSubmit() {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;
