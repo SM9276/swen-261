@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<body>
+    <br>
+    <h2>Profile Page</h2>
+    <ul class="needs">
+        <li *ngFor="let need of needs">
+            <h3>Your top donated need is: </h3>
+            <span class="badge">{{need.id}}</span> {{need.name}} with {{need.quantity}} amount donated!
+        </li>
+    </ul>
+  </body>
+  
