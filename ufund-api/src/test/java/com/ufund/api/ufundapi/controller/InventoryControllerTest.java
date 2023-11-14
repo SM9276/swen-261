@@ -35,7 +35,7 @@ public class InventoryControllerTest {
 
     @Test
     public void testGetNeeds() throws IOException{
-        Need[] testNeeds = {new Need("Water",2,5,1)}; 
+        Need[] testNeeds = {new Need(2,"Water",5,1)}; 
         when(inventoryDAO.getNeeds()).thenReturn(testNeeds);
         testEntityNeeds = mockInventoryController.getNeed();
         assertEquals(testEntityNeeds.getStatusCodeValue(), 200);
@@ -50,7 +50,7 @@ public class InventoryControllerTest {
 
     @Test
     public void testGetNeed() throws IOException{
-        Need testNeed = new Need("Water",2,5,1); 
+        Need testNeed = new Need(2,"Water",5,1); 
         when(inventoryDAO.getNeed(testNeed.getId())).thenReturn(testNeed);
         testEntityNeed = mockInventoryController.getNeed(testNeed.getId());
         assertEquals(testEntityNeed.getStatusCodeValue(), 200);
@@ -81,7 +81,7 @@ public class InventoryControllerTest {
     @Test
     public void testSearchNeeds() throws IOException{
         Need[] testNeeds = new Need[3];
-        testNeeds[0] = new Need("Food",5.50,6,2);
+        testNeeds[0] = new Need(2, "Food",5.50,6);
         when(inventoryDAO.findNeeds("ood")).thenReturn(testNeeds);
         testEntityNeeds = mockInventoryController.searchNeed("ood");
         assertEquals(testEntityNeeds.getStatusCodeValue(), 200);
@@ -102,7 +102,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testCreateNeed() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.createNeed(testNeed)).thenReturn(testNeed);
         ResponseEntity<Need> testEntity = mockInventoryController.createNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 201);    }
@@ -111,7 +111,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testCreateNeedConflict() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.createNeed(testNeed)).thenReturn(null);
         ResponseEntity<Need> testEntity = mockInventoryController.createNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 201);    
@@ -121,7 +121,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testCreateNeedThrowsIO() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.createNeed(any(Need.class))).thenThrow(IOException.class);
         ResponseEntity<Need> testEntity = mockInventoryController.createNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 500);    
@@ -132,7 +132,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testUpdateNeed() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.updateNeed(testNeed)).thenReturn(testNeed);
         ResponseEntity<Need> testEntity = mockInventoryController.updateNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 200);    
@@ -143,7 +143,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testUpdateNeedConflict() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.updateNeed(testNeed)).thenReturn(null);
         ResponseEntity<Need> testEntity = mockInventoryController.updateNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 404);    
@@ -153,7 +153,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testUpdateNeedThrowsIO() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.updateNeed(any(Need.class))).thenThrow(IOException.class);
         ResponseEntity<Need> testEntity = mockInventoryController.updateNeed(testNeed);
         assertEquals(testEntity.getStatusCodeValue(), 500);    
@@ -164,7 +164,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testDeleteNeed() throws IOException{
-        Need testNeed = new Need("Food",5.50,6,2);
+        Need testNeed = new Need(2,"Food",5.50,6);
         when(inventoryDAO.deleteNeed(testNeed.getId())).thenReturn(true);
         ResponseEntity<Need> testEntity = mockInventoryController.deleteNeed(testNeed.getId());
         assertEquals(testEntity.getStatusCodeValue(), 200);    
@@ -175,7 +175,7 @@ public class InventoryControllerTest {
     */
     @Test
     public void testDeleteNeedThrowsIO() throws IOException{
-        Need testNeed = new Need("Socks",12,2,3);
+        Need testNeed = new Need(3,"Socks",12,2);
         when(inventoryDAO.deleteNeed(3)).thenThrow(IOException.class);
         ResponseEntity<Need> testEntity = mockInventoryController.deleteNeed(testNeed.getId());
         assertEquals(testEntity.getStatusCodeValue(), 500);    
