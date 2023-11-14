@@ -6,6 +6,7 @@ a {
     background-color: #3f525c;
     /* background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b); */
     background-repeat: no-repeat;
+    height: 44vh;
   }
   label {
     font-family: "Raleway", sans-serif;

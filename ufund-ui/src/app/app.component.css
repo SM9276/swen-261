@@ -1,7 +1,8 @@
 /* AppComponent's private CSS styles */
-  h1 {
-    margin-bottom: 0;
+  h1.title {
     text-align: center;
+    margin-top: 90px;
+    margin-bottom: -50px;
   }
   .router-outlet {
     margin-bottom: 0; /* Remove bottom margin */
@@ -67,6 +68,7 @@
 /*footer*/
 .footer
 {
+  background-color: lightgray;
 	width: 100%;
 	margin: auto;
 	margin-top: 30px;
