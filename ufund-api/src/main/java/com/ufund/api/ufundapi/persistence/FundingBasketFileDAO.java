@@ -125,7 +125,7 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
         synchronized(fundingBaskets) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            FundingBasket newFundingBasket = new FundingBasket(fundingBasket.getFundingBasket(), fundingBasket.getNeeds());
+            FundingBasket newFundingBasket = new FundingBasket(fundingBasket.getFundingBasket(), fundingBasket.getNeeds(), fundingBasket.getBought());
             fundingBaskets.put(newFundingBasket.getFundingBasket(),newFundingBasket);
             save(); // may throw an IOException
             return newFundingBasket;

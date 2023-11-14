@@ -16,6 +16,7 @@ public class FundingBasket {
 
     @JsonProperty("username") private String username;
     @JsonProperty("needs") private Need[] needs;
+    @JsonProperty("bought") private Need[] bought;
 
     /**
      * Create a inventory with the given id and name
@@ -27,9 +28,10 @@ public class FundingBasket {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public FundingBasket(@JsonProperty("username") String username, @JsonProperty("needs") Need[] needs) {
+    public FundingBasket(@JsonProperty("username") String username, @JsonProperty("needs") Need[] needs, @JsonProperty ("bought") Need[] bought) {
         this.username = username;
         this.needs = needs;
+        this.bought = bought;
     }
 
     /**
@@ -42,6 +44,10 @@ public class FundingBasket {
     
     public void setNeeds(Need[] needs) {
         this.needs = needs;
+    }
+    public Need[] getBought() {return bought;}
+    public void setBought(Need[] bought){
+        this.bought = bought;
     }
     
     /**
