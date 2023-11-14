@@ -1,6 +1,15 @@
 /* DashboardComponent's private CSS styles */
+.banner{
+  align-items: flex-start;
+  align-content: flex-start;
+  align-self: flex-start;
+  display:flex;
+}
 
-h2 {
+.column{
+  flex:1;
+}
+h2,h3, button {
     text-align: center;
   }
   
