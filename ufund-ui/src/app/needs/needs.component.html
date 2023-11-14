@@ -5,21 +5,17 @@
   <label for="new-need">Need name: </label>
   <input id="new-need" #needName />
   <!-- (click) passes input value to add() and then clears the input -->
-
+  <br>
   <label for="new-need2">Need price: </label>
   <input id="new-need2" #needPrice />
   <br>
   <label for="new-need3">Need quantity: </label>
   <input id="new-need3" #needQuantity />
-
-  <label for="new-need4">Need id: </label>
-  <input id="new-need4" #needID />
   <br>
-  <button type="button" class="add-button" (click)="add(needName.value,needPrice.value, needQuantity.value, needID.value);
+  <button type="button" class="add-button" (click)="add(needName.value, needPrice.value, needQuantity.value);
   needName.value ='';
   needPrice.value ='';
-  needQuantity.value ='';
-  needID.value='';">
+  needQuantity.value ='';">
     Add Need
   </button>
 

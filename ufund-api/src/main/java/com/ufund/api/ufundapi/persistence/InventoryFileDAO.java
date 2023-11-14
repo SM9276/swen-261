@@ -126,7 +126,6 @@ public class InventoryFileDAO implements InventoryDAO {
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
         Need[] needArray = objectMapper.readValue(new File(filename),Need[].class);
-
         // Add each inventory to the tree map and keep track of the greatest id
         for (Need need : needArray) {
             needs.put(need.getId(),need);
@@ -179,7 +178,7 @@ public class InventoryFileDAO implements InventoryDAO {
         synchronized(needs) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(need.getName(),need.getPrice(),need.getQuantity(),need.getId());
+            Need newNeed = new Need(nextId(),need.getName(),need.getPrice(),need.getQuantity());
             needs.put(newNeed.getId(),newNeed);
             save(); // may throw an IOException
             return newNeed;
