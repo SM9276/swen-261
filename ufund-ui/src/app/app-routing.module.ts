@@ -8,16 +8,18 @@ import { RegisterComponent } from './register/register.component';
 import { fundingBasketsComponent } from './funding-baskets/funding-baskets.component';
 import { AppComponent } from './app.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'needs', component: NeedsComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'detail/:id', component: NeedDetailComponent },
   { path: 'register', component: RegisterComponent,},
   {path: 'funding-basket', component: fundingBasketsComponent},
-  { path: 'statistics', component: StatisticsComponent}
+  { path: 'statistics', component: StatisticsComponent},
+  { path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

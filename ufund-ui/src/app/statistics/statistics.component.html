@@ -1,12 +1,11 @@
-<br>
-<h2>Statistics</h2>
-
-
-<ul class="needs">
-  <li *ngFor="let need of needs">
-    <a routerLink="/detail/{{need.id}}">
-      <span class="badge">{{need.id}}</span> {{need.name}} {{need.amount}} {{need.amount * need.price}}
-    </a>
-  </li>
-</ul>
-
+<body>
+    <br>
+    <h2>Statistics</h2>
+    <ul class="top">
+        <li *ngFor="let need of top">
+            <h3>The Top Donated Need is Currently: </h3>
+            <span class="badge">{{need.id}}</span> {{need.name}} with {{need.amount}} amount donated at a total of {{need.amount * need.price}} dollars
+        </li>
+    </ul>
+  </body>
+  
