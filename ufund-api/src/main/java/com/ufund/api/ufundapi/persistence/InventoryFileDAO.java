@@ -178,7 +178,7 @@ public class InventoryFileDAO implements InventoryDAO {
         synchronized(needs) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(nextId(),need.getName(),need.getPrice(),need.getQuantity());
+            Need newNeed = new Need(nextId(),need.getName(),need.getPrice(),need.getQuantity(),need.getAmount());
             needs.put(newNeed.getId(),newNeed);
             save(); // may throw an IOException
             return newNeed;

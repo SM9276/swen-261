@@ -31,6 +31,7 @@ export class NeedsComponent implements OnInit {
     name = name.trim();
     const price:number = parseFloat(needPrice);
     const quantity:number = parseFloat(needQuantity);
+    const amount:number = 0;
     console.log(price)
     console.log(quantity)
     if (price<0 || quantity<0 ){
@@ -38,8 +39,8 @@ export class NeedsComponent implements OnInit {
     }
     else{
       if (!name && !needPrice && !needQuantity) { return; }
-      console.log(this.needService.addNeed({name,price,quantity} as Need));
-      this.needService.addNeed({name,price,quantity} as Need)
+      console.log(this.needService.addNeed({name,price,quantity,amount} as Need));
+      this.needService.addNeed({name,price,quantity,amount} as Need)
         .subscribe(need => {
           this.needs.push(need);
         });

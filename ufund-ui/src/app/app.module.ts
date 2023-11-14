@@ -20,6 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { fundingBasketsComponent } from './funding-baskets/funding-baskets.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { fundingBasketsComponent } from './funding-baskets/funding-baskets.compo
     LoginComponent,
     RegisterComponent,
     fundingBasketsComponent,
+    StatisticsComponent,
+    ProfileComponent,
   ],
   bootstrap: [ AppComponent ],
 })

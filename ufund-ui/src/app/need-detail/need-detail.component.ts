@@ -71,7 +71,7 @@ export class NeedDetailComponent {
       else if(this.needInBasket()){
         this.fundingBaskets[0].needs.forEach((need) => {
           if(this.need.id == need.id){
-            need.quantity += 1;
+            need.quantity = Number(need.quantity) + Number(this.need.quantity);
           }
         });
       }

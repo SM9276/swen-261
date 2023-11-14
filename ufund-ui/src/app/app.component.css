@@ -1,4 +1,10 @@
 /* AppComponent's private CSS styles */
+  #logout{
+    background-color: black;
+    align-content: center;
+    margin-block: 5px;
+    color: white;
+  }
   h1.title {
     text-align: center;
     margin-top: 90px;
