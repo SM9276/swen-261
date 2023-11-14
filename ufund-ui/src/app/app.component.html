@@ -1,4 +1,150 @@
-<!-- <h1>{{title}}</h1> -->
-<router-outlet></router-outlet>
-<app-messages></app-messages>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="app.component.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+  crossorigin="anonymous">
+  <script defer src="https://friconix.com/cdn/friconix-0.2615.js"> </script>
+</head>
+<body>
+<h1>{{title}}</h1>
+
+<!--Navbar-->
+<nav *ngIf="this.isLoggedIn() === true" class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+    <!-- <img src="https://lh3.googleusercontent.com/GE01fZ3X14L5JT3iQltmZhyrLPk3H7eqnD0ipiliifjIWO2csHLu-ueRsa6mHLxyPcUrizLeO0rRKyDdnljdDvs-iZhxTU8XGZ4dMBq2ToARfyIW6cFmj8O390CqgbIpTeKPurIsof0=s200-p-k "> -->
+    <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarNav " aria-controls="navbarNav
+    " aria-expanded="false " aria-label="Toggle navigation ">
+     <span class="navbar-toggler-icon "></span>
+    </button>
+    
+  <div class="collapse navbar-collapse " id="navbarNav ">
+     <ul class="navbar-nav ">
+       <li class="nav-item active ">
+         <a class="nav-link " routerLink ="/dashboard">Dashboard</a>
+       </li>
+      <li class="nav-item active ">
+         <a class="nav-link " routerLink="/needs">Needs</a>
+       </li>
+      <li class="nav-item active ">
+         <a class="nav-link " routerLink="/funding-basket">Fund Basket</a>
+      </li>
+      <li class="nav-item active ">
+         <a class="nav-link " routerLink="/needs">Donate</a>
+      </li>
+      <li class="nav-item active ">
+        <a class="nav-link " (click)="logout()">Logout</a>
+      </li>
+       <form class="form-inline my-2 my-lg-0 ">
+       <button class="Nav-subscribe-toggle ">Get Updates</button>
+       </form>
+     </ul>
+    </div>
+   </nav>
+
+   <!-- Router Outlet -->
+   <div class = "router-outlet">
+   <router-outlet></router-outlet>
+    </div>
+   <app-messages></app-messages>
+
+  <hr>
+  <!-- Contact Section -->
+  <section class = "contact ">
+    <h1>Contact</h1>
+    <p>Questions, comments or concerns? Get in touch with one of our members!</p>
+    <div class = "row ">
+      <div class = "col-md-6 ">
+        <div class="input-group input-group-lg ">
+          <div class="input-group-prepend ">
+            <i class="fi-xnsuxl-user-solid "></i>
+          </div>
+          <input placeholder="Jane Doe"type="text " class="form-control " aria-label="Sizing example input " aria-describedby="inputGroup-sizing-lg ">
+        </div>
+      
+        <div class="input-group input-group-lg ">
+          <div class="input-group-prepend ">
+            <i class="fi-xwsuxl-envelope-solid "></i>
+          </div>
+          <input placeholder="Janedoe@gmail.com"type="text " class="form-control " aria-label="Sizing example input " aria-describedby="inputGroup-sizing-lg ">
+        </div>
+      
+
+        <div class="input-group input-group-lg ">
+          <div class="input-group-prepend ">
+            <i class="fi-xnsrxl-phone-solid "></i>
+          </div>
+          <input placeholder="+1-777-777-7777"type="text " class="form-control " aria-label="Sizing example input " aria-describedby="inputGroup-sizing-lg ">
+        </div>
+      </div>
+
+      <div class = "col-lg-6 col-md-6 ">
+        <div class = "input-group ">
+          <textarea class="form-control "></textarea>
+        </div>
+        <button class="btn btn-lg ">Submit Your Message</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class = "footer ">
+    <div class = "row ">
+      <div class = "col-md-4 ">
+          <p>
+            <i class="fi-xnsuxl-house-solid "></i>
+            Rohcester Institute of Technology <br>Golisano 1550 
+            New York, NY, 14623
+          </p>
+          <p>
+            <i class="fi-xwsuxl-envelope-solid "></i>
+            orphanhelpers@gmail.com
+          </p>
+          <p>
+            <i class="fi-xnsrxl-phone-solid "></i>
+            (111) 111-1111
+          </p>
+      </div>
+
+      <div class = "col-md-4 ">
+          <p>
+            <i class="fi-cnsdxl-exclamation-mark "></i>
+            About Us
+          </p>
+          <p>
+            <i class="fi-xnsuxl-team-solid "></i>
+            Privacy
+          </p>
+          <p>
+            <i class="fi-cwsuxl-check "></i>
+            Terms and Conditions
+          </p>
+      </div>
+
+      <div class = "col-md-4 ">
+          <a class = "socialMedia ">
+            <i class="fi-snsuxl-facebook facebook"></i>
+            <i class="fi-snsuxx-linkedin linkedin "></i>
+            <i class="fi-xnsuxx-instagram instagram "></i>
+            <i class="fi-xnsuxx-twitter twitter "></i>
+          </a>
+          <br><br>
+          <div class = "subscription ">
+            <input placeholder="John Doe"  type="text ">
+            <input placeholder="Johndoe@gmail.com" type="text "><br><br>
+            <button class="btn btn-lg ">Subscribe to Our Newsletter</button>
+          </div>
+          
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js " integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n
+  " crossorigin="anonymous "></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo
+  " crossorigin="anonymous "></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js " integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6
+  " crossorigin="anonymous "></script>
+
+</body>
+
 <!-- This file sets the components globally -->

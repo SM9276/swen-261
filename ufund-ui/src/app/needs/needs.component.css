@@ -1,4 +1,6 @@
-
+h2{
+  text-align: center;
+}
 .needs {
     margin: 0 0 2em 0;
     list-style-type: none;

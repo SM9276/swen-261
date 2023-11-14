@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 import com.ufund.api.ufundapi.persistence.InventoryDAO;
 import com.ufund.api.ufundapi.persistence.FundingBasketDAO;
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.FundingBasket;
 import com.ufund.api.ufundapi.model.User;
 
@@ -76,6 +76,24 @@ public class FundingBasketController {
         }
     }
 
+    @PutMapping("")
+    public ResponseEntity<FundingBasket> updateFundingBasket(@RequestBody FundingBasket fundingBasket) {
+        LOG.info("PUT /funding-basket " + fundingBasket);
+
+        try {
+            FundingBasket current_funding_basket = fundingBasketDao.updateFundingBasket(fundingBasket);
+            if (current_funding_basket != null)
+                return new ResponseEntity<FundingBasket>(fundingBasket, HttpStatus.OK);
+            else
+
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     /**
      * Responds to the GET request for all {@linkplain FundingBasket fundingBasket} whose name contains
      * the text in name
@@ -89,25 +107,10 @@ public class FundingBasketController {
      * Example: Find all inventories that contain the text "ma"
      * GET http://localhost:8080/ufund/?name=ma
      */
-    @GetMapping("/")
-    public ResponseEntity<FundingBasket[]> searchUserFundingBasket(@RequestParam String name) {
-        LOG.info("GET /funding-basket/?user="+name);
 
-        try {
-            FundingBasket[] fundingBasket = fundingBasketDao.findFundingBasket(name);
-            if (fundingBasket != null)
-                return new ResponseEntity<FundingBasket[]>(fundingBasket,HttpStatus.OK);
-            else
-                return new ResponseEntity<FundingBasket[]>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    @PostMapping("/funding-basket")
+    @PostMapping("/funding")
     public ResponseEntity<FundingBasket> createFundingBasket(@RequestBody FundingBasket fundingBasket) {
-        LOG.info("POST /basket?id = " + fundingBasket);
+        LOG.info("POST /funding?name = " + fundingBasket);
 
         try {
             FundingBasket status = fundingBasketDao.createFundingBasket(fundingBasket);

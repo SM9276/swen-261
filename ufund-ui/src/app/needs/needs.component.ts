@@ -34,7 +34,7 @@ export class NeedsComponent implements OnInit {
     const id:number = parseFloat(needId);
     console.log(price)
     console.log(quantity)
-    if (price<0 || quantity<0){
+    if (price<0 || quantity<0 ){
       window.alert('Invalid Price or Quantity');
     }
     else{

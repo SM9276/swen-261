@@ -1,14 +1,14 @@
-<h2>Funds-Basket</h2>
-<a routerLink="/dashboard">Dashboard</a>
-<a routerLink="/needs">Needs</a>
-<ul class="needs">
-    <li *ngFor="let need of needs">
-      <!-- <a routerLink="/detail/{{need.id}}"> -->
-        <span class="badge">{{need.id}}</span> {{need.name}}
-      <!-- </a> -->
-      <!-- <button type="button" class="delete" title="delete need" -->
-        <!-- (click)="delete(need)">x</button> -->
-    </li>
-</ul>
-<button mat-raised-button color="primary" (click)="logout()">Logout</button>
-
+<body>
+  <br>
+  <h2>Fund Basket</h2>
+  <ul class="needs">
+      <li *ngFor="let need of needs">
+        <!-- <a routerLink="/detail/{{need.id}}"> -->
+          <span class="badge">{{need.id}}</span> {{need.name}} {{need.quantity}}
+        <!-- </a> -->
+        <!-- <button type="button" class="delete" title="delete need" -->
+          <!-- (click)="delete(need)">x</button> -->
+      </li>
+  </ul>
+  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+</body>

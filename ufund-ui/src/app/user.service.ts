@@ -23,26 +23,30 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-    // updateNeed(need: Need): Observable<any> {
-    //   const url = `${this.needsUrl}/${need.id}`;
-    //   return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
-    //     tap(_ => this.log(`updated need cost=${need.id}`)),
-    //     catchError(this.handleError<any>('updateNeed'))
-    //   );
-    // }  
-      /** GET need by id. Will 404 if id not found */
+  updateFundingBasket(fundingBasket: FundingBasket): Observable<any> {
+      const url = `${this.fundingBasketUrl}/${fundingBasket.username}`;
+      return this.http.put(this.fundingBasketUrl, fundingBasket, this.httpOptions).pipe(
+        tap(_ => this.log(`updated need cost=${fundingBasket.username}`)),
+        catchError(this.handleError<any>('updateNeed'))
+      );
+    }  
   getFundingBasket(name: String): Observable<FundingBasket> {
     const url = `${this.fundingBasketUrl}/${name}`;
+    console.log(url);
+    console.log(name);
+    console.log(this.http.get<FundingBasket>(url));
     return this.http.get<FundingBasket>(url).pipe(
-      tap(_ => this.log(`fetched need name=${name}`)),
-      catchError(this.handleError<FundingBasket>(`getFundingBasket name=${name}`))
+      catchError(this.handleError<FundingBasket>(`getUser = ${name}`))
     );
   }
+  
 
 
   makeFundingBasket(fundingBasket: FundingBasket): Observable<FundingBasket> {
     const {username, needs} = fundingBasket;
-    return this.http.post<FundingBasket>(`${this.fundingBasketUrl}/funding-basket`, fundingBasket, this.httpOptions).pipe(
+    console.log(fundingBasket);
+    console.log(this.http.post<FundingBasket>(`${this.fundingBasketUrl}/funding`, fundingBasket, this.httpOptions));
+    return this.http.post<FundingBasket>(`${this.fundingBasketUrl}/funding`, fundingBasket, this.httpOptions).pipe(
       catchError(this.handleError<FundingBasket>('makeFundingBasket'))
     );
   }

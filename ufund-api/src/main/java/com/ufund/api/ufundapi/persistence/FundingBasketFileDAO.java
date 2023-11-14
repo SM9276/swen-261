@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.FundingBasket;
 import com.ufund.api.ufundapi.model.User;
 @Component
@@ -84,12 +84,7 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
         }
     }
 
-    @Override
-    public FundingBasket[] findFundingBasket(String containsText) throws IOException {
-        synchronized(fundingBaskets) {
-            return getFundingBasketsArray(containsText);
-        }
-    }
+
     private boolean load() throws IOException {
         fundingBaskets = new TreeMap<>();
 
@@ -101,7 +96,7 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
         // Add each inventory to the tree map and keep track of the greatest id
         for (FundingBasket fundingBasket : fundingBasketArray) {
             fundingBaskets.put(fundingBasket.getFundingBasket(), fundingBasket);
-
+            System.out.println("yo");
         }
         return true;
     }
@@ -130,10 +125,21 @@ public class FundingBasketFileDAO implements FundingBasketDAO{
         synchronized(fundingBaskets) {
             // We create a new inventory object because the id field is immutable
             // and we need to assign the next unique id
-            FundingBasket newFundingBasket = new FundingBasket(fundingBasket.getFundingBasket(), fundingBasket.getProducts());
+            FundingBasket newFundingBasket = new FundingBasket(fundingBasket.getFundingBasket(), fundingBasket.getNeeds());
             fundingBaskets.put(newFundingBasket.getFundingBasket(),newFundingBasket);
             save(); // may throw an IOException
             return newFundingBasket;
+        }
+    }
+    @Override
+    public FundingBasket updateFundingBasket(FundingBasket fundingBasket) throws IOException {
+        synchronized(fundingBaskets) {
+            if (fundingBaskets.containsKey(fundingBasket.getFundingBasket()) == false)
+                return null;  // inventory does not exist
+
+            fundingBaskets.put(fundingBasket.getFundingBasket(),fundingBasket);
+            save(); // may throw an IOException
+            return fundingBasket;
         }
     }
 

@@ -32,7 +32,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "Needion": {
               "budgets": [
                 {
                   "type": "initial",
@@ -56,13 +56,13 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "Needion"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "browserTarget": "ufund-ui:build:production"
+            "Needion": {
+              "browserTarget": "ufund-ui:build:Needion"
             },
             "development": {
               "browserTarget": "ufund-ui:build:development"

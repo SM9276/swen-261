@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufund.api.ufundapi.persistence.UserDAO;
-import com.ufund.api.ufundapi.model.Product;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.User;
  /**
  * Handles the REST API requests for the User resource
