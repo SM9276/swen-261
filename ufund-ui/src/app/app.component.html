@@ -5,13 +5,12 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
   crossorigin="anonymous">
   <script defer src="https://friconix.com/cdn/friconix-0.2615.js"> </script>
-  <link rel="stylesheet" href="https://friconix.com/cdn/friconix.latest.css">
 </head>
 <body>
 <h1>{{title}}</h1>
 
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+<nav *ngIf="this.isLoggedIn() === true" class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
     <!-- <img src="https://lh3.googleusercontent.com/GE01fZ3X14L5JT3iQltmZhyrLPk3H7eqnD0ipiliifjIWO2csHLu-ueRsa6mHLxyPcUrizLeO0rRKyDdnljdDvs-iZhxTU8XGZ4dMBq2ToARfyIW6cFmj8O390CqgbIpTeKPurIsof0=s200-p-k "> -->
     <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarNav " aria-controls="navbarNav
     " aria-expanded="false " aria-label="Toggle navigation ">
@@ -28,11 +27,11 @@
        </li>
       <li class="nav-item active ">
          <a class="nav-link " routerLink="/funding-basket">Fund Basket</a>
-       </li>
-       <li class="nav-item active ">
+      </li>
+      <li class="nav-item active ">
          <a class="nav-link " routerLink="/needs">Donate</a>
-       </li>
-       <li class="nav-item active ">
+      </li>
+      <li class="nav-item active ">
         <a class="nav-link " (click)="logout()">Logout</a>
       </li>
        <form class="form-inline my-2 my-lg-0 ">
