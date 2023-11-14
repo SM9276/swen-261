@@ -18,6 +18,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   users: User[] = [];
   list: Need[] = [];
+  list_2: Need[] = [];
 
   fundingBaskets: FundingBasket[] = [];
 
@@ -39,13 +40,14 @@ export class RegisterComponent {
       const password = this.registerForm.get('password')?.value;
       console.log(username);
       console.log(password);
-      console.log(this.authenticationService.searchUsers(username))
+      console.log(this.authenticationService.searchUsers(username));
       if(this.authenticationService.searchUsers(username)){
         this.authenticationService.register({username, password} as User).subscribe(
           (user) => {
             this.users.push(user);
             const needs = this.list;
-            this.userService.makeFundingBasket({username, needs} as FundingBasket).subscribe(
+            const bought = this.list_2;
+            this.userService.makeFundingBasket({username, needs, bought} as FundingBasket).subscribe(
               (fundingBasket) => {
                 this.fundingBaskets.push(fundingBasket);
               }
@@ -54,7 +56,7 @@ export class RegisterComponent {
           }
 
         );
-        
+
       }
       else {
         window.alert('This username is already taken.');

@@ -24,6 +24,7 @@ export class UserService {
     private messageService: MessageService) { }
 
   updateFundingBasket(fundingBasket: FundingBasket): Observable<any> {
+    console.log(fundingBasket);
       const url = `${this.fundingBasketUrl}/${fundingBasket.username}`;
       return this.http.put(this.fundingBasketUrl, fundingBasket, this.httpOptions).pipe(
         tap(_ => this.log(`updated need cost=${fundingBasket.username}`)),
@@ -43,7 +44,7 @@ export class UserService {
 
 
   makeFundingBasket(fundingBasket: FundingBasket): Observable<FundingBasket> {
-    const {username, needs} = fundingBasket;
+    const {username, needs, bought} = fundingBasket;
     console.log(fundingBasket);
     console.log(this.http.post<FundingBasket>(`${this.fundingBasketUrl}/funding`, fundingBasket, this.httpOptions));
     return this.http.post<FundingBasket>(`${this.fundingBasketUrl}/funding`, fundingBasket, this.httpOptions).pipe(
