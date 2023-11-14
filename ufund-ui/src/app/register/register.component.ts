@@ -39,26 +39,46 @@ export class RegisterComponent {
       const password = this.registerForm.get('password')?.value;
       console.log(username);
       console.log(password);
-      this.authenticationService.register({username, password}as User).subscribe(
-        (user) => {
-          this.users.push(user);
-          if (user!= null && this.authenticationService.searchUsers(user.username)) {
+      if(!this.authenticationService.searchUsers(username)){
+        this.authenticationService.register({username, password} as User).subscribe(
+          (user) => {
+            this.users.push(user);
             const needs = this.list;
-            console.log(needs);
-            this.userService.makeFundingBasket({username, needs}as FundingBasket).subscribe(
+            this.userService.makeFundingBasket({username, needs} as FundingBasket).subscribe(
               (fundingBasket) => {
-                this.fundingBaskets.push(fundingBasket); 
-                console.log(this.fundingBaskets);
-                console.log(fundingBasket);
-                console.log(fundingBasket.needs);
+                this.fundingBaskets.push(fundingBasket);
               }
             )
             this.router.navigate(['login']);
-          } else {
-            window.alert('This username is already taken.');
           }
-        }
-      );
+
+        );
+        
+      }
+      else {
+        window.alert('This username is already taken.');
+      }
+      // this.authenticationService.register({username, password}as User).subscribe(
+      //   (user) => {
+      //     this.users.push(user);
+      //     if (user!= null && !this.authenticationService.searchUsers(username)) {
+      //       console.log(this.authenticationService.searchUsers(user.username))
+      //       const needs = this.list;
+      //       console.log(needs);
+      //       this.userService.makeFundingBasket({username, needs}as FundingBasket).subscribe(
+      //         (fundingBasket) => {
+      //           this.fundingBaskets.push(fundingBasket); 
+      //           console.log(this.fundingBaskets);
+      //           console.log(fundingBasket);
+      //           console.log(fundingBasket.needs);
+      //         }
+      //       )
+      //       this.router.navigate(['login']);
+      //     } else {
+      //       window.alert('This username is already taken.');
+      //     }
+      //   }
+      // );
 
   }
 }

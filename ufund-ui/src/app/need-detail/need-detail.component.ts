@@ -58,25 +58,47 @@ export class NeedDetailComponent {
       const basket = this.userService.getFundingBasket(username);
       const id = Number(this.route.snapshot.paramMap.get('id'));
       basket.subscribe((fundingBasket) => {this.fundingBaskets.push(fundingBasket);
+      console.log(fundingBasket);
       this.needService.getNeed(id).subscribe(need => this.need = need);
       console.log(this.need);
       console.log(this.need.quantity);
-      this.fundingBaskets[0].needs.forEach((need) => {
-        if(this.need.id == need.id){
-          need.quantity += 1;
-          console.log(need);
-        }
-        else {
-          this.fundingBaskets[0].needs.push(this.need);
-        }
-      });
+      console.log(this.fundingBaskets[0].needs.length);
+      console.log(this.needInBasket());
+      if(this.fundingBaskets[0].needs.length == 0){
+        this.fundingBaskets[0].needs.push(this.need);
+        console.log(this.fundingBaskets[0].needs);
+      }
+      else if(this.needInBasket()){
+        this.fundingBaskets[0].needs.forEach((need) => {
+          if(this.need.id == need.id){
+            need.quantity += 1;
+          }
+        });
+      }
+      else {
+        this.fundingBaskets[0].needs.push(this.need);
+        console.log(this.fundingBaskets[0].needs);
+      }
       this.userService.updateFundingBasket(this.fundingBaskets[0]).subscribe(() => this.goBack());
     });
     }
   }
-
   getUsername(): String {
     return this.appComponent.getUsername();
 
+  }
+  needInBasket(): boolean {
+    let result: boolean = false;
+    const username: String = (this.appComponent.login).trim();
+    const basket = this.userService.getFundingBasket(username);
+    basket.subscribe((fundingBasket) => {this.fundingBaskets.push(fundingBasket);
+      });
+      this.fundingBaskets[0].needs.forEach((need) => {
+        if(this.need.id == need.id){
+          result = this.need.id == need.id;
+        }
+      });
+      console.log(result);
+      return result
   }
 }
