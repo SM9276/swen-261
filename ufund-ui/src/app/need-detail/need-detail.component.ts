@@ -86,7 +86,7 @@ export class NeedDetailComponent {
       }
     }else{
       this.router.navigate(['login']);
-      window.alert('This username is already taken.');
+      window.alert('Please Login before adding item to basket!');
     }
   }
   getUsername(): String {
