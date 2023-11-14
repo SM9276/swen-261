@@ -30,6 +30,7 @@ export class StatisticsComponent {
         }
       });
       this.top.push(this.need);
+      console.log(this.top);
     });
   }
 
