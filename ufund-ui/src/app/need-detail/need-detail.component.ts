@@ -85,7 +85,7 @@ export class NeedDetailComponent {
       }
     }else{
       this.router.navigate(['login']);
-      window.alert('Please Login before adding to funding basket');
+      window.alert('Please Login before adding item to basket!');
     }
   }
   getUsername(): String {
