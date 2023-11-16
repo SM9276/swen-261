@@ -209,80 +209,80 @@ public class InventoryControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
-    // @Test
-    // public void testSearchHeroes() throws IOException { // findHeroes may throw IOException
-    //     // Setup
-    //     String searchString = "la";
-    //     Hero[] heroes = new Hero[2];
-    //     heroes[0] = new Hero(99,"Galactic Agent");
-    //     heroes[1] = new Hero(100,"Ice Gladiator");
-    //     // When findHeroes is called with the search string, return the two
-    //     /// heroes above
-    //     when(mockHeroDAO.findHeroes(searchString)).thenReturn(heroes);
+    @Test
+    public void testSearchNeeds() throws IOException { // findNeeds may throw IOException
+        // Setup
+        String searchString = "oi";
+        Need[] need = new Need[2];
+        need[0] = new Need(1, "khoi", 1, 2, 3);
+        need[1] = new Need(2, "boi", 3, 2, 1);
+        // When findHeroes is called with the search string, return the two
+        /// heroes above
+        when(mockInventoryDAO.findNeeds(searchString)).thenReturn(need);
 
-    //     // Invoke
-    //     ResponseEntity<Hero[]> response = heroController.searchHeroes(searchString);
+        // Invoke
+        ResponseEntity<Need[]> response = inventoryController.searchNeed(searchString);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.OK,response.getStatusCode());
-    //     assertEquals(heroes,response.getBody());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(need,response.getBody());
+    }
 
-    // @Test
-    // public void testSearchHeroesHandleException() throws IOException { // findHeroes may throw IOException
-    //     // Setup
-    //     String searchString = "an";
-    //     // When createHero is called on the Mock Hero DAO, throw an IOException
-    //     doThrow(new IOException()).when(mockHeroDAO).findHeroes(searchString);
+    @Test
+    public void testSearchNeedsHandleException() throws IOException { // findNeeds may throw IOException
+        // Setup
+        String searchString = "an";
+        // When createNeed is called on the Mock Inventory DAO, throw an IOException
+        doThrow(new IOException()).when(mockInventoryDAO).findNeeds(searchString);
 
-    //     // Invoke
-    //     ResponseEntity<Hero[]> response = heroController.searchHeroes(searchString);
+        // Invoke
+        ResponseEntity<Need[]> response = inventoryController.searchNeed(searchString);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
-    // @Test
-    // public void testDeleteHero() throws IOException { // deleteHero may throw IOException
-    //     // Setup
-    //     int heroId = 99;
-    //     // when deleteHero is called return true, simulating successful deletion
-    //     when(mockHeroDAO.deleteHero(heroId)).thenReturn(true);
+    @Test
+    public void testDeleteNeed() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        int needId = 99;
+        // when deleteHero is called return true, simulating successful deletion
+        when(mockInventoryDAO.deleteNeed(needId)).thenReturn(true);
 
-    //     // Invoke
-    //     ResponseEntity<Hero> response = heroController.deleteHero(heroId);
+        // Invoke
+        ResponseEntity<Need> response = inventoryController.deleteNeed(needId);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.OK,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
 
-    // @Test
-    // public void testDeleteHeroNotFound() throws IOException { // deleteHero may throw IOException
-    //     // Setup
-    //     int heroId = 99;
-    //     // when deleteHero is called return false, simulating failed deletion
-    //     when(mockHeroDAO.deleteHero(heroId)).thenReturn(false);
+    @Test
+    public void testDeleteNeedNotFound() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        int needId = 99;
+        // when deleteNeed is called return false, simulating failed deletion
+        when(mockInventoryDAO.deleteNeed(needId)).thenReturn(false);
 
-    //     // Invoke
-    //     ResponseEntity<Hero> response = heroController.deleteHero(heroId);
+        // Invoke
+        ResponseEntity<Need> response = inventoryController.deleteNeed(needId);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
 
-    // @Test
-    // public void testDeleteHeroHandleException() throws IOException { // deleteHero may throw IOException
-    //     // Setup
-    //     int heroId = 99;
-    //     // When deleteHero is called on the Mock Hero DAO, throw an IOException
-    //     doThrow(new IOException()).when(mockHeroDAO).deleteHero(heroId);
+    @Test
+    public void testDeleteNeedHandleException() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        int needId = 99;
+        // When deleteHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockInventoryDAO).deleteNeed(needId);
 
-    //     // Invoke
-    //     ResponseEntity<Hero> response = heroController.deleteHero(heroId);
+        // Invoke
+        ResponseEntity<Need> response = inventoryController.deleteNeed(needId);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }
 
 
