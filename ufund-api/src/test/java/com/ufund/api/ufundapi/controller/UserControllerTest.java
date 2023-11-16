@@ -36,49 +36,49 @@ public class UserControllerTest {
         userController = new UserController(mockUserDAO);
     }
 
-    // @Test
-    // public void testGetUser() throws IOException {  // getHero may throw IOException
-    //     // Setup
-    //     User user = new User(99,"Galactic Agent", "Admin");
-    //     // When the same id is passed in, our mock Hero DAO will return the Hero object
-    //     when(mockUserDAO.getUser(user.getId())).thenReturn(user);
+    @Test
+    public void testGetUser() throws IOException {  // getUser may throw IOException
+        // Setup
+        User user = new User("khoi", "pham");
+        // When the same id is passed in, our mock User DAO will return the Hero object
+        when(mockUserDAO.getUser(user.getUsername())).thenReturn(user);
 
-    //     // Invoke
-    //     ResponseEntity<User> response = userController.getUser(user.getId());
+        // Invoke
+        ResponseEntity<User> response = userController.getUser(user.getUsername());
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.OK,response.getStatusCode());
-    //     assertEquals(user,response.getBody());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(user,response.getBody());
+    }
 
-    // @Test
-    // public void testGetUserNotFound() throws Exception { // createHero may throw IOException
-    //     // Setup
-    //     int userId = 99;
-    //     // When the same id is passed in, our mock Hero DAO will return null, simulating
-    //     // no hero found
-    //     when(mockUserDAO.getUser(userId)).thenReturn(null);
+    @Test
+    public void testGetUserNotFound() throws Exception { // createUser may throw IOException
+        // Setup
+        String khoi = "khoi";
+        // When the same id is passed in, our mock User DAO will return null, simulating
+        // no user found
+        when(mockUserDAO.getUser(khoi)).thenReturn(null);
 
-    //     // Invoke
-    //     ResponseEntity<User> response = userController.getUser(userId);
+        // Invoke
+        ResponseEntity<User> response = userController.getUser(khoi);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
 
-    // @Test
-    // public void testGetUserHandleException() throws Exception { // createHero may throw IOException
-    //     // Setup
-    //     int userId = 99;
-    //     // When getHero is called on the Mock Hero DAO, throw an IOException
-    //     doThrow(new IOException()).when(mockUserDAO).getUser(userId);
+    @Test
+    public void testGetUserHandleException() throws Exception { // createUser may throw IOException
+        // Setup
+        String khoi ="khoi";
+        // When getUser is called on the Mock User DAO, throw an IOException
+        doThrow(new IOException()).when(mockUserDAO).getUser(khoi);
 
-    //     // Invoke
-    //     ResponseEntity<User> response = userController.getUser(userId);
+        // Invoke
+        ResponseEntity<User> response = userController.getUser(khoi);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
     /*****************************************************************
      * The following tests will fail until all HeroController methods

@@ -55,8 +55,8 @@ public class InventoryControllerTest {
     public void testGetNeedNotFound() throws Exception { // createHero may throw IOException
         // Setup
         int needId = 99;
-        // When the same id is passed in, our mock Hero DAO will return null, simulating
-        // no hero found
+        // When the same id is passed in, our mock Inventory DAO will return null, simulating
+        // no need found
         when(mockInventoryDAO.getNeed(needId)).thenReturn(null);
 
         // Invoke
