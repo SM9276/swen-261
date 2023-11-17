@@ -4,6 +4,7 @@ geometry: margin=1in
 # PROJECT Design Documentation
 
 
+Team Coordinator = Joseph DeSimone, Requirement Coordinator = , Design Coordinator = ,Configuration Coordinator = , Quality and Testing Coordinator =  .
 
 
 > _The following template provides the headings for your Design
@@ -82,7 +83,7 @@ This section describes the features of the application.
 
 
 ### Definition of MVP
-> The Minimum Viable Need in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to funding basket, checkout funding basket, search specific needs by id and name. 
+> The Minimum Viable Product in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to shopping cart, checkout shopping cart, search specific needs by id and name. 
 ### MVP Features
 > _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
@@ -109,7 +110,7 @@ This section describes the application domain.
 
 
 
-![Domain Model](DomainModel.png)
+![Domain Model](“Domain Model.png”)
 
 
 
@@ -120,18 +121,18 @@ This section describes the application domain.
 A helper can choose from Orphan needs(Cupboard) 
 Orphan Needs are stored in the Inventory
 Checkout Updates Inventory
-Admin can Add/remove/edit funding basket
+Admin can Add/remove/edit shopping cart
 A helper is a User 
-A helper can view/edit their funding basket. A Helper can pay to checkout their funding basket
+A helper can view/edit their shopping cart. A Helper can pay to checkout their shopping cart
 User can log in using a Username
 User can View Website
 Website displays Orphan Needs(Cupboard)
-Funding Basket(Funding Basket) proceeds to checkout
+Shopping Cart(Funding Basket) proceeds to checkout
 Username saves in a UserFile
-The UserFile restores the FundingBasket
-Needs(Needs) has Food and Supplies
+The UserFile restores the ShoppingCart
+Products(Needs) has Food and Supplies
 Donations have Food, Money Donations, Supplies
-Both Needs(needs) and Donations are stored in Statics Page.
+Both Products(needs) and Donations are stored in the Statics Page.
 
 
 
@@ -164,12 +165,12 @@ The following Tiers/Layers model shows a high-level view of the webapp's archite
 
 
 
-The web application, is built using the Modelâ€“Viewâ€“ViewModel (MVVM) architecture pattern.
+The web application is built using the Modelâ€“Viewâ€“ViewModel (MVVM) architecture pattern.
 
 
 
 
-The Model stores the application data objects including any functionality to provide persistance.
+The Model stores the application data objects including any functionality to provide persistence.
 
 
 
@@ -199,12 +200,6 @@ This section describes the web interface flow; this is how the user views and in
 
 
 > _Provide a summary of the application's user interface. Describe, from the user's perspective, the flow of the pages in the web application._
-
-
-
-
-
-
 
 
 ### View Tier
@@ -256,10 +251,10 @@ This section describes the web interface flow; this is how the user views and in
 > Tier above._
 
 
-The three main classes we built to model our website are the User, the Need, and the Funding Basket.
+The three main classes we built to model our website are the User, the Product, and the Shopping Cart.
 The User class was built to maintain all of the information pertaining to each user, such as their username and password. This allows them to log into their account as needed in order to fulfill their personal tasks and maintain persistence when logging in and out.
-The Need class was built to maintain information pertaining to each need inside the cupboard. This allows the controller to access information about each Need’s id, cost, quantity, and name. This allows transparency for when the Admin or a Helper attempts to create, search for, edit, or delete a need if they’re permitted to.
-The Funding Basket class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
+The Product class was built to maintain information pertaining to each need inside the cupboard. This allows the controller to access information about each product’s id, cost, quantity, and name. This allows transparency for when the Admin or a Helper attempts to create, search for, edit, or delete a need if they’re permitted to.
+The Shopping Cart class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
 
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
@@ -271,11 +266,24 @@ The Funding Basket class was built to allow Helpers to add needs to a Fund Baske
 
 
 ## OO Design Principles
-> _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
+> _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by the instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
+
+
 Low Coupling: 
 The way the JuiceBoxSquad implemented Low coupling was by creating classes that were reliant on themselves to the best of their ability, only have linked items from API to UI, Even that was kept to a minimum
+
+
 Information Expert:
-The way the JuiceBoxSquad implemented information Expert was by not creating multiple classes for different operations, we kept similar items together. 
+The way the JuiceBoxSquad implemented information Expert was by not creating multiple classes for different operations, we kept similar items together.
+
+
+Open/Closed:
+What Open/closed means is that new functionality can be added with minimum changes to existing code. A way the JuiceBoxSquad has designed code that keeps in mind these principles that make it easier to change is in the example of needs. When adding a new parameter to needs instead of adding the parameter anywhere, we always put it at the end so the least amount of code needs to be changed everywhere where needs is referenced.
+
+
+Controller: Controller is 1 of the three different tiers of models(model, view, controller). The controller is what connects the model and the view. Each controller should be a single responsibility that clearly deals with one task. A way the JuiceBoxSquad has implemented controllers is with the use of one for the Funding basket. We have a controller to connect what happens in the view and what happens in the backend with the model.
+
+
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
 
@@ -284,6 +292,7 @@ The way the JuiceBoxSquad implemented information Expert was by not creating mul
 ## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise,
 > **Identify 3-4** areas within your code that have been flagged by the Static Code
+The Bot area of the is not covered therefore it is flagged by the static code. This is an area we must improve on for sprint 4. Hopefully the code will be converted. 
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.
 > Include any relevant screenshot(s) with each area._
 
@@ -308,11 +317,11 @@ The way the JuiceBoxSquad implemented information Expert was by not creating mul
 > criteria tests failing, and the number of user stories that
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
-Acceptance Testing was performed by our own team members, the unit tests were run in order to make sure there was functionality. Some of the feature that were wanted to be implemented were not, so they failed by default.
+Acceptance Testing was performed by our own team members, the unit tests were run in order to make sure there was functionality. Some of the features that were wanted to be implemented were not, so they failed by default.
 
 
 ### Unit Testing and Code Coverage
-Unit Tests worked on each class individually but when time came to combine all of the classes a lot of the classes had to changed inorder to function together properly and they will rewritten having these changes in mind. As for Code Coverage the team has not yet touched code Coverage hopefully for sprint 3 the juicebox squad can have it completed. 
+Unit Tests worked on each class individually but when time came to combine all of the classes a lot of the classes had to change inorder to function together properly and they will be rewritten having these changes in mind. As for Code Coverage the team has not yet touched code Coverage. Hopefully for sprint 3 the juicebox squad can have it completed. 
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your

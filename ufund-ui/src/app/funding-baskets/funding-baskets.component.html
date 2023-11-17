@@ -4,7 +4,7 @@
   <ul class="needs">
       <li *ngFor="let need of needs">
         <!-- <a routerLink="/detail/{{need.id}}"> -->
-          <span class="badge">{{need.id}}</span> {{need.name}} {{need.quantity}}
+          <span class="badge">{{need.id}}</span> {{need.name}} Amount: {{need.quantity}} Price: {{need.price * need.quantity}}
           <div>
             <button type="button" (click)="removeNeedFromBasket(need)">x</button>
           </div>
