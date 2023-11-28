@@ -4,15 +4,7 @@ geometry: margin=1in
 # PROJECT Design Documentation
 
 
-Team Coordinator = Joseph DeSimone, Requirement Coordinator = , Design Coordinator = ,Configuration Coordinator = , Quality and Testing Coordinator =  .
-
-
-> _The following template provides the headings for your Design
-> Documentation. As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
-
+Team Coordinator = Joseph DeSimone, Requirement Coordinator = Sergio Mercado Nunez, Design Coordinator = Khoi ,Configuration Coordinator = Jay Lee , Quality and Testing Coordinator = Bryant 
 
 
 ## Team Information
@@ -28,36 +20,20 @@ Team Coordinator = Joseph DeSimone, Requirement Coordinator = , Design Coordinat
 
 
 ## Executive Summary
-
-
-
-
-The UFund Orphanage Project is a website in which a user can fund the needs of a Orphan. 
-
-
+The UFund Orphanage Project is a dedicated website designed to connect individuals with the opportunity to make a meaningful impact in the lives of orphans. Through this platform, users have the ability to provide crucial financial support to fulfill the diverse needs of these children, ensuring they receive the care, resources, and opportunities essential for their well-being and future growth.
 
 
 ### Purpose
-The purpose of this project is to create a website in which orphan needs can be bought by a helper. The project objective is to create a robust website that has minimum errors, the administrator can create and change different needs that the meet what the orphan needs actually are.
-
-
-
-
-
-
-
-
-
-
+The purpose of this project is to create a website in which orphan needs can be bought by a helper. The project objective is to create a robust website that is fully functional, easy to use. The administrator can create and update the needs to where they are always aligned with the orphans necessities. 
 
 
 ### Glossary and Acronyms
 | Term | Definition 				 |
 |------|------------				 |
-| SPA | Single Page 				 |
-| FB  |Fund Basket  				 |
-| N   |Need         				 |
+| SPA |Single Page 				 |
+| FB  |Funding Basket  			 |
 | FE  |Front End    				 |
+| BE  |Back End                          |
 | API |Application Programing Interface  |
 | UI  |User Interface  			 |
 | H   |Helper		                  |
@@ -66,73 +42,66 @@ The purpose of this project is to create a website in which orphan needs can be 
 
 
 ## Requirements
-
-
-
-
-This section describes the features of the application.
-
-
-
-
-> _In this section you do not need to be exhaustive and list every
-> story. Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
-
-
-
+The requirements of this web application are to have the following functioning features:
+-Username, password to create and save accounts and determine the difference between user and admin.
+-Admin can create, delete and modify needs in the Cupboard
+-User can add, remove from FB.
+-Each User can click on their profile
+-Banner Ads in order to generate revenue on the website.
+-
 ### Definition of MVP
 > The Minimum Viable Product in the perspective of the Admin and the Helper, The Admin must be able to log in and view,add,remove and edit the needs in the cupboard. A helper must be able to log in, view, add and remove needs to shopping cart, checkout shopping cart, search specific needs by id and name. 
+
+
 ### MVP Features
-> _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
-
-
+> Top-level Epics and/or Stories 
+-Helper Actions
+	-Helper adds to FB
+	-Helper pays FB
+-Admin Actions
+	-Admin Adds to Cupboard
+	-Admin Edits Inventory
+-User
+	-User Creates Account
+	-User Logs into Username
+-10 % Feature 
+	-Banner Ads
+	-Profile Page
 
 
 ### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+> Describe what enhancements you have implemented for the project.
+Banner Ads - As a helper, I want to view banner ads of needs so that I can easily find another way to help support orphans
 
 
-
-
-
-
+Statistics Page - As an admin, I want to be able to see the numerical data of the donations so that I can track how much is being donated and at what rate
 
 
 ## Application Domain
 
 
-
-
-This section describes the application domain.
-
-
-
-
 ![Domain Model](“Domain Model.png”)
 
 
-
-
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
 > can discuss the more important domain entities and their relationship
 > to each other._
-A helper can choose from Orphan needs(Cupboard) 
-Orphan Needs are stored in the Inventory
-Checkout Updates Inventory
-Admin can Add/remove/edit shopping cart
-A helper is a User 
-A helper can view/edit their shopping cart. A Helper can pay to checkout their shopping cart
-User can log in using a Username
-User can View Website
-Website displays Orphan Needs(Cupboard)
-Shopping Cart(Funding Basket) proceeds to checkout
-Username saves in a UserFile
-The UserFile restores the ShoppingCart
-Products(Needs) has Food and Supplies
-Donations have Food, Money Donations, Supplies
-Both Products(needs) and Donations are stored in the Statics Page.
+
+
+A user, referred to as a helper, has the option to select items from the Orphan Needs category, specifically the Cupboard section. These Orphan Needs are cataloged in the inventory. Upon checkout, the inventory is updated.
+
+
+Administrators have the authority to add, remove, or edit items in the shopping cart. The term "helper" is synonymous with "user" in this context. Helpers can not only view but also edit their shopping cart, and they can make payments to finalize and check out their selected items.
+
+
+To access the system, users can log in using a unique username and password. Once logged in, they can navigate through the website, where information about Orphan Needs from the Cupboard is visibly displayed.
+
+
+The shopping cart, also referred to as the Funding Basket, can be reviewed before proceeding to checkout. Usernames are stored in a designated UserFile, facilitating the restoration of the shopping cart for future reference.
+
+
+The items within the system are categorized as "Needs" and encompass both Food and Supplies. Donations, which include Food, Money Donations, and Supplies, are also part of the system. Both Needs and Donations are centralized and stored on the Statistics Page.
+
+
 
 
 
@@ -270,23 +239,27 @@ The Shopping Cart class was built to allow Helpers to add needs to a Fund Basket
 
 
 Low Coupling: 
-The way the JuiceBoxSquad implemented Low coupling was by creating classes that were reliant on themselves to the best of their ability, only have linked items from API to UI, Even that was kept to a minimum
-
-
-Information Expert:
-The way the JuiceBoxSquad implemented information Expert was by not creating multiple classes for different operations, we kept similar items together.
+As a team the group will be using the principle of low coupling, which is keeping the design to keep the number of unnecessary relationships down. The way the team will be implementing this low coupling concept is by using well-defined interfaces between classes so that the classes don't know about each other. Because if they know about each other then if we affect one of the classes it will affect the other and can cause it to break other code.  Another way the team will implement low coupling is by avoiding sharing data between the classes. In order to be able to implement different classes without them affecting each other. Abstract classes are another way for the team to reduce coupling. Using abstract classes allows classes to be implemented differently without affecting each other.
 
 
 Open/Closed:
 What Open/closed means is that new functionality can be added with minimum changes to existing code. A way the JuiceBoxSquad has designed code that keeps in mind these principles that make it easier to change is in the example of needs. When adding a new parameter to needs instead of adding the parameter anywhere, we always put it at the end so the least amount of code needs to be changed everywhere where needs is referenced.
 
 
-Controller: Controller is 1 of the three different tiers of models(model, view, controller). The controller is what connects the model and the view. Each controller should be a single responsibility that clearly deals with one task. A way the JuiceBoxSquad has implemented controllers is with the use of one for the Funding basket. We have a controller to connect what happens in the view and what happens in the backend with the model.
+Law of Demeter:
+We applied the Law of Demeter through separating the ability to view certain entities based on which role you log in as.  For example, if you’re the Admin of the website, you cannot peer into the Helper’s shopping cart.  In fact, any given Helper cannot peer into any other Helper’s shopping cart either.  On the other hand, Helpers also cannot look at all of the data the Admin gets to look at, namely the inventory data.  That way, there’s a level of privacy added through separating the views of each role. The Law of Demeter also states that these types of models are easier to maintain since removing one entity doesn’t require you to make changes throughout all of the removed entity’s connected entities.  Obviously there’s a lot of polishing we can do for this diagram, but it serves its purpose to observe how different entities interact with each other for the most part.
 
 
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
+Controller:
+Our current model accounts for the ability to perform simple tasks by separating the concerns of each entity at each level.  For example, we will be adding a controller that checks the username the user entered upon startup of the website in relation to the database with usernames and account information.  As another example, we will allow the Admin of the website to add, remove, and edit Needs in the Cupboard.  And the Cupboard will have direct access to the overall inventory of the organization, so it can add, remove, and edit the inventory based on what the admin desires to alter about it.  In a similar way, Helpers will be able to pass shopping carts full of donations for Needs to the Checkout, which will then process all the new items that must be accounted for in the inventory after the transaction is approved.
 
 
+Single-responsibility:
+Single responsibility is a computer programming principle, part of the bigger SOLID framework, which is pertinent in its philosophy that a class should only have one reason to change. The concepts underlying the principle is quite explanatory in that each constructed class in the universal model diagram (UML) should be influenced by one external influence and only one. Single-responsibility principle is utilized in my group’s design because every class entity has only one major responsibility that needs to be addressed per interaction with another class entity. For example, the helper class has only one function with the needs cupboard class, which is to choose from it. The helper class also has only one function with the shopping cart class, which is to edit its content. What the helper class cannot do is add to or remove from the shopping cart the items that it chose from the needs cupboard. That task is solely done by the needs cupboard class. By doing so, this ensures that the system of classes each only has one singular responsibility when an individual class interacts with other classes.
+
+
+Information Expert:
+Information expert is the idea of keeping the most qualified class which means the class that has the most information about a certain area of code to fulfill a certain  responsibility. The way the JuiceBoxSquad implemented information Expert was by not creating multiple classes for different operations, we kept similar items together.
 
 
 ## Static Code Analysis/Future Design Improvements
@@ -297,11 +270,7 @@ The Bot area of the is not covered therefore it is flagged by the static code. T
 > Include any relevant screenshot(s) with each area._
 
 
-
-
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
-
-
+> Update CSS/Front end, how the perceived looks of the website look alot better. 
 
 
 ## Testing
@@ -332,6 +301,7 @@ Unit Tests worked on each class individually but when time came to combine all o
 
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
+
 
 
 
