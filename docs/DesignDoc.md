@@ -80,7 +80,7 @@ Statistics Page - As an admin, I want to be able to see the numerical data of th
 ## Application Domain
 
 
-![Domain Model](“Domain Model.png”)
+![Domain Model](“DomainModel.png”)
 
 
 > can discuss the more important domain entities and their relationship
