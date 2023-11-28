@@ -239,18 +239,11 @@ The Shopping Cart class was built to allow Helpers to add needs to a Fund Basket
 
 
 Low Coupling: 
-The way the JuiceBoxSquad implemented Low coupling was by creating classes that were reliant on themselves to the best of their ability, only have linked items from API to UI, Even that was kept to a minimum
-
-
-Information Expert:
-The way the JuiceBoxSquad implemented information Expert was by not creating multiple classes for different operations, we kept similar items together.
+As a team the group will be using the principle of low coupling, which is keeping the design to keep the number of unnecessary relationships down. The way the team will be implementing this low coupling concept is by using well-defined interfaces between classes so that the classes don't know about each other. Because if they know about each other then if we affect one of the classes it will affect the other and can cause it to break other code.  Another way the team will implement low coupling is by avoiding sharing data between the classes. In order to be able to implement different classes without them affecting each other. Abstract classes are another way for the team to reduce coupling. Using abstract classes allows classes to be implemented differently without affecting each other.
 
 
 Open/Closed:
 What Open/closed means is that new functionality can be added with minimum changes to existing code. A way the JuiceBoxSquad has designed code that keeps in mind these principles that make it easier to change is in the example of needs. When adding a new parameter to needs instead of adding the parameter anywhere, we always put it at the end so the least amount of code needs to be changed everywhere where needs is referenced.
-
-
-Controller: Controller is 1 of the three different tiers of models(model, view, controller). The controller is what connects the model and the view. Each controller should be a single responsibility that clearly deals with one task. A way the JuiceBoxSquad has implemented controllers is with the use of one for the Funding basket. We have a controller to connect what happens in the view and what happens in the backend with the model.
 
 
 Law of Demeter:
@@ -261,6 +254,14 @@ Controller:
 Our current model accounts for the ability to perform simple tasks by separating the concerns of each entity at each level.  For example, we will be adding a controller that checks the username the user entered upon startup of the website in relation to the database with usernames and account information.  As another example, we will allow the Admin of the website to add, remove, and edit Needs in the Cupboard.  And the Cupboard will have direct access to the overall inventory of the organization, so it can add, remove, and edit the inventory based on what the admin desires to alter about it.  In a similar way, Helpers will be able to pass shopping carts full of donations for Needs to the Checkout, which will then process all the new items that must be accounted for in the inventory after the transaction is approved.
 
 
+Single-responsibility:
+Single responsibility is a computer programming principle, part of the bigger SOLID framework, which is pertinent in its philosophy that a class should only have one reason to change. The concepts underlying the principle is quite explanatory in that each constructed class in the universal model diagram (UML) should be influenced by one external influence and only one. Single-responsibility principle is utilized in my group’s design because every class entity has only one major responsibility that needs to be addressed per interaction with another class entity. For example, the helper class has only one function with the needs cupboard class, which is to choose from it. The helper class also has only one function with the shopping cart class, which is to edit its content. What the helper class cannot do is add to or remove from the shopping cart the items that it chose from the needs cupboard. That task is solely done by the needs cupboard class. By doing so, this ensures that the system of classes each only has one singular responsibility when an individual class interacts with other classes.
+
+
+Information Expert:
+Information expert is the idea of keeping the most qualified class which means the class that has the most information about a certain area of code to fulfill a certain  responsibility. The way the JuiceBoxSquad implemented information Expert was by not creating multiple classes for different operations, we kept similar items together.
+
+
 ## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise,
 > **Identify 3-4** areas within your code that have been flagged by the Static Code
@@ -269,11 +270,7 @@ The Bot area of the is not covered therefore it is flagged by the static code. T
 > Include any relevant screenshot(s) with each area._
 
 
-
-
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
-
-
+> Update CSS/Front end, how the perceived looks of the website look alot better. 
 
 
 ## Testing
