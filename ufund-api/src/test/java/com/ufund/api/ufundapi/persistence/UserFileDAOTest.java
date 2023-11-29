@@ -100,20 +100,20 @@ public class UserFileDAOTest {
         assertEquals(actual.getUsername(),user.getUsername());
     }
 
-    // @Test
-    // public void testUpdateUser() {
-    //     // Setup
-    //     User user = new User("Galactic Jud", "JedMode");
+    @Test
+    public void testUpdateUser() {
+        // Setup
+        User user = new User("Boseph", "Password2");
 
-    //     // Invoke
-    //     User result = assertDoesNotThrow(() -> userFileDAO.updateUser(user),
-    //                             "Unexpected exception thrown");
+        // Invoke
+        User result = assertDoesNotThrow(() -> userFileDAO.updateUser(user),
+                                "Unexpected exception thrown");
 
-    //     // Analyze
-    //     assertNotNull(result);
-    //     User actual = userFileDAO.getUser(user.getUsername());
-    //     assertEquals(actual,user);
-    // }
+        // Analyze
+        assertNotNull(result);
+        User actual = userFileDAO.getUser(user.getUsername());
+        assertEquals(actual,user);
+    }
 
     @Test
     public void testSaveException() throws IOException{

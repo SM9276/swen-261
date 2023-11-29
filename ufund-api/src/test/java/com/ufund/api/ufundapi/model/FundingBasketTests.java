@@ -78,20 +78,20 @@ public class FundingBasketTests{
         assertEquals(expected_bought,fundingBasket.getBought());
     }
 
-    // @Test
-    // public void testToString() {
-    //     // Setup
-    //     String khoi = "khoi";
-    //     Need[] needList = new Need[1];
-    //     Need[] boughtList = new Need[1];
-    //     String expected_string = String.format(FundingBasket.STRING_FORMAT,khoi, needList);
+    @Test
+    public void testToString() {
+        // Setup
+        String khoi = "khoi";
+        Need[] needList = new Need[1];
+        Need[] boughtList = new Need[1];
+        String expected_string = String.format(FundingBasket.STRING_FORMAT,khoi, needList, boughtList);
         
-    //     FundingBasket fundingBasket = new FundingBasket(expected_string, needList, boughtList);
+        FundingBasket fundingBasket = new FundingBasket(expected_string, needList, boughtList);
         
-    //     // Invoke
-    //     String actual_string = fundingBasket.toString();
+        // Invoke
+        String actual_string = fundingBasket.toString();
 
-    //     // Analyze
-    //     assertEquals(expected_string,actual_string);
-    // }
+        // Analyze
+        assertEquals(expected_string,actual_string);
+    }
 }
