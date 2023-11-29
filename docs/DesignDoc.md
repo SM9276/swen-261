@@ -199,8 +199,8 @@ The ViewModel of the web application is what is sent to the client UI inorder fo
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 >
-![Replace with your ViewModel Tier class diagram 1, etc.](User_Logs_in.png)
-![Replace with your ViewModel Tier class diagram 2, etc.](model-placeholder.png)
+![Replace with your ViewModel Tier class diagram 1, etc.](User_Logs_In.png)
+![Replace with your ViewModel Tier class diagram 2, etc.](HelperAddsToFundingBasket.png)
 
 
 
