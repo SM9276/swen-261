@@ -44,6 +44,23 @@ public class UserTest {
     }
 
     @Test
+    public void testPassword() {
+        // Setup
+
+        String name = "Wi-Fire";
+        String password = "Password";
+        User user= new User(name, password);
+
+        String expected_password = "Galactic Agent";
+
+        // Invoke
+        user.setPassword(expected_password);;
+
+        // Analyze
+        assertEquals(expected_password,user.getPassword());
+    }    
+
+    @Test
     public void testToString() {
         // Setup
         String name = "Wi-Fire";

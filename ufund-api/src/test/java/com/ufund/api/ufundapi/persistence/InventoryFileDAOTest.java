@@ -142,7 +142,7 @@ public class InventoryFileDAOTest {
     }
 
     @Test
-    public void testGetHeroNotFound() throws IOException {
+    public void testGetNeedNotFound() throws IOException {
         // Invoke
         Need need= inventoryFileDAO.getNeed(10);
 
@@ -162,7 +162,7 @@ public class InventoryFileDAOTest {
     }
 
     @Test
-    public void testUpdateHeroNotFound() {
+    public void testUpdateNeedNotFound() {
         // Setup
         Need need = new Need(4, "wonder", 4, 4, 4);
 
