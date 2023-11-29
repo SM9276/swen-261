@@ -32,7 +32,7 @@ public class InventoryFileDAOTest {
      * @throws IOException
      */
     @BeforeEach
-    public void setupHeroFileDAO() throws IOException {
+    public void setupInventoryFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testNeeds = new Need[3];
         testNeeds[0] = new Need(1, "khoi", 1, 1, 1);
@@ -74,7 +74,7 @@ public class InventoryFileDAOTest {
         // Invoke
         Need need = inventoryFileDAO.getNeed(1);
 
-        // Analzye
+        // Analyze
         assertEquals(need,testNeeds[0]);
     }
 

@@ -100,20 +100,17 @@ public class InventoryControllerTest {
         assertEquals(need,response.getBody());
     }
 
-    // @Test 
-    // public void testCreateNeedFailed() throws IOException {  // createNeed may throw IOException
-    //     // Setup
-    //     Need need = new Need(1, "khoi", 1, 1, 1);
-    //     // when createNeed is called, return false simulating failed
-    //     // creation and save
-    //     when(mockInventoryDAO.createNeed(need)).thenReturn(null);
+    @Test 
+    public void testCreateNeedFailed() throws IOException {  // createNeed may throw IOException
+        // Setup
+        Need need = null;
 
-    //     // Invoke
-    //     ResponseEntity<Need> response = inventoryController.createNeed(need);
+        // Invoke
+        ResponseEntity<Need> response = inventoryController.createNeed(need);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
 
     @Test
     public void testCreateNeedHandleException() throws IOException {  // createNeed may throw IOException

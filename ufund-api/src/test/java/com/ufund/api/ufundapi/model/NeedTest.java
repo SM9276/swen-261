@@ -11,142 +11,103 @@ import java.util.LinkedList;
 
 
 
-// @Tag("Model-tier")
-// public class NeedTest {
+@Tag("Model-tier")
+public class NeedTest {
 
-//     Need Need;
-//     String name;
-//     double price;
-//     int quantity;
-//     int id;
-//     Need Need2;
-//     String name2;
-//     double price2;
-//     int quantity2;
-//     int id2;
-//     Need Need3;
-//     String name3;
-//     double price3;
-//     int quantity3;
-//     int id3;
-//     Need Need4;
-//     String name4;
-//     double price4;
-//     int quantity4;
-//     int id4;
+    @Test
+    public void testCtor() {
+        // Setup
+        int expected_id = 99;
+        String expected_name = "Wi-Fire";
+        int expected_price = 99;
+        int expected_quantity = 99;
+        int expected_amount = 99;
 
-//     @BeforeEach
-//     public void setUpNeedTest(){
-//         name = "Munchies";
-//         price = 10.0;
-//         quantity = 8;
-//         id = 0;
-//         Need = new Need(name, price, quantity, id);
+        // Invoke
+        Need need = new Need(expected_id, expected_name, expected_price, expected_quantity, expected_amount);
 
-//         name2 = "Munchies";
-//         price2 = 10.0;
-//         quantity2 = 10;
-//         id2 = 1;
-//         Need2 = new Need(name2, price2, quantity, id);
-        
-//         name3 = "Alma de Mexico";
-//         price3 = 5.0;
-//         quantity3 = 8;
-//         id3 = 2;
-//         Need3 = new Need(name3, price3, quantity3, id);
+        // Analyze
+        assertEquals(expected_id,need.getId());
+        assertEquals(expected_name,need.getName());
+        assertEquals(expected_price, need.getPrice());
+        assertEquals(expected_quantity, need.getQuantity());
+        assertEquals(expected_amount, need.getAmount());
+    }
 
-//         name4 = "Munchies";
-//         price4 = 5.0;
-//         quantity4 = 8;
-//         id4 = 3;
-//         Need4 = new Need(name4, price4, quantity4, id);
-//     }
+    @Test
+    public void testName() {
+        // Setup
+        int id = 99;
+        String name = "Wi-Fire";
+        double price    = 99;
+        int quantity = 99;
+        int amount   = 99;
+        Need need = new Need(id, name, price, quantity, amount);
 
-//     @Test
-//     public void testGetName(){
-//         assertEquals(name, Need.getName());
-//     }
+        String expected_name = "Galactic Agent";
 
-//     @Test
-//     public void testSetName(){
-//         Need.setName("Minecraft");
-//         assertEquals("Minecraft", Need.getName());
-//     }
+        // Invoke
+        need.setName(expected_name);
 
-//     @Test
-//     public void testGetQuantity(){
-//         assertEquals(8, Need.getQuantity());
-//     }
+        // Analyze
+        assertEquals(expected_name,need.getName());
+    }
 
-//     @Test 
-//     public void testEquals() {
-//         LinkedList<Need> list = new LinkedList<>();
-//         list.add(Need);
-//         assertTrue(Need.equals(Need2));
-//         assertFalse(Need.equals(Need3));
-//         assertFalse(Need.equals(Need4));
-//         assertTrue(list.contains(Need2));
+    @Test
+    public void testPrice() {
+        // Setup
+        int id = 99;
+        String name = "Wi-Fire";
+        double price    = 99;
+        int quantity = 99;
+        int amount   = 99;
+        Need need = new Need(id, name, price, quantity, amount);
 
-//         Object testObj = new Object();
-//         assertFalse(Need.equals(testObj));
-//     }
-//     @Test
-//     public void testSetQuantity(){
-//         Need.setQuantity(18);
-//         assertEquals(18, Need.getQuantity());
+        double expected_price = 1;
 
-//         Need.setQuantity(-1);
-//         assertEquals(0, Need.getQuantity());
-//     }
-//     @Test
-//     public void testGetPrice(){
-//         assertEquals(price, Need.getPrice());
-//     }
-//     @Test
-//     public void testSetPrice(){
-//         Need.setPrice(15.00);
-//         assertEquals(15.00, Need.getPrice());
+        // Invoke
+        need.setPrice(expected_price);;
 
-//         Need.setPrice(-1);
-//         assertEquals(0, Need.getPrice());
+        // Analyze
+        assertEquals(expected_price,need.getPrice());
+    }
 
-//         Need.setPrice(0);
-//         assertEquals(0, Need.getPrice());
-//     }
-//     @Test
-//     public void testToString(){
-//         int quantity = 4;
-//         double price = 10.0;
-//         String name = "Munchies";
-//         String expectedString = String.format(Need.STRING_FORMAT, name, price, quantity);
-//         Need tester = new Need(name, price, quantity, id);
-//         String actualString = tester.toString();
-//         assertEquals(expectedString, actualString);
-//     }
+    @Test
+    public void testQuantity() {
+        // Setup
+        int id = 99;
+        String name = "Wi-Fire";
+        double price    = 99;
+        int quantity = 99;
+        int amount   = 99;
+        Need need = new Need(id, name, price, quantity, amount);
 
-//     @Test
-//     public void testHash() {
-//         assertNotNull(Need.hashCode());
-//     }
-//     @Test
-//     public void testConstructor(){
-//         String name = "Rock";
-//         double price = 20.7;
-//         int quantity = 8;
-//         Need Need = new Need(name, price, quantity, id2);
-//         assertEquals(name, Need.getName());
-//         assertEquals(price, Need.getPrice());
-//         assertEquals(quantity, Need.getQuantity());
-//     }
-//     @Test
-//     public void testConstructorNegative(){
-//         String name = "Rock";
-//         double price = -1;
-//         int quantity = -1;
-//         Need Need = new Need(name, price, quantity, id3);
-//         assertEquals(name, Need.getName());
-//         assertEquals(0, Need.getPrice());
-//         assertEquals(0, Need.getQuantity());
-//     }
+        int expected_quantity = 1;
 
-// }
+        // Invoke
+        need.setQuantity(expected_quantity);;
+
+        // Analyze
+        assertEquals(expected_quantity,need.getQuantity());
+    }
+
+    @Test
+    public void testToString() {
+        // Setup
+        int id = 99;
+        String name = "Wi-Fire";
+        float price = 99;
+        int quantity = 99;
+        int amount = 99;
+
+        String expected_string = String.format(Need.STRING_FORMAT, id, name, price, quantity, amount);
+        Need need = new Need(id, name, price, quantity, amount);
+
+        // Invoke
+        String actual_string = need.toString();
+
+        // Analyze
+        assertEquals(expected_string,actual_string);
+    }
+
+}
