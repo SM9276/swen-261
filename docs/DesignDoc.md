@@ -80,7 +80,7 @@ Statistics Page - As an admin, I want to be able to see the numerical data of th
 ## Application Domain
 
 
-![Domain Model](DomainModel.png)
+![Domain Model](“Domain Model.png”)
 
 
 > can discuss the more important domain entities and their relationship
@@ -134,33 +134,22 @@ The following Tiers/Layers model shows a high-level view of the webapp's archite
 
 
 
-The web application is built using the Modelâ€“Viewâ€“ViewModel (MVVM) architecture pattern.
+The web application is built using the Model, View, ViewModel (MVVM) architecture pattern, which is standard in the industry.  
 
 
+The Model stores the application data objects including any functionality to provide persistence. As seen in our architecture tiers and layer diagram the Inventory data is stored within the model with the help of File I/O Storage.Another point to add is the model also contains the inventoryDAO and InventoryFileDAO which are both crucial to the functionality of the web application.
 
 
-The Model stores the application data objects including any functionality to provide persistence.
+The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript.As seen in our architecture tiers and layers diagram the framework we used was Angular & TypeScript. The platform is very flexible, being able to be run in any web browser. The OS/Hardware that the web application has to be run on is of no importance as long as it supports a web browser. The User uses the Client UI and the help of a network connection inorder to see to interact with the viewmodel.
 
 
+ The ViewModel provides RESTful APIs to the client (View) as well as any logic required to manipulate the data objects from the Model. Please refer to the View Tier for a more detailed description of the viewmodel.
 
 
-The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript. The ViewModel provides RESTful APIs to the client (View) as well as any logic required to manipulate the data objects from the Model.
-
-
-
-
-Both the ViewModel and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
-
-
-
-
-
-
+Both the ViewModel and the Model are based in Java 17 which was selected for its robust and great compatibility with Maven and Angular. Which can be run on any OS/HW. 
 
 
 ### Overview of User Interface
-
-
 
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
@@ -172,21 +161,12 @@ This section describes the web interface flow; this is how the user views and in
 
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities. This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
 
 
-
-
-> _**[Sprint 4]** You must provide at least **2 sequence diagrams** as is relevant to a particular aspects
-> of the design that you are describing. (**For example**, in a shopping experience application you might create a
-> sequence diagram of a customer searching for an item and adding to their cart.)
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
-> to help illustrate the end-to-end flow._
-
-
+In this sequence diagram we have a user, this user open the web application then the user logs into the web application, when the user presses log in the client UI submits a login request, then the loginForm calls the attemptLogin() with the information imputed from the User, then the UserFileDAO retrieves the login info if it exists. Then the UserFileDAO returns the result for the called function attemptLogin(). The LoginForm reroutes the page to the corresponding page. Then finally the return success message is sent back to the user.
+![Replace with your ViewModel Tier class diagram 1, etc.](User_Logs_In.png)
+In this sequence diagram we have a helper trying to add to the FB. The helper views the cupboard and the getNeedArray() function is called. The cupboard returns the Array of needs and displays it. The Helper then inspects a Need and clicks add to Cart which calls addToCart() function, the need is posted then it returns a success message.
+![Replace with your ViewModel Tier class diagram 2, etc.](HelperAddsToFundingBasket.png)
 
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
@@ -199,6 +179,7 @@ This section describes the web interface flow; this is how the user views and in
 
 
 ### ViewModel Tier
+The ViewModel of the web application is what is sent to the client UI inorder for the User to view and interact with the web application.
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
@@ -209,21 +190,19 @@ This section describes the web interface flow; this is how the user views and in
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 >
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
+
+
+
+
 
 
 
 
 ### Model Tier
-> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
-
 The three main classes we built to model our website are the User, the Product, and the Shopping Cart.
 The User class was built to maintain all of the information pertaining to each user, such as their username and password. This allows them to log into their account as needed in order to fulfill their personal tasks and maintain persistence when logging in and out.
 The Product class was built to maintain information pertaining to each need inside the cupboard. This allows the controller to access information about each product’s id, cost, quantity, and name. This allows transparency for when the Admin or a Helper attempts to create, search for, edit, or delete a need if they’re permitted to.
-The Shopping Cart class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
+The Funding basket class was built to allow Helpers to add needs to a Fund Basket, so they can have them all in one place for when they checkout. Helpers have the ability to both add and remove needs from the cart as well as check the cart of needs out.
 
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
@@ -235,7 +214,7 @@ The Shopping Cart class was built to allow Helpers to add needs to a Fund Basket
 
 
 ## OO Design Principles
-> _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by the instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
+Follow guidance in augmenting those completed in previous Sprints as indicated to you by the instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
 
 Low Coupling: 
@@ -286,7 +265,7 @@ The Bot area of the is not covered therefore it is flagged by the static code. T
 > criteria tests failing, and the number of user stories that
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
-Acceptance Testing was performed by our own team members, the unit tests were run in order to make sure there was functionality. Some of the features that were wanted to be implemented were not, so they failed by default.
+Acceptance Testing was performed by our own team members, the unit tests were run in order to make sure there was functionality. Some of the features that were originally desired to be implemented were not, so they failed by default. Including those user stories, group 1A passed 7 of them and failed 8 of them. A few of our user stories weren’t tested by group 1A but were tested, rather, by ourselves after that day. However, since most of the user stories were roughly implemented by that point, we were able to completely resolve all of the failed user stories’ errors that we had actually planned on implementing by the end of our third sprint. There are still a few minor adjustments to be made within our implemented user stories (in terms of usability), but they get the job done.
 
 
 ### Unit Testing and Code Coverage
