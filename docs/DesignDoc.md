@@ -161,22 +161,12 @@ This section describes the web interface flow; this is how the user views and in
 
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities. This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
 
 
-The ViewModel of the web application is what is sent to the client UI inorder for the User to view and interact with the web application.
-
-
-> _**[Sprint 4]** You must provide at least **2 sequence diagrams** as is relevant to a particular aspects
-> of the design that you are describing. (**For example**, in a shopping experience application you might create a
-> sequence diagram of a customer searching for an item and adding to their cart.)
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
-> to help illustrate the end-to-end flow._
-
-
+In this sequence diagram we have a user, this user open the web application then the user logs into the web application, when the user presses log in the client UI submits a login request, then the loginForm calls the attemptLogin() with the information imputed from the User, then the UserFileDAO retrieves the login info if it exists. Then the UserFileDAO returns the result for the called function attemptLogin(). The LoginForm reroutes the page to the corresponding page. Then finally the return success message is sent back to the user.
+![Replace with your ViewModel Tier class diagram 1, etc.](User_Logs_In.png)
+In this sequence diagram we have a helper trying to add to the FB. The helper views the cupboard and the getNeedArray() function is called. The cupboard returns the Array of needs and displays it. The Helper then inspects a Need and clicks add to Cart which calls addToCart() function, the need is posted then it returns a success message.
+![Replace with your ViewModel Tier class diagram 2, etc.](HelperAddsToFundingBasket.png)
 
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
@@ -189,6 +179,7 @@ The ViewModel of the web application is what is sent to the client UI inorder fo
 
 
 ### ViewModel Tier
+The ViewModel of the web application is what is sent to the client UI inorder for the User to view and interact with the web application.
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
@@ -199,8 +190,11 @@ The ViewModel of the web application is what is sent to the client UI inorder fo
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 >
-![Replace with your ViewModel Tier class diagram 1, etc.](User_Logs_In.png)
-![Replace with your ViewModel Tier class diagram 2, etc.](HelperAddsToFundingBasket.png)
+
+
+
+
+
 
 
 
@@ -271,7 +265,7 @@ The Bot area of the is not covered therefore it is flagged by the static code. T
 > criteria tests failing, and the number of user stories that
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
-Acceptance Testing was performed by our own team members, the unit tests were run in order to make sure there was functionality. Some of the features that were originally desired to be implemented were not, so they failed by default. Including those user stories, group 1A passed 7 of them and failed 8 of them. A few of our user stories weren’t tested by group 1A but were tested, rather, by ourselves after that day. However, since most of the user stories were roughly implemented by that point, we were able to completely resolve all of the failed user stories’ errors that we had actually planned on implementing by the end of our third sprint.
+Acceptance Testing was performed by our own team members, the unit tests were run in order to make sure there was functionality. Some of the features that were originally desired to be implemented were not, so they failed by default. Including those user stories, group 1A passed 7 of them and failed 8 of them. A few of our user stories weren’t tested by group 1A but were tested, rather, by ourselves after that day. However, since most of the user stories were roughly implemented by that point, we were able to completely resolve all of the failed user stories’ errors that we had actually planned on implementing by the end of our third sprint. There are still a few minor adjustments to be made within our implemented user stories (in terms of usability), but they get the job done.
 
 
 ### Unit Testing and Code Coverage
